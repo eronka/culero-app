@@ -12,6 +12,8 @@ import { Avatar, HorizontalDivider, StyledText } from "../components";
 import { IconButton } from "../components/IconButton";
 import { twMerge } from "tailwind-merge";
 import { useScreenInfo } from "../hooks/useScreenInfo";
+import InitialScreen from "../screens/InitialScreen";
+import { WriteReviewScreen } from "../screens/WriteReviewScreen/WriteReviewScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -123,7 +125,7 @@ export const DrawerNavigator = () => {
       />
       <Drawer.Screen
         name="Write a review"
-        component={BottomNavigator}
+        component={isPhone ? BottomNavigator : WriteReviewScreen}
         options={{
           drawerIcon: () => <Icon name="review" size={20} color="gray38" />,
         }}

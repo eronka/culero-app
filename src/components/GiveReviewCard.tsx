@@ -9,12 +9,17 @@ import { CheckBox } from "./Checkbox";
 import { Formik } from "formik";
 import { Alert } from "react-native";
 import * as Yup from "yup";
+import colors from "../../colors";
 
 export type GiveReviewCardProps = {
   className?: ViewProps["className"];
+  isWhiteBg?: boolean;
 };
 
-export const GiveReviewCard = ({ className }: GiveReviewCardProps) => {
+export const GiveReviewCard = ({
+  className,
+  isWhiteBg = false,
+}: GiveReviewCardProps) => {
   return (
     <Card
       className={twMerge("bg-transparent", className)}
@@ -22,7 +27,7 @@ export const GiveReviewCard = ({ className }: GiveReviewCardProps) => {
         <View>
           <Formik
             initialValues={{
-              isAnonymous: false,
+              isAnonymous: true,
               review: "",
               professionalsim: 0,
               reliability: 0,
@@ -49,6 +54,8 @@ export const GiveReviewCard = ({ className }: GiveReviewCardProps) => {
                       multiline={true}
                       numberOfLines={10}
                       value={values.review}
+                      containerClassName="bg-grayF2"
+                      placeholderTextColor={colors["gray33"]}
                       onChangeText={(value) => setFieldValue("review", value)}
                     />
                     <CheckBox
@@ -75,7 +82,9 @@ export const GiveReviewCard = ({ className }: GiveReviewCardProps) => {
 
                       <View>
                         <StyledStarRating
-                          isDarkBg={true}
+                          isDarkBg={!isWhiteBg}
+                          isDarkStarBorder={true}
+                          color="primary"
                           jumpValue={0.5}
                           startingValue={0}
                           onFinishRating={(rating: number) => {
@@ -93,7 +102,9 @@ export const GiveReviewCard = ({ className }: GiveReviewCardProps) => {
 
                       <View>
                         <StyledStarRating
-                          isDarkBg={true}
+                          isDarkBg={!isWhiteBg}
+                          isDarkStarBorder={true}
+                          color="primary"
                           jumpValue={0.5}
                           startingValue={0}
                           onFinishRating={(rating: number) => {
@@ -112,7 +123,9 @@ export const GiveReviewCard = ({ className }: GiveReviewCardProps) => {
 
                       <View>
                         <StyledStarRating
-                          isDarkBg={true}
+                          isDarkBg={!isWhiteBg}
+                          isDarkStarBorder={true}
+                          color="primary"
                           jumpValue={0.5}
                           startingValue={0}
                           onFinishRating={(rating: number) => {

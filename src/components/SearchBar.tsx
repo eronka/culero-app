@@ -1,5 +1,6 @@
 import { twMerge } from "tailwind-merge";
 import { StyledTextInput, StyledTextInputProps } from "./StyledTextInput";
+import colors from "../../colors";
 
 export type SearchBarProps = StyledTextInputProps & {
   onSubmit?: (value: string | undefined) => void;
@@ -16,6 +17,7 @@ export const SearchBar = ({
         "rounded-3xl border border-light-primary pr-1 py-1",
         containerClassName
       )}
+      placeholderTextColor={colors["gray8B"]}
       submitProps={
         onSubmit && {
           color: "primary",
