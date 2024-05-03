@@ -17,6 +17,7 @@ export type UserCardProps = {
   revewisCount: number;
   connectionsCount: number;
   joinedDate: Date;
+  isConnection?: boolean;
 };
 export const UserCard = ({
   userName,
@@ -27,6 +28,7 @@ export const UserCard = ({
   revewisCount,
   connectionsCount,
   joinedDate,
+  isConnection,
 }: UserCardProps) => {
   return (
     <Card
@@ -53,11 +55,12 @@ export const UserCard = ({
             </View>
             <View className="flex-1">
               <StyledPressable
-                disabled={true}
+                disabled={isConnection}
+                color="white"
                 className="self-end mt-2"
                 textVariant={{ color: "primary", weight: 500 }}
               >
-                Connection
+                Connect
               </StyledPressable>
             </View>
           </View>

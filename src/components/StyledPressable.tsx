@@ -6,7 +6,7 @@ import { Icon, IconProps } from "../icons";
 import { twMerge } from "tailwind-merge";
 
 const button = tv({
-  base: "rounded-md p-2 px-6 flex items-center justify-center flex-row",
+  base: "rounded-md p-2 px-6 flex items-center justify-center flex-row disabled:bg-opacity-50",
   variants: {
     color: {
       light: "bg-light-primary",

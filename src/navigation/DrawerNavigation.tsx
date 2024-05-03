@@ -83,11 +83,15 @@ const DrawerFooter = ({
 };
 
 function CustomDrawerContent(props: DrawerContentComponentProps) {
+  const { height } = useScreenInfo();
+
   return (
     <DrawerContentScrollView {...props} contentContainerStyle={{ flex: 1 }}>
       <DrawerHeader />
       <DrawerItemList {...props} />
-      <DrawerFooter className="absolute bottom-0 right-0 left-0" />
+      {height > 650 && (
+        <DrawerFooter className="absolute bottom-0 right-0 left-0" />
+      )}
     </DrawerContentScrollView>
   );
 }

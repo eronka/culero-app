@@ -26,7 +26,7 @@ export const Card = ({
       {!!headerComponent && (
         <View className={twMerge("", headerClassName)}>{headerComponent}</View>
       )}
-      {!!headerComponent && <HorizontalDivider />}
+      {!!headerComponent && !!bodyComponent && <HorizontalDivider />}
       {!!bodyComponent && (
         <View className={twMerge("", bodyClassName)}>{bodyComponent}</View>
       )}

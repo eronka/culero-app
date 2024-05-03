@@ -8,8 +8,18 @@ import {
 } from "../../components";
 import { Icon } from "../../icons";
 import { ConnectionReviewCard } from "../../components/ConnectionsReviewCard";
+import { useState } from "react";
+import { getSearchUserResult } from "../../utils/api";
 
 export const WriteReviewScreen = () => {
+  const [searchResult, setSearchResult] = useState<{
+    isInitial: boolean;
+    result: any[];
+  }>({
+    result: [],
+    isInitial: true,
+  });
+
   return (
     <ScrollView>
       <View className="p-9">
@@ -21,46 +31,64 @@ export const WriteReviewScreen = () => {
         </View>
 
         <View className="flex-row gap-4 mt-12">
-          <Card
-            className="basis-3/4 py-6 px-9"
-            headerComponent={
-              <View className="w-2/3 mb-4">
-                <StyledText weight={500} xl2>
-                  Search by Social Link
-                </StyledText>
-                <StyledText weight={400} className="mt-8 mb-2" color="gray33">
-                  Enter the social link (LinkedIn, Twitter, GitHub, or
-                  Instagram) of the person you want to review.
-                </StyledText>
-                <SearchBar
-                  placeholder="Enter social link"
-                  containerClassName="mt-2  bg-grayF7"
-                  onSubmit={(value) => console.log("Seach with ", value)}
-                />
-              </View>
-            }
-            bodyComponent={
-              <View>
-                <StyledText weight={500} lg color="gray39" className="mt-2">
-                  Search result:
-                </StyledText>
-                <UserCard
-                  className="mt-2"
-                  userName="Logan Davis"
-                  userPosition="UX designer"
-                  isVerified={true}
-                  revewisCount={20}
-                  connectionsCount={100}
-                  joinedDate={new Date()}
-                  userAvatar="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                />
-                <GiveReviewCard
-                  className="hidden md:block mt-8"
-                  isWhiteBg={true}
-                />
-              </View>
-            }
-          />
+          <View className="basis-3/4">
+            <Card
+              className=" py-6 px-9"
+              headerComponent={
+                <View className="w-2/3 mb-4">
+                  <StyledText weight={500} xl2>
+                    Search by Social Link
+                  </StyledText>
+                  <StyledText weight={400} className="mt-8 mb-2" color="gray33">
+                    Enter the social link (LinkedIn, Twitter, GitHub, or
+                    Instagram) of the person you want to review.
+                  </StyledText>
+                  <SearchBar
+                    placeholder="Enter social link"
+                    containerClassName="mt-2  bg-grayF7"
+                    onSubmit={async (value) => {
+                      if (!value) {
+                        return;
+                      }
+                      const result = await getSearchUserResult(value);
+                      console.log("search result is", result);
+                      setSearchResult({ isInitial: false, result });
+                    }}
+                  />
+                </View>
+              }
+              bodyComponent={
+                !searchResult.isInitial ? (
+                  <View>
+                    <StyledText weight={500} lg color="gray39" className="mt-2">
+                      Search result:
+                    </StyledText>
+                    {searchResult.result.length > 0 && (
+                      <>
+                        <UserCard
+                          className="mt-2"
+                          userName={searchResult.result[0].name}
+                          userPosition={searchResult.result[0].jobTitle}
+                          isVerified={searchResult.result[0].isEmailVerified}
+                          revewisCount={searchResult.result[0].ratingsCount}
+                          connectionsCount={
+                            searchResult.result[0].connectionsCount
+                          }
+                          isConnection={searchResult.result[0].isConnection}
+                          joinedDate={new Date(searchResult.result[0].joinedAt)}
+                          userAvatar={searchResult.result[0].profilePictureUrl}
+                        />
+                        <GiveReviewCard
+                          className="hidden md:block mt-8"
+                          isWhiteBg={true}
+                        />
+                      </>
+                    )}
+                  </View>
+                ) : undefined
+              }
+            />
+          </View>
           <ConnectionReviewCard
             expandable={false}
             className="basis-1/4"

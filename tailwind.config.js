@@ -6,6 +6,24 @@ module.exports = {
   // NOTE: Update this to include the paths to all of your component files.
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   presets: [require("nativewind/preset")],
+  variants: {
+    backgroundColor: [
+      "responsive",
+      "hover",
+      "focus",
+      "active",
+      "disabled",
+      "enabled",
+    ],
+    textColor: [
+      "responsive",
+      "hover",
+      "focus",
+      "active",
+      "disabled",
+      "enabled",
+    ],
+  },
   theme: {
     colors: colors,
     extend: {

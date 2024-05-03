@@ -44,14 +44,23 @@ const addHeaders = (headers: HeadersInit) => {
   });
 };
 
+const stringifyBody = () => {
+  return (input: FetchInput, init: FetchInit) => ({
+    input,
+    init: { ...init, body: JSON.stringify(init.body) },
+  });
+};
+
 const normalizeResult = async (response: Response) => {
   const responseData = await response.json();
   if (responseData.message != null) {
     throw new Error(responseData.message);
   }
+
+  return responseData;
 };
 
-const authorizedFetch = (input: FetchInput, init: FetchInit) => {
+const authorizedFetch = (input: FetchInput, init: FetchInit): Promise<any> => {
   //TODO: get the actual token once the login in implemented
   const DEMO_TOKEN =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsdnFsbGVjYTAwMDA0MjB5amljY2V3bnIiLCJpYXQiOjE3MTQ3NTQxMzUsImV4cCI6MTcxNDg0MDUzNSwiaXNzIjoiY3VsZXJvIn0.QoxtluUTZ1YKYrNQQvUttYYE-5YTPuqjajhrS4yE8Xo";
@@ -63,6 +72,7 @@ const authorizedFetch = (input: FetchInput, init: FetchInit) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${DEMO_TOKEN}`,
       }),
+      stringifyBody(),
     ],
     [normalizeResult]
   );
@@ -125,6 +135,11 @@ export async function signInUser(
   }
 }
 
-export async function searchUser(query: string) {
-  return authorizedFetch(``, {});
+export async function getSearchUserResult(query: string) {
+  return authorizedFetch(
+    `${baseUrl}/user/search?query=${encodeURIComponent(query)}`,
+    {
+      method: "GET",
+    }
+  );
 }
