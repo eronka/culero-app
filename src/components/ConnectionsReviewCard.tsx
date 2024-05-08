@@ -9,6 +9,9 @@ import { IconButton } from "./IconButton";
 
 export type ConnectionsReviewCardProps = {
   className?: ViewProps["className"];
+  title: string;
+  subtitle?: string;
+  expandable?: boolean;
 };
 
 const data = [
@@ -64,6 +67,9 @@ const data = [
 ];
 export const ConnectionReviewCard = ({
   className,
+  title,
+  subtitle,
+  expandable = true,
 }: ConnectionsReviewCardProps) => {
   const [expanded, setExpand] = useState(false);
   return (
@@ -71,18 +77,27 @@ export const ConnectionReviewCard = ({
       className={className}
       bodyComponent={
         <View className="p-2">
-          <View className="flex-row justify-between mb-4">
-            <StyledText weight={500} className="text-lg">
-              Your connections need review
-            </StyledText>
-            <Pressable onPress={() => setExpand(!expanded)}>
-              <StyledText className="text-sm">
-                {expanded ? "See Less" : "See All"}
+          <View className="mb-4">
+            <View className="flex-row justify-between">
+              <StyledText weight={500} lg>
+                {title}
               </StyledText>
-            </Pressable>
+              {expandable && (
+                <Pressable onPress={() => setExpand(!expanded)}>
+                  <StyledText className="text-sm">
+                    {expanded ? "See Less" : "See All"}
+                  </StyledText>
+                </Pressable>
+              )}
+            </View>
+            {subtitle && (
+              <StyledText weight={400} color="gray33" className="mt-1">
+                {subtitle}
+              </StyledText>
+            )}
           </View>
           <FlatList
-            data={expanded ? data : data.slice(0, 3)}
+            data={!expandable || expanded ? data : data.slice(0, 3)}
             ItemSeparatorComponent={() => <HorizontalDivider />}
             renderItem={({ item }) => (
               <View className="flex-row justify-between items-center p-2">

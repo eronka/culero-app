@@ -2,6 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import InitialScreen from "../screens/InitialScreen";
 import { Icon } from "../icons";
 import { useScreenInfo } from "../hooks/useScreenInfo";
+import { WriteReviewScreen } from "../screens/WriteReviewScreen/WriteReviewScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -33,7 +34,7 @@ export function BottomNavigator() {
       />
       <Tab.Screen
         name="Home2"
-        component={InitialScreen}
+        component={WriteReviewScreen}
         options={{
           tabBarLabel: "Write a review",
           tabBarIcon: () => <Icon name="plus" color="primary" size={38} />,

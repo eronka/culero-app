@@ -9,12 +9,19 @@ import { CheckBox } from "./Checkbox";
 import { Formik } from "formik";
 import { Alert } from "react-native";
 import * as Yup from "yup";
+import colors from "../../colors";
 
 export type GiveReviewCardProps = {
   className?: ViewProps["className"];
+  isWhiteBg?: boolean;
+  onSubmit?: (values: any) => void;
 };
 
-export const GiveReviewCard = ({ className }: GiveReviewCardProps) => {
+export const GiveReviewCard = ({
+  className,
+  isWhiteBg = false,
+  onSubmit,
+}: GiveReviewCardProps) => {
   return (
     <Card
       className={twMerge("bg-transparent", className)}
@@ -22,22 +29,32 @@ export const GiveReviewCard = ({ className }: GiveReviewCardProps) => {
         <View>
           <Formik
             initialValues={{
-              isAnonymous: false,
-              review: "",
-              professionalsim: 0,
+              anonymous: true,
+              comment: "",
+              professionalism: 0,
               reliability: 0,
               communication: 0,
             }}
-            onSubmit={(values) => {
+            onSubmit={async (values, { resetForm }) => {
+              if (onSubmit) {
+                await onSubmit(values);
+                resetForm();
+              }
+
               // check developer console on web
               console.log(`Send with: ${JSON.stringify(values)}`);
               Alert.alert(`Send with: ${JSON.stringify(values)}`);
             }}
             validateOnChange={false}
             validateOnBlur={false}
-            validationSchema={Yup.string().required()}
+            validationSchema={Yup.object().shape({
+              comment: Yup.string().required(),
+              professionalism: Yup.number().min(0.5),
+              reliability: Yup.number().min(0.5),
+              communication: Yup.number().min(0.5),
+            })}
           >
-            {({ values, handleSubmit, setFieldValue }) => (
+            {({ values, handleSubmit, setFieldValue, errors }) => (
               <>
                 <View className="flex-row">
                   <View className="w-3/4 pr-8">
@@ -48,15 +65,18 @@ export const GiveReviewCard = ({ className }: GiveReviewCardProps) => {
                       placeholder="Text area to write your review comments ...."
                       multiline={true}
                       numberOfLines={10}
-                      value={values.review}
-                      onChangeText={(value) => setFieldValue("review", value)}
+                      error={errors.comment}
+                      value={values.comment}
+                      containerClassName="bg-grayF2"
+                      placeholderTextColor={colors["gray33"]}
+                      onChangeText={(value) => setFieldValue("comment", value)}
                     />
                     <CheckBox
                       className="mt-2"
                       color="primary"
-                      value={values.isAnonymous}
+                      value={values.anonymous}
                       onPress={() =>
-                        setFieldValue("isAnonymous", !values.isAnonymous)
+                        setFieldValue("anonymous", !values.anonymous)
                       }
                       label="Submit Anonymously"
                       description="Your honest feedback is valuable. If you prefer, you can submit this review anonymously by checking the box."
@@ -69,15 +89,17 @@ export const GiveReviewCard = ({ className }: GiveReviewCardProps) => {
                     <View className="flex-row justify-between">
                       <View className="mr-2 w-32">
                         <StyledText weight={600} color="darkgrey">
-                          Professionalsim
+                          Professionalism
                         </StyledText>
                       </View>
 
                       <View>
                         <StyledStarRating
-                          isDarkBg={true}
+                          isDarkBg={!isWhiteBg}
+                          isDarkStarBorder={true}
+                          color="primary"
                           jumpValue={0.5}
-                          startingValue={0}
+                          startingValue={values.professionalism}
                           onFinishRating={(rating: number) => {
                             setFieldValue("professionalism", rating);
                           }}
@@ -93,9 +115,11 @@ export const GiveReviewCard = ({ className }: GiveReviewCardProps) => {
 
                       <View>
                         <StyledStarRating
-                          isDarkBg={true}
+                          isDarkBg={!isWhiteBg}
+                          isDarkStarBorder={true}
+                          color="primary"
                           jumpValue={0.5}
-                          startingValue={0}
+                          startingValue={values.reliability}
                           onFinishRating={(rating: number) => {
                             setFieldValue("reliability", rating);
                           }}
@@ -112,9 +136,11 @@ export const GiveReviewCard = ({ className }: GiveReviewCardProps) => {
 
                       <View>
                         <StyledStarRating
-                          isDarkBg={true}
+                          isDarkBg={!isWhiteBg}
+                          isDarkStarBorder={true}
+                          color="primary"
                           jumpValue={0.5}
-                          startingValue={0}
+                          startingValue={values.communication}
                           onFinishRating={(rating: number) => {
                             setFieldValue("communication", rating);
                           }}

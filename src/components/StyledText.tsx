@@ -21,6 +21,7 @@ const text = tv({
     color: {
       darkgrey: "text-dark-grey",
       black: "text-black",
+      red: "text-red",
       white: "text-white",
       gray35: "text-gray35",
       nickel: "text-nickel-gray",
