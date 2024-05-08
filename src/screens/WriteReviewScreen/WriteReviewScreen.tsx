@@ -9,7 +9,7 @@ import {
 import { Icon } from "../../icons";
 import { ConnectionReviewCard } from "../../components/ConnectionsReviewCard";
 import { useState } from "react";
-import { getSearchUserResult } from "../../utils/api";
+import { getSearchUserResult, sendFeedback } from "../../utils/api";
 
 export const WriteReviewScreen = () => {
   const [searchResult, setSearchResult] = useState<{
@@ -81,6 +81,9 @@ export const WriteReviewScreen = () => {
                         <GiveReviewCard
                           className="hidden md:block mt-8"
                           isWhiteBg={true}
+                          onSubmit={(values) => {
+                            sendFeedback(searchResult.result[0].id, values);
+                          }}
                         />
                       </>
                     )}

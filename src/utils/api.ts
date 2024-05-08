@@ -60,10 +60,13 @@ const normalizeResult = async (response: Response) => {
   return responseData;
 };
 
-const authorizedFetch = (input: FetchInput, init: FetchInit): Promise<any> => {
+const authorizedFetch = (
+  input: FetchInput,
+  init: FetchInit | object
+): Promise<any> => {
   //TODO: get the actual token once the login in implemented
   const DEMO_TOKEN =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsdnFsbGVjYTAwMDA0MjB5amljY2V3bnIiLCJpYXQiOjE3MTQ3NTQxMzUsImV4cCI6MTcxNDg0MDUzNSwiaXNzIjoiY3VsZXJvIn0.QoxtluUTZ1YKYrNQQvUttYYE-5YTPuqjajhrS4yE8Xo";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsdnFsbGVjYTAwMDA0MjB5amljY2V3bnIiLCJpYXQiOjE3MTUxNjc3MTEsImV4cCI6MTcxNTI1NDExMSwiaXNzIjoiY3VsZXJvIn0.L8tyPW8UuaUt58yKiTAa2g9KTgn87y0-wWz1STDdieI";
   return enhancedFetch(
     input,
     init,
@@ -142,4 +145,19 @@ export async function getSearchUserResult(query: string) {
       method: "GET",
     }
   );
+}
+
+export type SendReviewData = {
+  professtionalsim: number;
+  reliability: number;
+  communication: number;
+  comment: string;
+  anonymous: boolean;
+};
+
+export async function sendFeedback(ratedUserId: string, data: SendReviewData) {
+  return authorizedFetch(`${baseUrl}/user/rate/${ratedUserId}`, {
+    method: "POST",
+    body: data,
+  });
 }
