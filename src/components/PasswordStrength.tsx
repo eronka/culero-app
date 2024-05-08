@@ -15,15 +15,13 @@ export const PasswordStrength = ({ type }: PasswordStrengthProps) => {
         height={9}
         barColor={type === "weak" ? "red" : "green"}
       />
-      <View className="flex-row w-full align-center">
-        <StyledText weight={600}>
-          Password strength: {type}.
-          {type == "weak" && (
-            <StyledText className="text-sm" weight={300} color="gray35">
-              Try lengthening it or adding numbers and symbols.
-            </StyledText>
-          )}
-        </StyledText>
+      <View className="flex align-center">
+        <StyledText weight={600}>Password strength: {type}.</StyledText>
+        {type == "weak" && (
+          <StyledText className="text-sm" weight={300} color="gray35">
+            Try lengthening it or adding numbers and symbols.
+          </StyledText>
+        )}
       </View>
     </View>
   );

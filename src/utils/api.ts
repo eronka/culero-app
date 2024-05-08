@@ -91,9 +91,19 @@ export async function signUp(
     body: JSON.stringify({ email, password }),
   });
   const responseData = await response.json();
-  if (responseData.message != null) {
+
+  if (response.ok) {
+    return responseData;
+  } else if (response.status === 409) {
+    throw new Error("There is already an account with this email.");
+  } else {
     throw new Error(responseData.message);
   }
+  // const responseData = await response.json();
+  // console.log("status, ", responseData.status);
+  // if (responseData.status != 409) {
+  //   throw new Error(responseData.message);
+  // }
   return true;
 }
 
@@ -127,14 +137,17 @@ export async function signInUser(
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
-    const responseData = await response.json();
+    console.log("got to this phase");
 
-    if (responseData.token == null) {
-      throw new Error(responseData.message);
-    }
-    return responseData;
-  } catch (error) {
-    throw error;
+    // if (response.ok) {
+    //   const responseData = await response.json();
+    //   return responseData;
+    // } else if (response.status === 409) {
+    //   console.log("here, throw");
+    //   throw new Error("There already is an account with this email");
+    // }
+  } catch (err) {
+    console.log("shall throw error");
   }
 }
 
@@ -161,3 +174,8 @@ export async function sendFeedback(ratedUserId: string, data: SendReviewData) {
     body: data,
   });
 }
+
+export type SignupData = {
+  email: string;
+  password: string;
+};

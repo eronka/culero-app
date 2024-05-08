@@ -40,6 +40,7 @@ export const StyledTextInput = ({
               fontFamily: "Inter_400Regular",
               flex: 1,
               flexGrow: 1,
+              height: "100%",
               //@ts-ignore
               outlineStyle: "none",
             },
@@ -54,7 +55,11 @@ export const StyledTextInput = ({
           />
         )}
       </View>
-      {error && <StyledText color="red">{error}</StyledText>}
+      {error && (
+        <StyledText color="deep-red" center>
+          {error}
+        </StyledText>
+      )}
     </>
   );
 };

@@ -9,6 +9,7 @@ import HomeScreen from "../screens/HomeScreen";
 import InitialScreen from "../screens/InitialScreen";
 import { BottomNavigator } from "./BottomTabNavigator";
 import { DrawerNavigator } from "./DrawerNavigation";
+import { AuthStackNavigator } from "./AuthStack";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -28,7 +29,7 @@ const RootNavigator = () => {
         </>
       ) : (
         <>
-          <Stack.Screen name="InitialScreen" component={DrawerNavigator} />
+          <Stack.Screen name="AuthNavigator" component={AuthStackNavigator} />
         </>
       )}
     </Stack.Navigator>
