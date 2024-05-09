@@ -178,7 +178,7 @@ export async function sendFeedback(ratedUserId: string, data: SendReviewData) {
 }
 
 export async function getMe(): Promise<User> {
-  return authorizedFetch(`${baseUrl}/user/me`, { method: "GET" });
+  return authorizedFetch(`${baseUrl}/user`, { method: "GET" });
 }
 
 export type RegenerateCodeInput = {

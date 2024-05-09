@@ -24,6 +24,7 @@ export type RootStackParamList = {
   InitialScreen: undefined;
   HomeScreen: undefined;
   AuthNav: NavigatorScreenParams<AuthStackParamList>;
+  EmailVerificationSuccess: undefined;
 };
 
 export type AuthStackParamList = {

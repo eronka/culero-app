@@ -26,10 +26,17 @@ import { ConnectionReviewCard } from "../../components/ConnectionsReviewCard";
 import { Icon } from "../../icons";
 import { SocialMediaCard } from "../../icons/SocialMediaCard";
 import { SearchableConnectionsCard } from "../../components/SearchableConnectionsCard";
+import { useLogout } from "../../hooks/useLogout";
+import { useUser } from "../../hooks";
 
 const InitialScreen = ({}: {}) => {
+  const user = useUser()!;
+  const logout = useLogout();
   return (
     <ScrollView>
+      <StyledText center onPress={() => logout()}>
+        {`Logout ${user.email}`}
+      </StyledText>
       <View className="flex-1 bg-dark-gray items-center h-full py-20 px-4 md:px-80">
         <StyledText>
           Hello, here are your components. For starters, this is the default

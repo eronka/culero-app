@@ -10,6 +10,8 @@ import { DrawerNavigator } from "./DrawerNavigation";
 import { AuthStackNavigator } from "./AuthStack";
 import { useUser } from "../hooks";
 import { VerifyEmailScreen } from "../screens/VerifyEmailScreen";
+import { EmailVerificationSuccess } from "../screens/EmailVerificationSuccessScreen";
+import { AuthHeader } from "../components";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -40,6 +42,18 @@ const RootNavigator = () => {
           <Stack.Screen name="AuthNav" component={AuthStackNavigator} />
         </>
       )}
+      <Stack.Screen
+        name="EmailVerificationSuccess"
+        component={EmailVerificationSuccess}
+        options={{
+          headerShown: true,
+          contentStyle: {
+            backgroundColor: "#ffffff",
+          },
+
+          header: () => <AuthHeader />,
+        }}
+      />
     </Stack.Navigator>
   );
 };

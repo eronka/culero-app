@@ -1,7 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { InitialAuthScreen } from "../screens/InitialAuthScreen";
-import { View } from "react-native";
-import { AuthHeader, StyledText } from "../components";
+import { AuthHeader } from "../components";
 import { VerifyEmailScreen } from "../screens/VerifyEmailScreen";
 import { AuthStackParamList } from "../types";
 
