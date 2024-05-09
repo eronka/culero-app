@@ -13,7 +13,7 @@ import * as Yup from "yup";
 import { useSignup } from "../../hooks/useSignup";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export const InitialAuthScreen = () => {
+export const SignupScreen = () => {
   const navigation = useNavigation();
   const [seeFullOptions, setFullOptions] = useState(false);
   const signUpMutation = useSignup();

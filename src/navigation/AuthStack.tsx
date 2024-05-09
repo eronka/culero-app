@@ -1,11 +1,13 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { InitialAuthScreen } from "../screens/InitialAuthScreen";
 import { AuthHeader } from "../components";
-import { VerifyEmailScreen } from "../screens/VerifyEmailScreen";
-import { LoginScreen } from "../screens/LoginScreen";
 
 import { AuthStackParamList } from "../types";
-import { VerifyLoginScreen } from "../screens/VerifyLoginScreen";
+import {
+  VerifyLoginScreen,
+  LoginScreen,
+  VerifyEmailScreen,
+  SignupScreen,
+} from "../screens/AuthScreens";
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();
 
@@ -20,7 +22,7 @@ export const AuthStackNavigator = () => {
         header: () => <AuthHeader />,
       }}
     >
-      <Stack.Screen name="Auth" component={InitialAuthScreen} />
+      <Stack.Screen name="Signup" component={SignupScreen} />
       <Stack.Screen name="VerifyEmail" component={VerifyEmailScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="VerifyLogin" component={VerifyLoginScreen} />

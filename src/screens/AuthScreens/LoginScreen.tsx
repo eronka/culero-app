@@ -150,11 +150,11 @@ export const LoginScreen = () => {
             color="primary"
             className="italic"
             onPress={() => {
-              navigation.navigate("AuthNav", { screen: "Auth" });
+              navigation.navigate("AuthNav", { screen: "Signup" });
             }}
           >
             Sign up
-          </StyledText>{" "}
+          </StyledText>
         </StyledText>
       </ScrollView>
     </SafeAreaView>

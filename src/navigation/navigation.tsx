@@ -3,14 +3,10 @@ import LinkingConfiguration from "./LinkingConfiguration";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import HomeScreen from "../screens/HomeScreen";
-import InitialScreen from "../screens/InitialScreen";
 import { BottomNavigator } from "./BottomTabNavigator";
-import { DrawerNavigator } from "./DrawerNavigation";
 import { AuthStackNavigator } from "./AuthStack";
 import { useUser } from "../hooks";
-import { VerifyEmailScreen } from "../screens/VerifyEmailScreen";
-import { EmailVerificationSuccess } from "../screens/EmailVerificationSuccessScreen";
+import { EmailVerificationSuccess } from "../screens/AuthScreens";
 import { AuthHeader } from "../components";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
