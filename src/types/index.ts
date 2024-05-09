@@ -30,6 +30,8 @@ export type RootStackParamList = {
 export type AuthStackParamList = {
   Auth: undefined;
   VerifyEmail: { email: string };
+  Login: undefined;
+  VerifyLogin: { email: string };
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

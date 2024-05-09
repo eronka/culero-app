@@ -1,21 +1,22 @@
 import { View } from "react-native";
 import {
   HorizontalDivider,
+  PasswordStrength,
   StyledPressable,
   StyledText,
   StyledTextInput,
 } from "../../components";
 import colors from "../../../colors";
 import { useNavigation } from "@react-navigation/native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useSignup } from "../../hooks/useSignup";
+import { useLogin } from "../../hooks/useLogin";
 
-export const InitialAuthScreen = () => {
-  const navigation = useNavigation();
+export const LoginScreen = () => {
   const [seeFullOptions, setFullOptions] = useState(false);
-  const signUpMutation = useSignup();
+  const loginMutation = useLogin();
+  const navigation = useNavigation();
 
   const formik = useFormik({
     initialValues: {
@@ -28,14 +29,14 @@ export const InitialAuthScreen = () => {
         .required("Email is required!"),
     }),
     onSubmit: async (values) => {
-      signUpMutation.mutate({ ...values });
+      loginMutation.mutate({ ...values });
     },
   });
 
   return (
     <View className="max-w-xl self-center">
       <StyledText weight={600} xl3 center>
-        Create your account
+        Welcome back
       </StyledText>
       <StyledText color="gray35" className="mt-6" center>
         Embark on a Journey of Professional Growth and Collaboration!
@@ -104,8 +105,8 @@ export const InitialAuthScreen = () => {
         onChangeText={(value) => formik.setFieldValue("email", value)}
         placeholderTextColor={colors.gray35}
       />
-      {signUpMutation.error && (
-        <StyledText color="deep-red">{signUpMutation.error.message}</StyledText>
+      {loginMutation.error && (
+        <StyledText color="deep-red">{loginMutation.error.message}</StyledText>
       )}
       <StyledPressable
         fw
@@ -114,7 +115,7 @@ export const InitialAuthScreen = () => {
         textClassName="p-1"
         onPress={() => formik.handleSubmit()}
       >
-        Create account
+        Sign In
       </StyledPressable>
 
       <StyledText sm color="gray35" center>
@@ -139,16 +140,16 @@ export const InitialAuthScreen = () => {
         .
       </StyledText>
       <StyledText className="mt-6" center>
-        Have an account already?{" "}
+        Don't have an account?{" "}
         <StyledText
           weight={500}
           color="primary"
           className="italic"
           onPress={() => {
-            navigation.navigate("AuthNav", { screen: "Login" });
+            navigation.navigate("AuthNav", { screen: "Auth" });
           }}
         >
-          Sign in
+          Sign up
         </StyledText>{" "}
       </StyledText>
     </View>

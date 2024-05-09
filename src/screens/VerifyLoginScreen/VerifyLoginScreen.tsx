@@ -4,13 +4,14 @@ import { useNavigation } from "@react-navigation/native";
 import { AuthStackParamList, RootStackParamList } from "../../types";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useFormik } from "formik";
+import { useEffect, useState } from "react";
 import { useVerifyEmail } from "../../hooks/useVerifyEmail";
 import { useRegenerateCode } from "../../hooks/useRegenerateCode";
 
-type Props = NativeStackScreenProps<AuthStackParamList, "VerifyEmail">;
-export const VerifyEmailScreen = ({ route }: Props) => {
+type Props = NativeStackScreenProps<AuthStackParamList, "VerifyLogin">;
+export const VerifyLoginScreen = ({ route }: Props) => {
   const navigation = useNavigation();
-  const verifyEmail = useVerifyEmail(true);
+  const verifyEmail = useVerifyEmail();
   const regenerateCode = useRegenerateCode();
   const { email } = route.params;
 
@@ -27,10 +28,10 @@ export const VerifyEmailScreen = ({ route }: Props) => {
     <ScrollView>
       <View className="max-w-xl self-center">
         <StyledText weight={600} xl3 center>
-          Verify your email address
+          Welcome back
         </StyledText>
         <StyledText color="gray35" className="mt-6" center lg>
-          {`We've sent a verification code to ${email}.`}
+          {`We've sent a temporary login code to ${email}.`}
         </StyledText>
         <StyledText
           color="gray35"
@@ -40,9 +41,6 @@ export const VerifyEmailScreen = ({ route }: Props) => {
           onPress={() => navigation.goBack()}
         >
           Not you?
-        </StyledText>
-        <StyledText className="mt-6" center xl>
-          Please enter the code below to confirm your email address
         </StyledText>
         <StyledOtpInput
           containerClassName="max-w-fit self-center my-10"
@@ -65,7 +63,7 @@ export const VerifyEmailScreen = ({ route }: Props) => {
           }
           onPress={() => form.handleSubmit()}
         >
-          Verify email
+          Continue
         </StyledPressable>
 
         <StyledText sm color="gray35" center>

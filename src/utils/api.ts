@@ -88,9 +88,7 @@ export type SignupInput = {
   email: string;
 };
 
-export async function signUp(
-  email: SignupInput["email"]
-): Promise<UserWithToken> {
+export async function signUp(email: SignupInput["email"]): Promise<User> {
   const response = await fetch(signUpUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -105,6 +103,24 @@ export async function signUp(
   } else {
     throw new Error(responseData.message);
   }
+}
+
+export type SigninInput = {
+  email: string;
+};
+
+export async function signIn(email: SigninInput["email"]): Promise<User> {
+  const response = await fetch(signInUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email }),
+  });
+  const responseData = await response.json();
+
+  if (response.ok) {
+    return responseData;
+  }
+  throw new Error(responseData.message);
 }
 
 export type VerifyEmailInput = {
@@ -127,30 +143,6 @@ export async function verifyEmail(
     throw new Error(responseData.message);
   }
   return responseData;
-}
-
-export async function signInUser(
-  email: string,
-  password: string
-): Promise<void> {
-  try {
-    const response = await fetch(signInUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-    console.log("got to this phase");
-
-    // if (response.ok) {
-    //   const responseData = await response.json();
-    //   return responseData;
-    // } else if (response.status === 409) {
-    //   console.log("here, throw");
-    //   throw new Error("There already is an account with this email");
-    // }
-  } catch (err) {
-    console.log("shall throw error");
-  }
 }
 
 export async function getSearchUserResult(query: string) {

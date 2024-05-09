@@ -4,7 +4,7 @@ import { VerifyEmailInput, verifyEmail } from "../utils/api";
 import storage from "../utils/storage";
 import { useNavigation } from "@react-navigation/native";
 
-export function useVerifyEmail() {
+export function useVerifyEmail(shouldNavigate?: boolean) {
   const queryClient = useQueryClient();
   const navigation = useNavigation();
 
@@ -12,7 +12,9 @@ export function useVerifyEmail() {
     mutationFn: ({ email, code }) => verifyEmail(email, code),
     mutationKey: ["user"],
     onSuccess: async (result) => {
-      await navigation.navigate("EmailVerificationSuccess");
+      if (shouldNavigate) {
+        await navigation.navigate("EmailVerificationSuccess");
+      }
 
       queryClient.setQueryData(["user"], result);
 
