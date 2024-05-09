@@ -24,11 +24,11 @@ export type RootStackParamList = {
   InitialScreen: undefined;
   HomeScreen: undefined;
   AuthNav: NavigatorScreenParams<AuthStackParamList>;
-  VerifyEmail: { email: string };
 };
 
 export type AuthStackParamList = {
   Auth: undefined;
+  VerifyEmail: { email: string };
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

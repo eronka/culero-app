@@ -46,7 +46,11 @@ export const StyledPressable = ({
   children,
   ...props
 }: StyledPressableProps) => (
-  <Pressable className={button({ color, fw, rounded, className })} {...props}>
+  <Pressable
+    className={button({ color, fw, rounded, className })}
+    style={props.disabled ? { opacity: 0.5 } : { opacity: 1 }}
+    {...props}
+  >
     {leftIconProps && <Icon {...leftIconProps} />}
     <StyledText
       weight={500}

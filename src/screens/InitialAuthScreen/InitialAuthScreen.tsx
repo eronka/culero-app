@@ -8,44 +8,15 @@ import {
 } from "../../components";
 import colors from "../../../colors";
 import { useNavigation } from "@react-navigation/native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { signUp } from "../../utils/api";
+import { useSignup } from "../../hooks/useSignup";
 
 export const InitialAuthScreen = () => {
   const navigation = useNavigation();
   const [seeFullOptions, setFullOptions] = useState(false);
-  const [isEmailFlowStarted, setStartEmailFlow] = useState(false);
-  const [error, setError] = useState<string | undefined>();
-
-  const formikEmailPasswordStep = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-    validationSchema: Yup.object().shape({
-      email: Yup.string()
-        .email("Must be a valid email!")
-        .required("Email is required!"),
-      password: Yup.string().matches(
-        /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{9,}$/,
-        "weak"
-      ),
-    }),
-
-    onSubmit: async (values) => {
-      try {
-        setError(undefined);
-        await signUp(values.email, values.password);
-      } catch (err) {
-        if (err instanceof Error) {
-          console.log(err.message);
-          setError(err.message);
-        }
-      }
-    },
-  });
+  const signUpMutation = useSignup();
 
   const formik = useFormik({
     initialValues: {
@@ -57,9 +28,8 @@ export const InitialAuthScreen = () => {
         .email("Must be a valid email!")
         .required("Email is required!"),
     }),
-    onSubmit: (values) => {
-      formikEmailPasswordStep.setFieldValue("email", values.email);
-      setStartEmailFlow(true);
+    onSubmit: async (values) => {
+      signUpMutation.mutate({ ...values });
     },
   });
 
@@ -71,84 +41,84 @@ export const InitialAuthScreen = () => {
       <StyledText color="gray35" className="mt-6" center>
         Embark on a Journey of Professional Growth and Collaboration!
       </StyledText>
-      {!isEmailFlowStarted && (
+
+      <StyledPressable
+        fw
+        color="white"
+        className="mt-12 border h-16"
+        onPress={() => {}}
+        leftIconProps={{ name: "google" }}
+      >
+        Continue with Google
+      </StyledPressable>
+      {!seeFullOptions && (
+        <StyledPressable
+          fw
+          color="white"
+          className="mt-4 border h-16"
+          onPress={() => setFullOptions(true)}
+        >
+          See other options
+        </StyledPressable>
+      )}
+      {seeFullOptions && (
         <>
           <StyledPressable
             fw
             color="white"
-            className="mt-12 border h-16"
+            className="mt-4 border h-16"
             onPress={() => {}}
-            leftIconProps={{ name: "google" }}
           >
-            Continue with Google
+            Continue with Apple
           </StyledPressable>
-          {!seeFullOptions && (
-            <StyledPressable
-              fw
-              color="white"
-              className="mt-4 border h-16"
-              onPress={() => setFullOptions(true)}
-            >
-              See other options
-            </StyledPressable>
-          )}
-          {seeFullOptions && (
-            <>
-              <StyledPressable
-                fw
-                color="white"
-                className="mt-4 border h-16"
-                onPress={() => {}}
-              >
-                Continue with Apple
-              </StyledPressable>
-              <StyledPressable
-                fw
-                color="white"
-                className="mt-4 border h-16"
-                onPress={() => {}}
-              >
-                Continue with Linkedin
-              </StyledPressable>{" "}
-              <StyledPressable
-                fw
-                color="white"
-                className="mt-4 border h-16"
-                onPress={() => {}}
-              >
-                Continue with Facebook
-              </StyledPressable>
-            </>
-          )}
-          <View className="flex-row items-center mt-6">
-            <HorizontalDivider className="flex-1" />
-            <StyledText weight={600} color="nickel">
-              {"  "}
-              Or{"  "}
-            </StyledText>
-            <HorizontalDivider className="flex-1" />
-          </View>
-          <StyledTextInput
-            containerClassName="mt-9 bg-grayF2 py-4"
-            placeholder="Enter your email address"
-            value={formik.values.email}
-            error={formik.errors.email}
-            onChangeText={(value) => formik.setFieldValue("email", value)}
-            placeholderTextColor={colors.gray35}
-          />
           <StyledPressable
             fw
-            color="light"
-            className="mt-6 mb-4"
-            textClassName="p-1"
-            disabled={!formik.isValid || Object.keys(formik.errors).length > 0}
-            onPress={() => formik.handleSubmit()}
+            color="white"
+            className="mt-4 border h-16"
+            onPress={() => {}}
           >
-            Get Started
+            Continue with Linkedin
+          </StyledPressable>{" "}
+          <StyledPressable
+            fw
+            color="white"
+            className="mt-4 border h-16"
+            onPress={() => {}}
+          >
+            Continue with Facebook
           </StyledPressable>
         </>
       )}
-      {isEmailFlowStarted && (
+      <View className="flex-row items-center mt-6">
+        <HorizontalDivider className="flex-1" />
+        <StyledText weight={600} color="nickel">
+          {"  "}
+          Or{"  "}
+        </StyledText>
+        <HorizontalDivider className="flex-1" />
+      </View>
+      <StyledTextInput
+        containerClassName="mt-9 bg-grayF2 py-4"
+        placeholder="Enter your email address"
+        value={formik.values.email}
+        error={formik.errors.email}
+        onChangeText={(value) => formik.setFieldValue("email", value)}
+        placeholderTextColor={colors.gray35}
+      />
+      {signUpMutation.error && (
+        <StyledText color="deep-red">{signUpMutation.error.message}</StyledText>
+      )}
+      <StyledPressable
+        fw
+        color="light"
+        className="mt-6 mb-4"
+        textClassName="p-1"
+        onPress={() => formik.handleSubmit()}
+      >
+        Create account
+      </StyledPressable>
+
+      {/* {isEmailFlowStarted && (
         <>
           <StyledTextInput
             containerClassName="mt-9 bg-grayF2 py-4 w-full"
@@ -179,7 +149,11 @@ export const InitialAuthScreen = () => {
               />
             )}
           </View>
-          {error && <StyledText color="deep-red">{error}</StyledText>}
+          {signUpMutation.error && (
+            <StyledText color="deep-red">
+              {signUpMutation.error.message}
+            </StyledText>
+          )}
 
           <StyledPressable
             fw
@@ -192,18 +166,20 @@ export const InitialAuthScreen = () => {
             Create account
           </StyledPressable>
         </>
-      )}
-      <StyledText sm className="italic" color="gray35" center>
+      )} */}
+      <StyledText sm color="gray35" center>
         By continuing, you agree to Culero
         <StyledText
           sm
           weight={600}
+          className="italic"
           onPress={() => console.log("Should go to T&C")}
         >
           Terms of Service
         </StyledText>{" "}
         and{" "}
         <StyledText
+          className="italic"
           sm
           weight={600}
           onPress={() => console.log("Should go to privacy poloicy")}
@@ -217,6 +193,7 @@ export const InitialAuthScreen = () => {
         <StyledText
           weight={500}
           color="primary"
+          className="italic"
           onPress={() => {
             //navigation.navigate("Login")
           }}

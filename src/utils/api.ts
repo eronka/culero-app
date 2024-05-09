@@ -86,17 +86,15 @@ const authorizedFetch = async (
 
 export type SignupInput = {
   email: string;
-  password: string;
 };
 
 export async function signUp(
-  email: SignupInput["email"],
-  password: SignupInput["password"]
+  email: SignupInput["email"]
 ): Promise<UserWithToken> {
   const response = await fetch(signUpUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({ email }),
   });
   const responseData = await response.json();
 
@@ -181,4 +179,13 @@ export async function sendFeedback(ratedUserId: string, data: SendReviewData) {
 
 export async function getMe(): Promise<User> {
   return authorizedFetch(`${baseUrl}/user/me`, { method: "GET" });
+}
+
+export type RegenerateCodeInput = {
+  email: string;
+};
+export async function regenerateCode(data: RegenerateCodeInput) {
+  return enhancedFetch(`${baseUrl}/auth/regenerate-code/${data.email}`, {
+    method: "PUT",
+  });
 }
