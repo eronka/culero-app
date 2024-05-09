@@ -1,3 +1,6 @@
+import { User, UserWithToken } from "../types";
+import storage from "./storage";
+
 const baseUrl = "http://localhost:4200/api";
 const signInUrl = `${baseUrl}/auth/sign-in`;
 const signUpUrl = `${baseUrl}/auth/sign-up`;
@@ -60,20 +63,20 @@ const normalizeResult = async (response: Response) => {
   return responseData;
 };
 
-const authorizedFetch = (
+const authorizedFetch = async (
   input: FetchInput,
   init: FetchInit | object
 ): Promise<any> => {
-  //TODO: get the actual token once the login in implemented
-  const DEMO_TOKEN =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsdnFsbGVjYTAwMDA0MjB5amljY2V3bnIiLCJpYXQiOjE3MTUxNjc3MTEsImV4cCI6MTcxNTI1NDExMSwiaXNzIjoiY3VsZXJvIn0.L8tyPW8UuaUt58yKiTAa2g9KTgn87y0-wWz1STDdieI";
+  const token = await storage.getItem(storage.TOKEN_KEY);
+
+  console.log("token is ", token);
   return enhancedFetch(
     input,
     init,
     [
       addHeaders({
         "Content-Type": "application/json",
-        Authorization: `Bearer ${DEMO_TOKEN}`,
+        Authorization: `Bearer ${token}`,
       }),
       stringifyBody(),
     ],
@@ -81,10 +84,15 @@ const authorizedFetch = (
   );
 };
 
+export type SignupInput = {
+  email: string;
+  password: string;
+};
+
 export async function signUp(
-  email: string,
-  password: string
-): Promise<boolean> {
+  email: SignupInput["email"],
+  password: SignupInput["password"]
+): Promise<UserWithToken> {
   const response = await fetch(signUpUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -99,18 +107,17 @@ export async function signUp(
   } else {
     throw new Error(responseData.message);
   }
-  // const responseData = await response.json();
-  // console.log("status, ", responseData.status);
-  // if (responseData.status != 409) {
-  //   throw new Error(responseData.message);
-  // }
-  return true;
 }
 
+export type VerifyEmailInput = {
+  email: string;
+  code: string;
+};
+
 export async function verifyEmail(
-  email: string,
-  code: string
-): Promise<boolean> {
+  email: VerifyEmailInput["email"],
+  code: VerifyEmailInput["code"]
+): Promise<UserWithToken> {
   const response = await fetch(verifyEmailUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -118,10 +125,7 @@ export async function verifyEmail(
   });
   const responseData = await response.json();
 
-  if (responseData.message != null) {
-    throw new Error(responseData.message);
-  }
-  if (responseData.token == null) {
+  if (!response.ok) {
     throw new Error(responseData.message);
   }
   return responseData;
@@ -175,7 +179,6 @@ export async function sendFeedback(ratedUserId: string, data: SendReviewData) {
   });
 }
 
-export type SignupData = {
-  email: string;
-  password: string;
-};
+export async function getMe(): Promise<User> {
+  return authorizedFetch(`${baseUrl}/user/me`, { method: "GET" });
+}

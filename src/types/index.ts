@@ -23,10 +23,17 @@ export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   InitialScreen: undefined;
   HomeScreen: undefined;
-  AuthNavigator: undefined;
+  AuthNav: NavigatorScreenParams<AuthStackParamList>;
+  VerifyEmail: { email: string };
+};
+
+export type AuthStackParamList = {
+  Auth: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
   NativeStackScreenProps<RootStackParamList, Screen>;
 
 export type RootTabParamList = {};
+
+export * from "./User";
