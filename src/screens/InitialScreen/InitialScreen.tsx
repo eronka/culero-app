@@ -34,7 +34,7 @@ const InitialScreen = ({}: {}) => {
   const logout = useLogout();
   return (
     <ScrollView>
-      <StyledText center onPress={() => logout()}>
+      <StyledText center onPress={() => logout()} className="mt-16">
         {`Logout ${user.email}`}
       </StyledText>
       <View className="flex-1 bg-dark-gray items-center h-full py-20 px-4 md:px-80">

@@ -8,15 +8,16 @@ export type StyledOtpInput = {
   containerClassName?: ViewProps["className"];
   height?: number;
   width?: number;
+  margin?: number;
   onChangeText?: (value: string) => void;
 };
 
 export const StyledOtpInput = ({
   containerClassName,
   onChangeText,
-
   height = 72,
   width = 82,
+  margin = 8,
 }: StyledOtpInput) => (
   <View className={twMerge("container flex-shrink", containerClassName)}>
     <OtpInput
@@ -32,8 +33,8 @@ export const StyledOtpInput = ({
         pinCodeContainerStyle: {
           width,
           height,
+          margin,
           flexShrink: 1,
-          margin: 8,
           backgroundColor: colors.grayF2,
           borderWidth: 0,
         },

@@ -33,6 +33,7 @@ export const StyledTextInput = ({
       >
         {!!leftIconProps && <Icon {...leftIconProps} />}
         <TextInput
+          autoCapitalize="none"
           value={value}
           onChangeText={(newValue) => setValue(newValue)}
           style={[

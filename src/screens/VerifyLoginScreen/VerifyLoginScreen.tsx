@@ -7,6 +7,8 @@ import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import { useVerifyEmail } from "../../hooks/useVerifyEmail";
 import { useRegenerateCode } from "../../hooks/useRegenerateCode";
+import { useScreenInfo } from "../../hooks/useScreenInfo";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 type Props = NativeStackScreenProps<AuthStackParamList, "VerifyLogin">;
 export const VerifyLoginScreen = ({ route }: Props) => {
@@ -14,6 +16,7 @@ export const VerifyLoginScreen = ({ route }: Props) => {
   const verifyEmail = useVerifyEmail();
   const regenerateCode = useRegenerateCode();
   const { email } = route.params;
+  const { isPhone } = useScreenInfo();
 
   const form = useFormik({
     initialValues: {
@@ -25,8 +28,8 @@ export const VerifyLoginScreen = ({ route }: Props) => {
   });
 
   return (
-    <ScrollView>
-      <View className="max-w-xl self-center">
+    <SafeAreaView>
+      <ScrollView className="px-4 max-w-xl md:mt-0 md:self-center">
         <StyledText weight={600} xl3 center>
           Welcome back
         </StyledText>
@@ -43,7 +46,9 @@ export const VerifyLoginScreen = ({ route }: Props) => {
           Not you?
         </StyledText>
         <StyledOtpInput
-          containerClassName="max-w-fit self-center my-10"
+          margin={isPhone ? 1 : 8}
+          height={isPhone ? 62 : 72}
+          containerClassName="max-w-fit self-center m-10"
           onChangeText={(value: string) => form.setFieldValue("code", value)}
         />
         {verifyEmail.error && (
@@ -105,7 +110,7 @@ export const VerifyLoginScreen = ({ route }: Props) => {
             {regenerateCode.isSuccess ? "Sent!" : "Resend Code"}
           </StyledText>{" "}
         </StyledText>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 };

@@ -1,7 +1,7 @@
 import { User, UserWithToken } from "../types";
 import storage from "./storage";
 
-const baseUrl = "http://localhost:4200/api";
+const baseUrl = "http://192.168.1.132:4200/api";
 const signInUrl = `${baseUrl}/auth/sign-in`;
 const signUpUrl = `${baseUrl}/auth/sign-up`;
 const verifyEmailUrl = `${baseUrl}/auth/verify-email`;

@@ -6,12 +6,15 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useFormik } from "formik";
 import { useVerifyEmail } from "../../hooks/useVerifyEmail";
 import { useRegenerateCode } from "../../hooks/useRegenerateCode";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useScreenInfo } from "../../hooks/useScreenInfo";
 
 type Props = NativeStackScreenProps<AuthStackParamList, "VerifyEmail">;
 export const VerifyEmailScreen = ({ route }: Props) => {
   const navigation = useNavigation();
   const verifyEmail = useVerifyEmail(true);
   const regenerateCode = useRegenerateCode();
+  const { isPhone } = useScreenInfo();
   const { email } = route.params;
 
   const form = useFormik({
@@ -24,8 +27,8 @@ export const VerifyEmailScreen = ({ route }: Props) => {
   });
 
   return (
-    <ScrollView>
-      <View className="max-w-xl self-center">
+    <SafeAreaView>
+      <ScrollView className="px-4 max-w-xl md:self-center">
         <StyledText weight={600} xl3 center>
           Verify your email address
         </StyledText>
@@ -45,7 +48,9 @@ export const VerifyEmailScreen = ({ route }: Props) => {
           Please enter the code below to confirm your email address
         </StyledText>
         <StyledOtpInput
-          containerClassName="max-w-fit self-center my-10"
+          margin={isPhone ? 1 : 8}
+          height={isPhone ? 62 : 72}
+          containerClassName="max-w-fit self-center m-10"
           onChangeText={(value: string) => form.setFieldValue("code", value)}
         />
         {verifyEmail.error && (
@@ -107,7 +112,7 @@ export const VerifyEmailScreen = ({ route }: Props) => {
             {regenerateCode.isSuccess ? "Sent!" : "Resend Code"}
           </StyledText>{" "}
         </StyledText>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
