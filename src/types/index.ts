@@ -3,15 +3,14 @@
  * https://reactnavigation.org/docs/typescript/
  */
 
-
 import {
   CompositeScreenProps,
   NavigatorScreenParams,
-} from "@react-navigation/native"
-import { NativeStackScreenProps } from "@react-navigation/native-stack"
+} from "@react-navigation/native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 export interface APP_CONSTANTS {
-  ENV: string
+  ENV: string;
 }
 
 declare global {
@@ -21,14 +20,23 @@ declare global {
 }
 
 export type RootStackParamList = {
-  Root: NavigatorScreenParams<RootTabParamList> | undefined
-  InitialScreen: undefined
-  HomeScreen: undefined
-}
+  Root: NavigatorScreenParams<RootTabParamList> | undefined;
+  InitialScreen: undefined;
+  HomeScreen: undefined;
+  AuthNav: NavigatorScreenParams<AuthStackParamList>;
+  EmailVerificationSuccess: undefined;
+};
+
+export type AuthStackParamList = {
+  Signup: undefined;
+  VerifyEmail: { email: string };
+  Login: undefined;
+  VerifyLogin: { email: string };
+};
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
-  NativeStackScreenProps<RootStackParamList, Screen>
+  NativeStackScreenProps<RootStackParamList, Screen>;
 
-export type RootTabParamList = {
-}
+export type RootTabParamList = {};
 
+export * from "./User";

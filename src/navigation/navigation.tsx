@@ -1,19 +1,26 @@
-import { RootState } from "../store/store";
 import { RootStackParamList } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { useSelector } from "react-redux";
-import HomeScreen from "../screens/HomeScreen";
-import InitialScreen from "../screens/InitialScreen";
 import { BottomNavigator } from "./BottomTabNavigator";
-import { DrawerNavigator } from "./DrawerNavigation";
+import { AuthStackNavigator } from "./AuthStack";
+import { useUser } from "../hooks";
+import { EmailVerificationSuccess } from "../screens/AuthScreens";
+import { AuthHeader } from "../components";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const RootNavigator = () => {
-  const state = useSelector((state: RootState) => state.userState);
+  const user = useUser();
+
+  console.log(
+    "user is ----the fuck?",
+    user,
+    !!user && user.isEmailVerified,
+    !user,
+    !!user && !user.isEmailVerified
+  );
 
   return (
     <Stack.Navigator
@@ -22,15 +29,27 @@ const RootNavigator = () => {
         animation: "slide_from_right",
       }}
     >
-      {state.isLoggedIn ? (
+      {user ? (
         <>
           <Stack.Screen name="HomeScreen" component={BottomNavigator} />
         </>
       ) : (
         <>
-          <Stack.Screen name="InitialScreen" component={DrawerNavigator} />
+          <Stack.Screen name="AuthNav" component={AuthStackNavigator} />
         </>
       )}
+      <Stack.Screen
+        name="EmailVerificationSuccess"
+        component={EmailVerificationSuccess}
+        options={{
+          headerShown: true,
+          contentStyle: {
+            backgroundColor: "#ffffff",
+          },
+
+          header: () => <AuthHeader />,
+        }}
+      />
     </Stack.Navigator>
   );
 };

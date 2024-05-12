@@ -24,3 +24,4 @@ export * from "./UserCard";
 export * from "./ProfileCard";
 export * from "./GiveReviewCard";
 export * from "./Checkbox";
+export * from "./AuthHeader";

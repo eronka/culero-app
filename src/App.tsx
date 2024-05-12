@@ -1,10 +1,8 @@
 import React from "react";
 import useCachedResources from "./hooks/useCachedResources";
 import Navigation from "./navigation/navigation";
-import { store } from "./store/store";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { Provider } from "react-redux";
 import "../global.css";
 import {
   useFonts,
@@ -18,6 +16,9 @@ import {
   Inter_700Bold,
   Inter_800ExtraBold,
 } from "@expo-google-fonts/inter";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const App = () => {
   const isLoadingComplete = useCachedResources();
@@ -37,10 +38,10 @@ const App = () => {
   return (
     <SafeAreaProvider>
       {isLoadingComplete && fontsLoaded && (
-        <Provider store={store}>
+        <QueryClientProvider client={queryClient}>
           <Navigation />
           <StatusBar style={"light"} />
-        </Provider>
+        </QueryClientProvider>
       )}
     </SafeAreaProvider>
   );

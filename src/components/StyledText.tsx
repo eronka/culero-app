@@ -33,6 +33,8 @@ const text = tv({
       white7: "text-white7",
       whiteFA: "text-whiteFA",
       gray7C: "text-gray7C",
+      "deep-red": "text-deep-red",
+      "light-primary": "text-light-primary",
     },
     sm: {
       true: "text-sm",
@@ -73,6 +75,9 @@ const text = tv({
     xl9: {
       true: "text-9xl",
     },
+    center: {
+      true: "text-center",
+    },
   },
   defaultVariants: {
     weight: 400,
@@ -98,7 +103,7 @@ export const StyledText = ({
   xl7,
   xl8,
   xl9,
-
+  center,
   className,
   ...props
 }: StyledTextProps) => {
@@ -121,6 +126,7 @@ export const StyledText = ({
           xl7,
           xl8,
           xl9,
+          center,
         }),
         className
       )}
