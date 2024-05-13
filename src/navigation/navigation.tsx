@@ -14,14 +14,6 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const RootNavigator = () => {
   const user = useUser();
 
-  console.log(
-    "user is ----the fuck?",
-    user,
-    !!user && user.isEmailVerified,
-    !user,
-    !!user && !user.isEmailVerified
-  );
-
   return (
     <Stack.Navigator
       screenOptions={{

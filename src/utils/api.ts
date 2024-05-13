@@ -69,7 +69,6 @@ const authorizedFetch = async (
 ): Promise<any> => {
   const token = await storage.getItem(storage.TOKEN_KEY);
 
-  console.log("token is ", token);
   return enhancedFetch(
     input,
     init,
