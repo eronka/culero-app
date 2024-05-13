@@ -15,10 +15,10 @@ export function useVerifyEmail(shouldNavigate?: boolean) {
       if (shouldNavigate) {
         await navigation.navigate("EmailVerificationSuccess");
       }
-
       queryClient.setQueryData(["user"], result);
 
       await storage.setItem(storage.TOKEN_KEY, result.token);
+      queryClient.refetchQueries();
     },
   });
 }

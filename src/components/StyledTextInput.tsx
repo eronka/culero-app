@@ -35,6 +35,7 @@ export const StyledTextInput = ({
         <TextInput
           autoCapitalize="none"
           value={value}
+          textAlignVertical={props.multiline ? "top" : "auto"}
           onChangeText={(newValue) => setValue(newValue)}
           style={[
             {
