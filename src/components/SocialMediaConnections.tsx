@@ -17,14 +17,14 @@ const SocialMediaConnection = ({
   SocialMediaIcon: ReactElement;
 }) => {
   return (
-    <View className="max-w-full items-center pb-4">
-      <View className="flex-row">
+    <View className="max-w-full items-center pb-4 md:flex-row">
+      <View className="flex-row flex-auto">
         {SocialMediaIcon}
         <View className="flex-auto px-4">
           <StyledText color="gray35">{description}</StyledText>
         </View>
       </View>
-      <View className="flex-none self-end w-52 mt-4 md:mt-0">
+      <View className="flex-none self-end w-52 mt-4 md:mt-0 md:self-center">
         <StyledPressable
           color="light"
           textVariant={{ weight: 600 }}

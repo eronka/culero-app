@@ -5,5 +5,6 @@ export const useScreenInfo = () => {
   return {
     isPhone: width < 768,
     height,
+    width,
   };
 };
