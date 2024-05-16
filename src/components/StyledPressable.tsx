@@ -33,6 +33,7 @@ export type StyledPressableProps = PressableProps &
     leftIconProps?: IconProps;
     rightIconProps?: IconProps;
     children?: React.ReactNode;
+    isLoading?: boolean;
   };
 export const StyledPressable = ({
   color,

@@ -22,6 +22,7 @@ import { UserStarIcon } from "./UserStarIcon";
 import { UserGroupIcon } from "./UserGroupIcon";
 import { HomeIcon } from "./HomeIcon";
 import { UserIcon } from "./UserIcon";
+import { UserAvatar } from "./UserAvatar";
 
 export type IconName =
   | "edit"
@@ -49,7 +50,8 @@ export type IconName =
   | "user"
   | "settings"
   | "eye"
-  | "checkmark";
+  | "checkmark"
+  | "user-avatar";
 
 export type IconProps = {
   name: IconName;
@@ -184,6 +186,7 @@ export const Icon = ({ name, color, size, className }: IconProps) => {
           color={color ? colors[color] : colors["black"]}
         />
       )}
+      {name === "user-avatar" && <UserAvatar color={color || "black"} />}
     </View>
   );
 };

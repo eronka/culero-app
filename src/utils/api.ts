@@ -1,3 +1,4 @@
+import { Platform } from "react-native";
 import { User, UserWithToken } from "../types";
 import storage from "./storage";
 
@@ -180,4 +181,57 @@ export async function regenerateCode(data: RegenerateCodeInput) {
   return enhancedFetch(`${baseUrl}/auth/regenerate-code/${data.email}`, {
     method: "PUT",
   });
+}
+
+export type UpdateProfileData = {
+  name?: string;
+  headline?: string;
+};
+
+export async function updateProfileData(data: UpdateProfileData) {
+  return authorizedFetch(`${baseUrl}/user`, {
+    method: "PUT",
+    body: data,
+  });
+}
+
+export async function updateProfilePicture(uri: string) {
+  let formData = new FormData();
+
+  if (Platform.OS === "android" && uri[0] === "/") {
+    uri = `file://${uri}`;
+    uri = uri.replace(/%/g, "%25");
+  }
+
+  const name = uri.substring(uri.lastIndexOf("/") + 1, uri.length);
+
+  const nameParts = name.split(".");
+  const fileType = nameParts[nameParts.length - 1];
+
+  let uriParts = uri.split(".");
+
+  console.log(name, fileType);
+
+  formData.append("file", {
+    uri,
+    name: name,
+    type: `application/${fileType}`,
+  } as any);
+
+  formData.append("file", uri);
+  const token = await storage.getItem(storage.TOKEN_KEY);
+
+  const response = await fetch(`${baseUrl}/user/profile-picture`, {
+    method: "PUT",
+    body: formData,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const responseData = await response.json();
+
+  if (!response.ok) {
+    throw new Error(responseData.message);
+  }
+  return responseData;
 }

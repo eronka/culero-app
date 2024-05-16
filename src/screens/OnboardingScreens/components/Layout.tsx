@@ -16,6 +16,7 @@ export type StepProps = {
   image: ImageProps["source"];
   skippable?: boolean;
   onNextPress?: () => void;
+  isLoading?: boolean;
 };
 
 export type OnboardingLayoutProps = {
@@ -35,6 +36,14 @@ export const OnboardingLayout = ({ data }: OnboardingLayoutProps) => {
 
   const renderItem = useCallback(
     ({ item, index }: { item: StepProps; index: number }) => {
+      const handleNextItem = () => {
+        if (index + 1 < data.length) {
+          flatListRef.current?.scrollToIndex({
+            index: index + 1,
+            animated: true,
+          });
+        }
+      };
       return (
         <View className="flex px-4 md:mt-5" style={{ width }}>
           <View className=" flex md:flex-row-reverse justify-center">
@@ -55,15 +64,11 @@ export const OnboardingLayout = ({ data }: OnboardingLayoutProps) => {
                 <>
                   {item.component}
                   <StyledPressable
+                    isLoading={item.isLoading}
                     className="hidden md:flex py-4 rounded-2xl"
                     onPress={async () => {
                       await item.onNextPress?.();
-                      if (index + 1 < data.length) {
-                        flatListRef.current?.scrollToIndex({
-                          index: index + 1,
-                          animated: true,
-                        });
-                      }
+                      handleNextItem();
                     }}
                   >
                     Next
@@ -72,13 +77,11 @@ export const OnboardingLayout = ({ data }: OnboardingLayoutProps) => {
               }
             />
             <StyledPressable
+              isLoading={item.isLoading}
               className="md:hidden my-9 py-4 rounded-2xl"
               onPress={async () => {
                 await item.onNextPress?.();
-
-                if (index + 1 < data.length) {
-                  flatListRef.current?.scrollToIndex({ index: index + 1 });
-                }
+                handleNextItem();
               }}
               textVariant={{ weight: 600, lg: true }}
             >
@@ -91,11 +94,10 @@ export const OnboardingLayout = ({ data }: OnboardingLayoutProps) => {
               weight={600}
               color="gray35"
               center
+              sm
               className="mt-6 italic"
               onPress={() => {
-                if (index + 1 < data.length) {
-                  flatListRef.current?.scrollToIndex({ index: index + 1 });
-                }
+                handleNextItem();
               }}
             >
               Skip for now

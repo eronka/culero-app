@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@babel/plugin-proposal-export-namespace-from':
-        specifier: ^7.18.9
-        version: 7.18.9(@babel/core@7.24.5)
       '@babel/plugin-transform-export-namespace-from':
         specifier: ^7.24.1
         version: 7.24.1(@babel/core@7.24.5)
@@ -47,6 +44,9 @@ importers:
       expo-font:
         specifier: ~11.10.3
         version: 11.10.3(expo@50.0.17(@babel/core@7.24.5)(@react-native/babel-preset@0.74.81(@babel/core@7.24.5)(@babel/preset-env@7.24.5(@babel/core@7.24.5))))
+      expo-image-picker:
+        specifier: ~14.7.1
+        version: 14.7.1(expo@50.0.17(@babel/core@7.24.5)(@react-native/babel-preset@0.74.81(@babel/core@7.24.5)(@babel/preset-env@7.24.5(@babel/core@7.24.5))))
       expo-linking:
         specifier: ^6.2.2
         version: 6.2.2(expo@50.0.17(@babel/core@7.24.5)(@react-native/babel-preset@0.74.81(@babel/core@7.24.5)(@babel/preset-env@7.24.5(@babel/core@7.24.5))))
@@ -322,13 +322,6 @@ packages:
   '@babel/plugin-proposal-export-default-from@7.24.1':
     resolution: {integrity: sha512-+0hrgGGV3xyYIjOrD/bUZk/iUwOIGuoANfRfVg1cPhYBxF+TIXSEcc42DqzBICmWsnAQ+SfKedY0bj8QD+LuMg==}
     engines: {node: '>=6.9.0'}
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-
-  '@babel/plugin-proposal-export-namespace-from@7.18.9':
-    resolution: {integrity: sha512-k1NtHyOMvlDDFeb9G5PhUXuGj8m/wiwojgQVEhJ/fsVsMCpLyOP4h0uGEjYJKrRI+EVPlb5Jk+Gt9P97lOGwtA==}
-    engines: {node: '>=6.9.0'}
-    deprecated: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-export-namespace-from instead.
     peerDependencies:
       '@babel/core': ^7.0.0-0
 
@@ -2225,6 +2218,16 @@ packages:
 
   expo-font@11.10.3:
     resolution: {integrity: sha512-q1Td2zUvmLbCA9GV4OG4nLPw5gJuNY1VrPycsnemN1m8XWTzzs8nyECQQqrcBhgulCgcKZZJJ6U0kC2iuSoQHQ==}
+    peerDependencies:
+      expo: '*'
+
+  expo-image-loader@4.6.0:
+    resolution: {integrity: sha512-RHQTDak7/KyhWUxikn2yNzXL7i2cs16cMp6gEAgkHOjVhoCJQoOJ0Ljrt4cKQ3IowxgCuOrAgSUzGkqs7omj8Q==}
+    peerDependencies:
+      expo: '*'
+
+  expo-image-picker@14.7.1:
+    resolution: {integrity: sha512-ILQVOJgI3aEzrDmCFGDPtpAepYkn8mot8G7vfQ51BfFdQbzL6N3Wm1fS/ofdWlAZJl/qT2DwaIh5xYmf3SyGZA==}
     peerDependencies:
       expo: '*'
 
@@ -4971,12 +4974,6 @@ snapshots:
       '@babel/helper-plugin-utils': 7.24.5
       '@babel/plugin-syntax-export-default-from': 7.24.1(@babel/core@7.24.5)
 
-  '@babel/plugin-proposal-export-namespace-from@7.18.9(@babel/core@7.24.5)':
-    dependencies:
-      '@babel/core': 7.24.5
-      '@babel/helper-plugin-utils': 7.24.5
-      '@babel/plugin-syntax-export-namespace-from': 7.8.3(@babel/core@7.24.5)
-
   '@babel/plugin-proposal-logical-assignment-operators@7.20.7(@babel/core@7.24.5)':
     dependencies:
       '@babel/core': 7.24.5
@@ -7657,6 +7654,15 @@ snapshots:
     dependencies:
       expo: 50.0.17(@babel/core@7.24.5)(@react-native/babel-preset@0.74.81(@babel/core@7.24.5)(@babel/preset-env@7.24.5(@babel/core@7.24.5)))
       fontfaceobserver: 2.3.0
+
+  expo-image-loader@4.6.0(expo@50.0.17(@babel/core@7.24.5)(@react-native/babel-preset@0.74.81(@babel/core@7.24.5)(@babel/preset-env@7.24.5(@babel/core@7.24.5)))):
+    dependencies:
+      expo: 50.0.17(@babel/core@7.24.5)(@react-native/babel-preset@0.74.81(@babel/core@7.24.5)(@babel/preset-env@7.24.5(@babel/core@7.24.5)))
+
+  expo-image-picker@14.7.1(expo@50.0.17(@babel/core@7.24.5)(@react-native/babel-preset@0.74.81(@babel/core@7.24.5)(@babel/preset-env@7.24.5(@babel/core@7.24.5)))):
+    dependencies:
+      expo: 50.0.17(@babel/core@7.24.5)(@react-native/babel-preset@0.74.81(@babel/core@7.24.5)(@babel/preset-env@7.24.5(@babel/core@7.24.5)))
+      expo-image-loader: 4.6.0(expo@50.0.17(@babel/core@7.24.5)(@react-native/babel-preset@0.74.81(@babel/core@7.24.5)(@babel/preset-env@7.24.5(@babel/core@7.24.5))))
 
   expo-json-utils@0.12.3: {}
 

@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { Pressable, View, Image } from "react-native";
 import { OnboardingLayout } from "./components";
 import {
   SocialMediaConnections,
@@ -7,9 +7,15 @@ import {
 } from "../../components";
 import { useFormik } from "formik";
 import colors from "../../../colors";
+import { Icon } from "../../icons";
 
 const step1Image = require("../../../assets/onboarding-1.png");
 const step2Image = require("../../../assets/onboarding-2.png");
+const step3Image = require("../../../assets/onboarding-3.png");
+import * as ImagePicker from "expo-image-picker";
+import { useUpdateProfile } from "../../hooks/useUpdateProfile";
+import * as Yup from "yup";
+import { useUpdateProfilePicture } from "../../hooks/useUpdateProfilePicture";
 
 const SocialAccountsStep = () => {
   return (
@@ -27,13 +33,44 @@ const SocialAccountsStep = () => {
 };
 
 export const SocialAccountsScreen = () => {
+  const updateUserMutation = useUpdateProfile();
+  const updateProfilePicMutation = useUpdateProfilePicture();
+
+  console.log("err is", updateProfilePicMutation.error?.message);
   const form = useFormik({
     initialValues: {
       name: "",
       headline: "",
     },
-    onSubmit: (values) => {},
+    onSubmit: async (values) => {
+      return updateUserMutation.mutateAsync(values);
+    },
   });
+
+  const imageForm = useFormik({
+    initialValues: { image: "" },
+    validationSchema: Yup.object().shape({
+      image: Yup.string().required("No image uploaded."),
+    }),
+    onSubmit: async (values) => {
+      console.log("send with", values.image);
+      return updateProfilePicMutation.mutateAsync(values.image);
+    },
+  });
+
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      imageForm.setFieldValue("image", result.assets[0].uri);
+    }
+  };
 
   return (
     <OnboardingLayout
@@ -71,8 +108,41 @@ export const SocialAccountsScreen = () => {
           ),
         },
         {
-          image: step1Image,
-          component: <SocialAccountsStep />,
+          image: step3Image,
+          skippable: true,
+          onNextPress: () => imageForm.handleSubmit(),
+          component: (
+            <View>
+              <StyledText weight={600} xl>
+                Add profile picture
+              </StyledText>
+
+              <Pressable className="py-12 items-center" onPress={pickImage}>
+                {imageForm.values.image !== "" ? (
+                  <Image
+                    source={{ uri: imageForm.values.image }}
+                    style={{
+                      height: 131,
+                      width: 131,
+                      borderRadius: 9999,
+                      borderWidth: 1,
+                      borderColor: "black",
+                    }}
+                  />
+                ) : (
+                  <Icon name="user-avatar" color="light-primary" />
+                )}
+                {imageForm.errors.image && (
+                  <StyledText center color="deep-red">
+                    {imageForm.errors.image}
+                  </StyledText>
+                )}
+                <StyledText center color="deep-red" className="mt-4">
+                  {updateProfilePicMutation.error?.message}
+                </StyledText>
+              </Pressable>
+            </View>
+          ),
         },
       ]}
     />
