@@ -15,6 +15,7 @@ export type StepProps = {
   component: ReactElement;
   image: ImageProps["source"];
   skippable?: boolean;
+  onNextPress?: () => void;
 };
 
 export type OnboardingLayoutProps = {
@@ -35,60 +36,62 @@ export const OnboardingLayout = ({ data }: OnboardingLayoutProps) => {
   const renderItem = useCallback(
     ({ item, index }: { item: StepProps; index: number }) => {
       return (
-        <View
-          className="flex md:flex-row-reverse px-4 md:mt-5 justify-center"
-          style={{ width }}
-        >
-          <Image
-            className="rounded-lg mb-5 md:mb-0"
-            style={[
-              {
-                width: isPhone ? width - 32 : width / 3,
-              },
-              !isPhone ? { height: "100%" } : {},
-            ]}
-            source={item.image}
-          />
+        <View className="flex px-4 md:mt-5" style={{ width }}>
+          <View className=" flex md:flex-row-reverse justify-center">
+            <Image
+              className="rounded-lg mb-5 md:mb-0"
+              style={[
+                {
+                  width: isPhone ? width - 32 : width / 3,
+                },
+                !isPhone ? { height: "100%" } : {},
+              ]}
+              source={item.image}
+            />
 
-          <Card
-            className="md:w-2/3 md:max-w-screen-sm md:mr-16 md:p-10"
-            bodyComponent={
-              <>
-                {item.component}
-                <StyledPressable
-                  className="hidden md:flex"
-                  onPress={() => {
-                    console.log(index, data.length);
-                    if (index + 1 < data.length) {
-                      console.log("shall scroll", flatListRef.current);
-                      setTimeout(() => {
+            <Card
+              className="md:w-2/3 md:max-w-screen-sm md:mr-16 md:p-10 md:min-h-96"
+              bodyComponent={
+                <>
+                  {item.component}
+                  <StyledPressable
+                    className="hidden md:flex py-4 rounded-2xl"
+                    onPress={async () => {
+                      await item.onNextPress?.();
+                      if (index + 1 < data.length) {
                         flatListRef.current?.scrollToIndex({
                           index: index + 1,
                           animated: true,
                         });
-                      }, 1);
-                    }
-                  }}
-                >
-                  Next
-                </StyledPressable>
-              </>
-            }
-          />
-          <StyledPressable
-            className="md:hidden my-9 py-3"
-            onPress={() => {
-              if (index + 1 < data.length) {
-                console.log(index, data.length);
-                flatListRef.current?.scrollToIndex({ index: index + 1 });
+                      }
+                    }}
+                  >
+                    Next
+                  </StyledPressable>
+                </>
               }
-            }}
-            textVariant={{ weight: 600, lg: true }}
-          >
-            Next
-          </StyledPressable>
+            />
+            <StyledPressable
+              className="md:hidden my-9 py-4 rounded-2xl"
+              onPress={async () => {
+                await item.onNextPress?.();
+
+                if (index + 1 < data.length) {
+                  flatListRef.current?.scrollToIndex({ index: index + 1 });
+                }
+              }}
+              textVariant={{ weight: 600, lg: true }}
+            >
+              Next
+            </StyledPressable>
+          </View>
+
           {item.skippable && (
             <StyledText
+              weight={600}
+              color="gray35"
+              center
+              className="mt-6 italic"
               onPress={() => {
                 if (index + 1 < data.length) {
                   flatListRef.current?.scrollToIndex({ index: index + 1 });

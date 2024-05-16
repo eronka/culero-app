@@ -34,7 +34,7 @@ export const StyledTextInput = ({
         {!!leftIconProps && <Icon {...leftIconProps} />}
         <TextInput
           autoCapitalize="none"
-          value={value}
+          value={props.value || value}
           onChangeText={(newValue) => setValue(newValue)}
           style={[
             {
@@ -45,6 +45,9 @@ export const StyledTextInput = ({
               //@ts-ignore
               outlineStyle: "none",
             },
+            value === "" && (!props.value || props.value === "")
+              ? { fontStyle: "italic" }
+              : {},
             style,
           ]}
           {...props}
