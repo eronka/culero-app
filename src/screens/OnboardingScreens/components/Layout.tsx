@@ -1,17 +1,13 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Card, StyledPressable, StyledText } from "../../../components";
 import { View, ScrollView, ImageProps, Image, ViewToken } from "react-native";
-import { ReactElement, useCallback, useState } from "react";
+import { ReactElement, useCallback } from "react";
 import { StepIndicator } from "./StepIndicator";
 import { useScreenInfo } from "../../../hooks/useScreenInfo";
-import { DarkTheme, DefaultTheme } from "@react-navigation/native";
+import { DefaultTheme } from "@react-navigation/native";
 import Animated, {
-  Extrapolation,
-  SharedValue,
-  interpolate,
   useAnimatedRef,
   useAnimatedScrollHandler,
-  useAnimatedStyle,
   useSharedValue,
 } from "react-native-reanimated";
 
@@ -25,71 +21,11 @@ export type OnboardingLayoutProps = {
   data: Array<StepProps>;
 };
 
-const StepItem = ({
-  x,
-  index,
-  item,
-}: {
-  x: SharedValue<number>;
-  index: number;
-  item: StepProps;
-}) => {
-  const { width, isPhone } = useScreenInfo();
-
-  return (
-    <View
-      className="flex md:flex-row-reverse px-4 self-center md:mt-5"
-      style={[{ width }]}
-    >
-      <Image
-        className="rounded-lg self-center mb-5 md:mb-0"
-        style={[
-          {
-            width: isPhone ? width - 32 : width / 3,
-          },
-          !isPhone ? { height: "100%" } : {},
-        ]}
-        source={item.image}
-      />
-
-      <Card
-        className="md:w-2/3 md:max-w-screen-sm md:mr-16"
-        bodyComponent={
-          <>
-            {item.component}
-            <StyledPressable
-              className="hidden md:flex"
-              // onPress={() => setStep(step + 1)}
-            >
-              Next
-            </StyledPressable>
-          </>
-        }
-      />
-      <StyledPressable
-        className="md:hidden my-9 py-3"
-        // onPress={() => setStep(step + 1)}
-        textVariant={{ weight: 600, lg: true }}
-      >
-        Next
-      </StyledPressable>
-      {item.skippable && <StyledText>Skip for now</StyledText>}
-      <View className="mt-20" />
-    </View>
-  );
-};
-
 export const OnboardingLayout = ({ data }: OnboardingLayoutProps) => {
   const x = useSharedValue(0);
-  const flatListIndex = useSharedValue(0);
   const flatListRef = useAnimatedRef<Animated.FlatList<StepProps>>();
+  const { width, isPhone } = useScreenInfo();
 
-  const onViewableItemsChanged = useCallback(
-    ({ viewableItems }: { viewableItems: ViewToken[] }) => {
-      flatListIndex.value = viewableItems[0].index ?? 0;
-    },
-    []
-  );
   const scrollHandle = useAnimatedScrollHandler({
     onScroll: (event) => {
       x.value = event.contentOffset.x;
@@ -98,7 +34,73 @@ export const OnboardingLayout = ({ data }: OnboardingLayoutProps) => {
 
   const renderItem = useCallback(
     ({ item, index }: { item: StepProps; index: number }) => {
-      return <StepItem x={x} index={index} item={item} />;
+      return (
+        <View
+          className="flex md:flex-row-reverse px-4 md:mt-5 justify-center"
+          style={{ width }}
+        >
+          <Image
+            className="rounded-lg mb-5 md:mb-0"
+            style={[
+              {
+                width: isPhone ? width - 32 : width / 3,
+              },
+              !isPhone ? { height: "100%" } : {},
+            ]}
+            source={item.image}
+          />
+
+          <Card
+            className="md:w-2/3 md:max-w-screen-sm md:mr-16 md:p-10"
+            bodyComponent={
+              <>
+                {item.component}
+                <StyledPressable
+                  className="hidden md:flex"
+                  onPress={() => {
+                    console.log(index, data.length);
+                    if (index + 1 < data.length) {
+                      console.log("shall scroll", flatListRef.current);
+                      setTimeout(() => {
+                        flatListRef.current?.scrollToIndex({
+                          index: index + 1,
+                          animated: true,
+                        });
+                      }, 1);
+                    }
+                  }}
+                >
+                  Next
+                </StyledPressable>
+              </>
+            }
+          />
+          <StyledPressable
+            className="md:hidden my-9 py-3"
+            onPress={() => {
+              if (index + 1 < data.length) {
+                console.log(index, data.length);
+                flatListRef.current?.scrollToIndex({ index: index + 1 });
+              }
+            }}
+            textVariant={{ weight: 600, lg: true }}
+          >
+            Next
+          </StyledPressable>
+          {item.skippable && (
+            <StyledText
+              onPress={() => {
+                if (index + 1 < data.length) {
+                  flatListRef.current?.scrollToIndex({ index: index + 1 });
+                }
+              }}
+            >
+              Skip for now
+            </StyledText>
+          )}
+          <View className="mt-20" />
+        </View>
+      );
     },
     [x]
   );
@@ -129,15 +131,19 @@ export const OnboardingLayout = ({ data }: OnboardingLayoutProps) => {
           />
         </View>
         <Animated.FlatList
+          snapToInterval={width}
           ref={flatListRef}
           horizontal
+          style={{ width }}
           pagingEnabled={true}
           data={data}
           keyExtractor={(_, index) => index.toString()}
           renderItem={renderItem}
           showsHorizontalScrollIndicator={false}
           bounces={false}
-          onViewableItemsChanged={onViewableItemsChanged}
+          getItemLayout={(data, index) => {
+            return { length: width, index, offset: width * index };
+          }}
           onScroll={scrollHandle}
         />
       </ScrollView>
