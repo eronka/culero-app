@@ -25,6 +25,11 @@ export type RootStackParamList = {
   HomeScreen: undefined;
   AuthNav: NavigatorScreenParams<AuthStackParamList>;
   EmailVerificationSuccess: undefined;
+  Onboarding: NavigatorScreenParams<OnboardingStackParamList>;
+};
+
+export type OnboardingStackParamList = {
+  SocialAccounts: undefined;
 };
 
 export type AuthStackParamList = {

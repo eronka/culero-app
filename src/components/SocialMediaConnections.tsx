@@ -17,12 +17,14 @@ const SocialMediaConnection = ({
   SocialMediaIcon: ReactElement;
 }) => {
   return (
-    <View className="flex-row max-w-full items-center">
-      {SocialMediaIcon}
-      <View className="flex-auto">
-        <StyledText color="gray35">{description}</StyledText>
+    <View className="max-w-full items-center pb-4">
+      <View className="flex-row">
+        {SocialMediaIcon}
+        <View className="flex-auto px-4">
+          <StyledText color="gray35">{description}</StyledText>
+        </View>
       </View>
-      <View className="flex-none">
+      <View className="flex-none self-end w-52 mt-4 md:mt-0">
         <StyledPressable
           color="light"
           textVariant={{ weight: 600 }}
@@ -37,11 +39,9 @@ const SocialMediaConnection = ({
 };
 
 export const SocialMediaConnections = () => (
-  <View className="w-full">
+  <View className="w-full py-4">
     <SocialMediaConnection
-      SocialMediaIcon={
-        <Icon name="linkedin-square" size={40} className="mr-2" />
-      }
+      SocialMediaIcon={<Icon name="linkedin-square" size={40} />}
       platformName="LinkedIn"
       onPressConnect={() => console.log("press")}
       description={
@@ -51,9 +51,7 @@ export const SocialMediaConnections = () => (
     <HorizontalDivider className="my-2" />
 
     <SocialMediaConnection
-      SocialMediaIcon={
-        <Icon name="instagram-square" size={40} className="mr-2" />
-      }
+      SocialMediaIcon={<Icon name="instagram-square" size={40} />}
       onPressConnect={() => console.log("press")}
       platformName="Instagram"
       description={
@@ -63,7 +61,7 @@ export const SocialMediaConnections = () => (
     <HorizontalDivider className="my-2" />
 
     <SocialMediaConnection
-      SocialMediaIcon={<Icon name="github-square" size={40} className="mr-2" />}
+      SocialMediaIcon={<Icon name="github-square" size={40} />}
       onPressConnect={() => console.log("press")}
       platformName="GitHub"
       description={

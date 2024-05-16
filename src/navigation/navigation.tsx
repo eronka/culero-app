@@ -8,6 +8,7 @@ import { AuthStackNavigator } from "./AuthStack";
 import { useUser } from "../hooks";
 import { EmailVerificationSuccess } from "../screens/AuthScreens";
 import { AuthHeader } from "../components";
+import { OnboardingNavigator } from "./OnboardingNavigation";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -29,6 +30,8 @@ const RootNavigator = () => {
         animation: "slide_from_right",
       }}
     >
+      <Stack.Screen name="Onboarding" component={OnboardingNavigator} />
+
       {user ? (
         <>
           <Stack.Screen name="HomeScreen" component={BottomNavigator} />
