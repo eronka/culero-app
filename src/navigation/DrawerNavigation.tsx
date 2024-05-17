@@ -129,8 +129,9 @@ export const DrawerNavigator = () => {
       />
       <Drawer.Screen
         name="Write a review"
-        component={isPhone ? BottomNavigator : WriteReviewScreen}
+        component={WriteReviewScreen}
         options={{
+          headerTitle: "",
           drawerIcon: () => <Icon name="review" size={20} color="gray38" />,
         }}
       />

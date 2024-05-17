@@ -10,6 +10,7 @@ import { Formik } from "formik";
 import { Alert } from "react-native";
 import * as Yup from "yup";
 import colors from "../../colors";
+import { useScreenInfo } from "../hooks/useScreenInfo";
 
 export type GiveReviewCardProps = {
   className?: ViewProps["className"];
@@ -22,6 +23,7 @@ export const GiveReviewCard = ({
   isWhiteBg = false,
   onSubmit,
 }: GiveReviewCardProps) => {
+  const { isPhone } = useScreenInfo();
   return (
     <Card
       className={twMerge("bg-transparent", className)}
@@ -56,8 +58,8 @@ export const GiveReviewCard = ({
           >
             {({ values, handleSubmit, setFieldValue, errors }) => (
               <>
-                <View className="flex-row">
-                  <View className="w-3/4 pr-8">
+                <View className="md:flex-row">
+                  <View className="md:w-3/4 md:pr-8">
                     <StyledText weight={700} color="primary" className="mb-2">
                       Write Review:
                     </StyledText>
@@ -72,7 +74,7 @@ export const GiveReviewCard = ({
                       onChangeText={(value) => setFieldValue("comment", value)}
                     />
                     <CheckBox
-                      className="mt-2"
+                      className="hidden md:flex mt-2"
                       color="primary"
                       value={values.anonymous}
                       onPress={() =>
@@ -82,7 +84,7 @@ export const GiveReviewCard = ({
                       description="Your honest feedback is valuable. If you prefer, you can submit this review anonymously by checking the box."
                     />
                   </View>
-                  <View className="w-1/4">
+                  <View className="mt-4 md:mt-0 md:w-1/4">
                     <StyledText weight={700} color="primary" className="mb-2">
                       Star Rating:
                     </StyledText>
@@ -148,13 +150,25 @@ export const GiveReviewCard = ({
                       </View>
                     </View>
                   </View>
+                  <CheckBox
+                    className="md:hidden mt-8"
+                    color="primary"
+                    checkMarkSize={isPhone ? 14 : 24}
+                    value={values.anonymous}
+                    onPress={() =>
+                      setFieldValue("anonymous", !values.anonymous)
+                    }
+                    label="Submit Anonymously"
+                    description="Your honest feedback is valuable. If you prefer, you can submit this review anonymously by checking the box."
+                  />
                 </View>
 
                 <StyledPressable
+                  fw={isPhone}
                   onPress={() => {
                     handleSubmit();
                   }}
-                  className="self-end mt-2"
+                  className="self-end mt-8 md:mt-2"
                   color="primary"
                   textVariant={{ color: "white" }}
                 >

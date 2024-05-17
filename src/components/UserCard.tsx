@@ -53,7 +53,7 @@ export const UserCard = ({
                 isVerified={isVerified}
               />
             </View>
-            <View className="flex-1">
+            <View className="hidden md:flex flex-1">
               <StyledPressable
                 disabled={isConnection}
                 color="white"
@@ -64,26 +64,38 @@ export const UserCard = ({
               </StyledPressable>
             </View>
           </View>
-          <View className="flex-row self-end mt-2">
-            <View className="flex-row">
-              <Icon name="user-star" color="grayC5" size={15} />
-              <StyledText color="whiteFA" sm>
-                {`${revewisCount} reviews`}
-              </StyledText>
-            </View>
+          <View className="flex-row justify-between">
+            <View className="md:flex-row md:self-end mt-2">
+              <View className="flex-row">
+                <Icon name="user-star" color="grayC5" size={15} />
+                <StyledText color="whiteFA" sm>
+                  {`${revewisCount} reviews`}
+                </StyledText>
+              </View>
 
-            <View className="flex-row mx-4">
-              <Icon name="user-group" color="grayC5" size={15} />
-              <StyledText color="whiteFA" sm>
-                {`${connectionsCount} connections`}
-              </StyledText>
-            </View>
+              <View className="flex-row md:mx-4">
+                <Icon name="user-group" color="grayC5" size={15} />
+                <StyledText color="whiteFA" sm>
+                  {`${connectionsCount} connections`}
+                </StyledText>
+              </View>
 
-            <View className="flex-row">
-              <Icon name="verified" color="grayC5" size={15} />
-              <StyledText color="whiteFA" sm>
-                {`Member since ${joinedDate.getFullYear()}`}
-              </StyledText>
+              <View className="flex-row">
+                <Icon name="verified" color="grayC5" size={15} />
+                <StyledText color="whiteFA" sm>
+                  {`Member since ${joinedDate.getFullYear()}`}
+                </StyledText>
+              </View>
+            </View>
+            <View className="md:hidden self-end">
+              <StyledPressable
+                disabled={isConnection}
+                color="white"
+                className="self-end mt-2"
+                textVariant={{ color: "primary", weight: 500 }}
+              >
+                Connect
+              </StyledPressable>
             </View>
           </View>
         </View>
