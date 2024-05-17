@@ -164,7 +164,6 @@ const InitialScreen = ({}: {}) => {
           professionalismRating={4.1}
           reliabilityRating={5}
           communicationRating={2.3}
-          overallRating={4.5}
           isFavourite={false}
           userName="Ionel Ionescu"
           isUserVerified={true}
