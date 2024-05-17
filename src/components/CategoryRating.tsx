@@ -1,12 +1,15 @@
-import { View } from "react-native";
+import { View, ViewProps } from "react-native";
 import { StyledText } from "./StyledText";
 import { PercentageBar } from "./PercentageBar";
+import { twMerge } from "tailwind-merge";
 export type CategoryRatingProps = {
   maxRating?: number;
   rating: number;
   hideBar?: boolean;
   hideNumbers?: boolean;
   categoryName: string;
+  height?: number;
+  className?: ViewProps["className"];
 };
 export const CategoryRating = ({
   maxRating = 5,
@@ -14,9 +17,16 @@ export const CategoryRating = ({
   categoryName,
   hideBar,
   hideNumbers,
+  height = 15,
+  className,
 }: CategoryRatingProps) => {
   return (
-    <View className="flex-row justify-between my-1 items-center">
+    <View
+      className={twMerge(
+        "flex-row justify-between my-1 items-center",
+        className
+      )}
+    >
       <View className="w-24 mr-2">
         <StyledText weight={600} className="text-xs" color="darkgrey">
           {categoryName}
@@ -24,7 +34,7 @@ export const CategoryRating = ({
       </View>
       {!hideBar && (
         <View className="flex-grow mr-2">
-          <PercentageBar maxValue={maxRating} value={rating} height={15} />
+          <PercentageBar maxValue={maxRating} value={rating} height={height} />
         </View>
       )}
       {!hideNumbers && (

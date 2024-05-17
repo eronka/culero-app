@@ -11,6 +11,8 @@ export type CardProps = {
   headerClassName?: ViewProps["className"];
   footerClassName?: ViewProps["className"];
   bodyClassName?: ViewProps["className"];
+  hideHeaderDivider?: boolean;
+  style?: ViewProps["style"];
 };
 export const Card = ({
   headerComponent,
@@ -20,13 +22,20 @@ export const Card = ({
   headerClassName,
   footerClassName,
   bodyClassName,
+  hideHeaderDivider,
+  style,
 }: CardProps) => {
   return (
-    <View className={twMerge("bg-white rounded-lg w-full p-4", className)}>
+    <View
+      className={twMerge("bg-white rounded-lg w-full p-4", className)}
+      style={style}
+    >
       {!!headerComponent && (
         <View className={twMerge("", headerClassName)}>{headerComponent}</View>
       )}
-      {!!headerComponent && !!bodyComponent && <HorizontalDivider />}
+      {!!headerComponent && !!bodyComponent && !hideHeaderDivider && (
+        <HorizontalDivider />
+      )}
       {!!bodyComponent && (
         <View className={twMerge("", bodyClassName)}>{bodyComponent}</View>
       )}

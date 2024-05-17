@@ -12,6 +12,7 @@ import { ConnectionReviewCard } from "../../components/ConnectionsReviewCard";
 import { useState } from "react";
 import { getSearchUserResult, sendFeedback } from "../../utils/api";
 import { useScreenInfo } from "../../hooks/useScreenInfo";
+import { DrawerHeader } from "../../components/headers/DrawerHeader";
 
 export const WriteReviewScreen = () => {
   const { isPhone } = useScreenInfo();
@@ -26,13 +27,7 @@ export const WriteReviewScreen = () => {
   return (
     <ScrollView>
       <View className="p-4 md:p-9">
-        <View className="flex-row my-4">
-          <StyledText weight={600} xl4={!isPhone} lg={isPhone}>
-            Write a Review
-          </StyledText>
-          <Icon name="review" className="ml-4" size={isPhone ? 18 : 30} />
-        </View>
-        <HorizontalDivider className="md:hidden" />
+        <DrawerHeader title="Write a Review" iconProps={{ name: "review" }} />
 
         <View className="md:flex-row gap-4 mt-4">
           <View className="basis-3/4">

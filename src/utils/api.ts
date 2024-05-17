@@ -1,4 +1,6 @@
 import { User, UserWithToken } from "../types";
+import { Rating } from "../types/Rating";
+import { Review } from "../types/Review";
 import storage from "./storage";
 
 const baseUrl = "http://192.168.1.132:4200/api";
@@ -68,6 +70,8 @@ const authorizedFetch = async (
   init: FetchInit | object
 ): Promise<any> => {
   const token = await storage.getItem(storage.TOKEN_KEY);
+
+  console.log("token is ", token);
 
   return enhancedFetch(
     input,
@@ -178,5 +182,15 @@ export type RegenerateCodeInput = {
 export async function regenerateCode(data: RegenerateCodeInput) {
   return enhancedFetch(`${baseUrl}/auth/regenerate-code/${data.email}`, {
     method: "PUT",
+  });
+}
+
+export async function getSelfReviews(): Promise<Review[]> {
+  return authorizedFetch(`${baseUrl}/user/ratings/self`, { method: "GET" });
+}
+
+export async function getSelfAvgRatings(): Promise<Rating> {
+  return authorizedFetch(`${baseUrl}/user/avg-rating/self`, {
+    method: "GET",
   });
 }

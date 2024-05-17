@@ -104,6 +104,7 @@ export const DrawerNavigator = () => {
       drawerContent={(props) => <CustomDrawerContent {...props} />}
       screenOptions={{
         headerShown: isPhone,
+        headerTitle: "",
         drawerType: isPhone ? "front" : "permanent",
         drawerActiveTintColor: "#F5F6F8",
         drawerLabelStyle: {
