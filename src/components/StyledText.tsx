@@ -64,7 +64,7 @@ const text = tv({
       true: "text-5xl",
     },
     xl6: {
-      true: "text-6xl",
+      true: "text-6xl ",
     },
     xl7: {
       true: "text-7xl",

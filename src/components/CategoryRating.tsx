@@ -39,12 +39,9 @@ export const CategoryRating = ({
       )}
       {!hideNumbers && (
         <View>
-          <StyledText weight={700} className="text-sm">
+          <StyledText weight={700} xl2>
             {rating.toFixed(1)}
-            <StyledText
-              weight={500}
-              className="text-xs"
-            >{` / ${maxRating}`}</StyledText>
+            <StyledText weight={500}>{` / ${maxRating}`}</StyledText>
           </StyledText>
         </View>
       )}

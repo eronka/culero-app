@@ -6,4 +6,6 @@ export type Review = {
   communication: number;
   isAnonymous: boolean;
   isEmailVerified: boolean;
+  createdOn: string;
+  comment: string;
 };
