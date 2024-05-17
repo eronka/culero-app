@@ -1,4 +1,5 @@
 import { User, UserWithToken } from "../types";
+import { Review } from "../types/Review";
 import storage from "./storage";
 
 const baseUrl = "http://192.168.1.132:4200/api";
@@ -178,5 +179,15 @@ export type RegenerateCodeInput = {
 export async function regenerateCode(data: RegenerateCodeInput) {
   return enhancedFetch(`${baseUrl}/auth/regenerate-code/${data.email}`, {
     method: "PUT",
+  });
+}
+
+export async function getSelfReviews(): Promise<Review[]> {
+  return authorizedFetch(`${baseUrl}/user/ratings/self`, { method: "GET" });
+}
+
+export async function getAvgRatings(userId: User["id"]) {
+  return authorizedFetch(`${baseUrl}/user/avg-ratings/${userId}`, {
+    method: "GET",
   });
 }

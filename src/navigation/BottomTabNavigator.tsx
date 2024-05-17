@@ -8,6 +8,7 @@ import { useScreenInfo } from "../hooks/useScreenInfo";
 import { WriteReviewScreen } from "../screens/WriteReviewScreen/WriteReviewScreen";
 import { RouteProp } from "@react-navigation/native";
 import { RootStackParamList } from "../types";
+import HomeScreen from "../screens/HomeScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -30,7 +31,7 @@ export function BottomNavigator(props: { initialRoute?: string }) {
     >
       <Tab.Screen
         name="Home"
-        component={InitialScreen}
+        component={HomeScreen}
         options={{
           tabBarLabel: "Home",
           tabBarIcon: ({ focused }) => (
