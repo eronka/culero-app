@@ -5,6 +5,7 @@ import { StyledStarRating } from "./StarRating";
 import { CategoryRating } from "./CategoryRating";
 import { useSelfRatings } from "../hooks/useSelfRatings";
 import { twMerge } from "tailwind-merge";
+import { useScreenInfo } from "../hooks/useScreenInfo";
 
 export type MyReviewsCardProps = {
   className?: ViewProps["className"];
@@ -12,6 +13,7 @@ export type MyReviewsCardProps = {
 
 export const MyReviewsCard = ({ className }: MyReviewsCardProps) => {
   const rating = useSelfRatings();
+  const { isPhone } = useScreenInfo();
 
   return (
     <Card
@@ -64,16 +66,20 @@ export const MyReviewsCard = ({ className }: MyReviewsCardProps) => {
           {!rating.isLoading && rating.data && rating.data.professionalism && (
             <View className="flex-grow mt-6">
               <CategoryRating
+                height={isPhone ? 15 : 20}
                 hideNumbers={true}
                 categoryName="Professionalsim"
                 rating={rating.data.professionalism}
               />
               <CategoryRating
+                height={isPhone ? 15 : 20}
+                className="md:my-6"
                 hideNumbers={true}
                 categoryName="Reliability"
                 rating={rating.data.reliability}
               />
               <CategoryRating
+                height={isPhone ? 15 : 20}
                 hideNumbers={true}
                 categoryName="Communication"
                 rating={rating.data.communication}

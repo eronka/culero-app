@@ -10,30 +10,29 @@ import {
 import { useSelfReviews } from "../../hooks/useSelfReviews";
 import { ConnectionReviewCard } from "../../components/ConnectionsReviewCard";
 import { SocialMediaCard } from "../../icons/SocialMediaCard";
+import { useScreenInfo } from "../../hooks/useScreenInfo";
 
 const ReviewsList = () => {
   const reviews = useSelfReviews();
-  console.log("items", reviews.data?.length);
+  const { isPhone } = useScreenInfo();
 
   if (reviews.isLoading) {
     return <ActivityIndicator size="large" className="self-center mt-8" />;
   }
 
   return (
-    <View style={{ flex: 1, width: "100%" }}>
+    <View>
       <FlatList
-        contentContainerStyle={{
-          flexGrow: 1,
-          paddingBottom: 5,
-        }}
         data={reviews.data}
         ListEmptyComponent={
           <View className="flex">
             <StyledText>You have no reviews.</StyledText>
           </View>
         }
-        style={{ overflow: "visible" }}
+        // list dosen't scroll on web when overflow is visible
+        style={isPhone ? { overflow: "visible" } : {}}
         horizontal={true}
+        showsHorizontalScrollIndicator={false}
         contentContainerClassName="pb-4"
         renderItem={({ item }) => (
           <SmallReviewCard
@@ -60,22 +59,32 @@ const HomeScreen = ({}: {}) => {
       <View className="p-4 md:p-9">
         <DrawerHeader title="Welcome to Culero!" />
 
-        <View className="mt-6">
-          <Card
-            bodyComponent={<ReviewsList />}
-            hideHeaderDivider
-            headerComponent={
-              <StyledText xl2 weight={500}>
-                My latest reviews
-              </StyledText>
-            }
-          />
-          <MyReviewsCard className="mt-4" />
-          <ConnectionReviewCard
-            className="mt-4"
-            title="Your connections need review"
-          />
-          <SocialMediaCard className="mt-4" />
+        <View className="mt-6 flex">
+          <View className="w-full">
+            <Card
+              bodyComponent={<ReviewsList />}
+              hideHeaderDivider
+              headerComponent={
+                <StyledText xl2 weight={500}>
+                  My latest reviews
+                </StyledText>
+              }
+            />
+          </View>
+          <View className="md:flex-row flex-1">
+            <View className="md:w-2/5 md:pr-8">
+              <MyReviewsCard className="mt-4 md:h-full" />
+            </View>
+            <View className="md:w-2/5 md:pr-8">
+              <ConnectionReviewCard
+                className="mt-4 md:h-full"
+                title="Your connections need review"
+              />
+            </View>
+            <View className="md:w-1/5">
+              <SocialMediaCard className="mt-4 md:h-full" />
+            </View>
+          </View>
         </View>
       </View>
     </ScrollView>
