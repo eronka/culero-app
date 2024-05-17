@@ -1,4 +1,5 @@
 import { User, UserWithToken } from "../types";
+import { Rating } from "../types/Rating";
 import { Review } from "../types/Review";
 import storage from "./storage";
 
@@ -69,6 +70,8 @@ const authorizedFetch = async (
   init: FetchInit | object
 ): Promise<any> => {
   const token = await storage.getItem(storage.TOKEN_KEY);
+
+  console.log("token is ", token);
 
   return enhancedFetch(
     input,
@@ -186,8 +189,8 @@ export async function getSelfReviews(): Promise<Review[]> {
   return authorizedFetch(`${baseUrl}/user/ratings/self`, { method: "GET" });
 }
 
-export async function getAvgRatings(userId: User["id"]) {
-  return authorizedFetch(`${baseUrl}/user/avg-ratings/${userId}`, {
+export async function getSelfAvgRatings(): Promise<Rating> {
+  return authorizedFetch(`${baseUrl}/user/avg-rating/self`, {
     method: "GET",
   });
 }

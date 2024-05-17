@@ -1,36 +1,35 @@
-import { View, ViewProps } from "react-native";
+import { ActivityIndicator, View, ViewProps } from "react-native";
 import { Card } from "./Card";
 import { StyledText } from "./StyledText";
 import { StyledStarRating } from "./StarRating";
 import { CategoryRating } from "./CategoryRating";
+import { useSelfRatings } from "../hooks/useSelfRatings";
+import { twMerge } from "tailwind-merge";
 
 export type MyReviewsCardProps = {
-  professionalismRating: number;
-  reliabilityRating: number;
-  communicationRating: number;
-  overallRating: number;
   className?: ViewProps["className"];
 };
 
-export const MyReviewsCard = ({
-  className,
-  professionalismRating,
-  communicationRating,
-  reliabilityRating,
-  overallRating,
-}: MyReviewsCardProps) => {
+export const MyReviewsCard = ({ className }: MyReviewsCardProps) => {
+  const rating = useSelfRatings();
+
   return (
     <Card
-      className={className}
-      bodyComponent={
-        <View className="p-2">
-          <View className="flex-row justify-between">
-            <StyledText weight={600} className="text-xl">
-              My Reviews
-            </StyledText>
+      className={twMerge("", className)}
+      headerComponent={
+        <View className="flex-row justify-between">
+          <StyledText weight={600} xl2>
+            My Reviews
+          </StyledText>
+          {!rating.isLoading && rating.data && rating.data.professionalism && (
             <View className="items-end">
               <StyledText weight={700} className="text-3xl">
-                {overallRating.toLocaleString("en", {
+                {(
+                  (rating.data.communication +
+                    rating.data.professionalism +
+                    rating.data.reliability) /
+                  3
+                ).toLocaleString("en", {
                   maximumFractionDigits: 1,
                 })}
                 <StyledText
@@ -39,28 +38,49 @@ export const MyReviewsCard = ({
                 >{`/ 5`}</StyledText>
               </StyledText>
 
-              <StyledStarRating readonly startingValue={overallRating} />
+              <StyledStarRating
+                readonly
+                startingValue={
+                  (rating.data.communication +
+                    rating.data.professionalism +
+                    rating.data.reliability) /
+                  3
+                }
+              />
             </View>
-          </View>
-
-          <View className="flex-grow mt-6">
-            <CategoryRating
-              hideNumbers={true}
-              categoryName="Professionalsim"
-              rating={professionalismRating}
-            />
-            <CategoryRating
-              hideNumbers={true}
-              categoryName="Reliability"
-              rating={reliabilityRating}
-            />
-            <CategoryRating
-              hideNumbers={true}
-              categoryName="Communication"
-              rating={communicationRating}
-            />
-          </View>
+          )}
         </View>
+      }
+      hideHeaderDivider
+      bodyComponent={
+        <>
+          {rating.isLoading && (
+            <ActivityIndicator size="small" className="self-center mt-6" />
+          )}
+          {!rating.isLoading && !rating.data?.professionalism && (
+            <StyledText className="mt-5">You have no reviews yet</StyledText>
+          )}
+
+          {!rating.isLoading && rating.data && rating.data.professionalism && (
+            <View className="flex-grow mt-6">
+              <CategoryRating
+                hideNumbers={true}
+                categoryName="Professionalsim"
+                rating={rating.data.professionalism}
+              />
+              <CategoryRating
+                hideNumbers={true}
+                categoryName="Reliability"
+                rating={rating.data.reliability}
+              />
+              <CategoryRating
+                hideNumbers={true}
+                categoryName="Communication"
+                rating={rating.data.communication}
+              />
+            </View>
+          )}
+        </>
       }
     />
   );
