@@ -4,8 +4,8 @@ import { StyledText } from "./StyledText";
 import { twMerge } from "tailwind-merge";
 
 type ConnectionDetailsProps = {
-  userName: string;
-  userPosition: string;
+  userName?: string;
+  userPosition?: string;
   userAvatar?: string;
   isVerified?: boolean;
   className?: ViewProps["className"];
@@ -42,10 +42,10 @@ export const ConnectionDetails = ({
           lg
           className={twMerge("", usernameTextClassName)}
         >
-          {userName}
+          {userName || ""}
         </StyledText>
         <StyledText color="gray33" className={positionTextClassName}>
-          {userPosition}
+          {userPosition || ""}
         </StyledText>
       </View>
     </View>
