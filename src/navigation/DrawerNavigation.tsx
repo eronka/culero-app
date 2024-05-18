@@ -14,6 +14,7 @@ import { twMerge } from "tailwind-merge";
 import { useScreenInfo } from "../hooks/useScreenInfo";
 import InitialScreen from "../screens/InitialScreen";
 import { WriteReviewScreen } from "../screens/WriteReviewScreen/WriteReviewScreen";
+import { MyReviewsScreen } from "../screens/MyReviewsScreen/MyReviewsScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -123,7 +124,7 @@ export const DrawerNavigator = () => {
       />
       <Drawer.Screen
         name="My Reviews"
-        component={BottomNavigator}
+        component={MyReviewsScreen}
         options={{
           drawerIcon: () => <Icon name="user-star" size={20} color="gray38" />,
         }}
