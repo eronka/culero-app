@@ -49,7 +49,8 @@ export type IconName =
   | "user"
   | "settings"
   | "eye"
-  | "checkmark";
+  | "checkmark"
+  | "back";
 
 export type IconProps = {
   name: IconName;
@@ -180,6 +181,13 @@ export const Icon = ({ name, color, size, className }: IconProps) => {
       {name === "checkmark" && (
         <Ionicons
           name="checkmark"
+          size={size}
+          color={color ? colors[color] : colors["black"]}
+        />
+      )}
+      {name === "back" && (
+        <Material
+          name="arrow-back-ios"
           size={size}
           color={color ? colors[color] : colors["black"]}
         />

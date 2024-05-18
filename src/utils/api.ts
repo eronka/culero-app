@@ -1,4 +1,4 @@
-import { User, UserWithToken } from "../types";
+import { User, UserWithCounts, UserWithToken } from "../types";
 import { Rating } from "../types/Rating";
 import { Review } from "../types/Review";
 import storage from "./storage";
@@ -191,6 +191,24 @@ export async function getSelfReviews(): Promise<Review[]> {
 
 export async function getSelfAvgRatings(): Promise<Rating> {
   return authorizedFetch(`${baseUrl}/user/avg-rating/self`, {
+    method: "GET",
+  });
+}
+
+export async function getUser(userId: User["id"]): Promise<UserWithCounts> {
+  return authorizedFetch(`${baseUrl}/user/${userId}`, {
+    method: "GET",
+  });
+}
+
+export async function getUserAvgRatings(userId: User["id"]): Promise<Rating> {
+  return authorizedFetch(`${baseUrl}/user/avg-rating/${userId}`, {
+    method: "GET",
+  });
+}
+
+export async function getUserReviews(userId: User["id"]): Promise<Review[]> {
+  return authorizedFetch(`${baseUrl}/user/ratings/${userId}`, {
     method: "GET",
   });
 }

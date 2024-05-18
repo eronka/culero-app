@@ -69,7 +69,7 @@ export const GiveReviewCard = ({
                       numberOfLines={10}
                       error={errors.comment}
                       value={values.comment}
-                      containerClassName="bg-grayF2"
+                      containerClassName="bg-[#dfdfdf]"
                       placeholderTextColor={colors["gray33"]}
                       onChangeText={(value) => setFieldValue("comment", value)}
                     />

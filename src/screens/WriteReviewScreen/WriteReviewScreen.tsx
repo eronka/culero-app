@@ -29,7 +29,7 @@ export const WriteReviewScreen = () => {
       <View className="p-4 md:p-9">
         <DrawerHeader title="Write a Review" iconProps={{ name: "review" }} />
 
-        <View className="md:flex-row gap-4 mt-4">
+        <View className="md:flex-row gap-4">
           <View className="basis-3/4">
             <Card
               className="py-6 px-3 md:px-9"

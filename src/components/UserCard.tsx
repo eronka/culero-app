@@ -9,9 +9,9 @@ import { IconButton } from "./IconButton";
 import { Icon } from "../icons";
 
 export type UserCardProps = {
-  userName: string;
-  userPosition: string;
-  userAvatar: string;
+  userName?: string;
+  userPosition?: string;
+  userAvatar?: string;
   className?: ViewProps["className"];
   isVerified?: boolean;
   revewisCount: number;
