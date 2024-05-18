@@ -9,7 +9,8 @@ import { ConnectionDetails } from "./ConnectionDetails";
 import { IconButton } from "./IconButton";
 import { useState } from "react";
 import { Item } from "react-native-picker-select";
-import { Connection } from "../types";
+import { Connection, ConnectionStackParamList } from "../types";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 
 export type SearchableConnectionsCardProps = {
   className?: ViewProps["className"];
@@ -38,6 +39,7 @@ export const SearchableConnectionsCard = ({
 }: SearchableConnectionsCardProps) => {
   const [sortBy, setSortBy] = useState(sortByItems[0]);
   const [searchTerm, setSearchTerm] = useState("");
+  const navigation = useNavigation<NavigationProp<ConnectionStackParamList>>();
 
   console.log("sorted users ", sortByProperty(users, sortBy.value), sortBy);
   return (
@@ -81,7 +83,13 @@ export const SearchableConnectionsCard = ({
             )}
             renderItem={({ item }) => (
               <View className="flex-row justify-between items-center p-4 py-8 px-6 hover:bg-white7 rounded-lg">
-                <Pressable className="flex-grow">
+                <Pressable
+                  className="flex-grow"
+                  onPress={() => {
+                    console.log("item.id", item.id);
+                    navigation.navigate("Connection", { userId: item.id });
+                  }}
+                >
                   <ConnectionDetails
                     avatarSize={86}
                     badgeSize={34}

@@ -16,8 +16,10 @@ import InitialScreen from "../screens/InitialScreen";
 import { WriteReviewScreen } from "../screens/WriteReviewScreen/WriteReviewScreen";
 import { MyReviewsScreen } from "../screens/MyReviewsScreen/MyReviewsScreen";
 import { SearchConnectionsScreen } from "../screens/ConnectionScreens";
+import { DrawerNavigatorParamList } from "../types";
+import { ConnectionStack } from "./ConnectionStack";
 
-const Drawer = createDrawerNavigator();
+const Drawer = createDrawerNavigator<DrawerNavigatorParamList>();
 
 const DrawerHeader = ({
   className,
@@ -140,7 +142,7 @@ export const DrawerNavigator = () => {
       />
       <Drawer.Screen
         name="Connections"
-        component={SearchConnectionsScreen}
+        component={ConnectionStack}
         options={{
           drawerIcon: () => <Icon name="user-group" size={20} color="gray38" />,
         }}

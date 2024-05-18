@@ -8,8 +8,8 @@ export const SearchConnectionsScreen = () => {
     <ScrollView>
       <View className="p-4 md:p-9">
         <DrawerHeader
-          title="My Reviews"
-          iconProps={{ name: "user-star", color: "black" }}
+          title="Connections"
+          iconProps={{ name: "user-group", color: "black" }}
         />
 
         <View className="md:flex-row">
