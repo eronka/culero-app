@@ -15,6 +15,7 @@ import { useScreenInfo } from "../hooks/useScreenInfo";
 import InitialScreen from "../screens/InitialScreen";
 import { WriteReviewScreen } from "../screens/WriteReviewScreen/WriteReviewScreen";
 import { MyReviewsScreen } from "../screens/MyReviewsScreen/MyReviewsScreen";
+import { SearchConnectionsScreen } from "../screens/ConnectionScreens";
 
 const Drawer = createDrawerNavigator();
 
@@ -139,7 +140,7 @@ export const DrawerNavigator = () => {
       />
       <Drawer.Screen
         name="Connections"
-        component={BottomNavigator}
+        component={SearchConnectionsScreen}
         options={{
           drawerIcon: () => <Icon name="user-group" size={20} color="gray38" />,
         }}

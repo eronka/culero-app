@@ -11,6 +11,8 @@ type ConnectionDetailsProps = {
   className?: ViewProps["className"];
   usernameTextClassName?: TextProps["className"];
   positionTextClassName?: TextProps["className"];
+  avatarSize?: number;
+  badgeSize?: number;
 };
 
 export const ConnectionDetails = ({
@@ -21,21 +23,24 @@ export const ConnectionDetails = ({
   className,
   usernameTextClassName,
   positionTextClassName,
+  avatarSize = 45,
+  badgeSize = 22,
 }: ConnectionDetailsProps) => {
   return (
-    <View className={twMerge("flex-row", className)}>
+    <View className={twMerge("flex-row items-center", className)}>
       <Avatar
         userImage={userAvatar}
         isVerified={isVerified}
         hasBadge={true}
-        size={45}
-        badgeSize={22}
+        size={avatarSize}
+        badgeSize={badgeSize}
         hideBorder={true}
       />
       <View className="ml-2">
         <StyledText
           weight={600}
-          className={twMerge("text-lg", usernameTextClassName)}
+          lg
+          className={twMerge("", usernameTextClassName)}
         >
           {userName}
         </StyledText>
