@@ -59,7 +59,7 @@ const HomeScreen = ({}: {}) => {
       <View className="p-4 md:p-9">
         <DrawerHeader title="Welcome to Culero!" />
 
-        <View className="mt-6 flex">
+        <View className="flex">
           <View className="w-full">
             <Card
               bodyComponent={<ReviewsList />}
