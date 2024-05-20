@@ -51,7 +51,8 @@ export type IconName =
   | "settings"
   | "eye"
   | "checkmark"
-  | "user-avatar";
+  | "user-avatar"
+  | "back";
 
 export type IconProps = {
   name: IconName;
@@ -187,6 +188,13 @@ export const Icon = ({ name, color, size, className }: IconProps) => {
         />
       )}
       {name === "user-avatar" && <UserAvatar color={color || "black"} />}
+      {name === "back" && (
+        <Material
+          name="arrow-back-ios"
+          size={size}
+          color={color ? colors[color] : colors["black"]}
+        />
+      )}
     </View>
   );
 };

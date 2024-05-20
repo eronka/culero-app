@@ -4,27 +4,28 @@ import { StyledText } from "./StyledText";
 import { Avatar } from "./Avatar";
 import { StyledStarRating } from "./StarRating";
 import { FavouriteButton } from "./FavouriteButton";
+import { IconButton } from "./IconButton";
+import { twMerge } from "tailwind-merge";
 
 export type RatingCardProps = {
   professionalismRating: number;
   reliabilityRating: number;
   communicationRating: number;
-  overallRating: number;
   className?: ViewProps["className"];
   userImage?: string;
   isAnonymous?: boolean;
   isFavourite: boolean;
-  review: string;
+  comment: string;
   date: Date;
 };
 
 const Rating = ({ category, value }: { category: string; value: number }) => {
   return (
-    <View className="flex items-center">
-      <StyledText weight={600} color="darkgrey" className="text-sm">
+    <View className="flex-row md:flex-col items-center justify-between">
+      <StyledText weight={600} color="darkgrey">
         {category}
       </StyledText>
-      <StyledText weight={700} className="text-lg">
+      <StyledText weight={700} xl2>
         {value.toFixed(1)}
       </StyledText>
     </View>
@@ -36,16 +37,18 @@ export const ReviewCard = ({
   professionalismRating,
   reliabilityRating,
   communicationRating,
-  overallRating,
-  review,
+  comment,
   date,
   userImage,
   isAnonymous,
   isFavourite,
 }: RatingCardProps) => {
+  const overallRating =
+    (professionalismRating + communicationRating + reliabilityRating) / 3;
+
   return (
     <Card
-      className={className}
+      className={twMerge("px-9 py-4", className)}
       headerComponent={
         <View className="flex-row justify-between p-2 items-center pb-4">
           <View className="flex-row">
@@ -64,25 +67,28 @@ export const ReviewCard = ({
               <StyledStarRating readonly startingValue={overallRating} />
             </View>
           </View>
-          <FavouriteButton
-            onPress={() => Alert.alert("love")}
-            isFav={isFavourite}
-          />
+          <View className="flex-row items-center">
+            <FavouriteButton
+              onPress={() => Alert.alert("love")}
+              isFav={isFavourite}
+            />
+            <IconButton iconProps={{ name: "message" }} className="ml-4" />
+          </View>
         </View>
       }
       bodyComponent={
-        <View className="flex-row my-8">
+        <View className="md:flex-row my-8">
           <View>
             <StyledText color="darkgrey">Review:</StyledText>
           </View>
-          <View className="flex-auto px-4">
-            <StyledText weight={500}>{review}</StyledText>
+          <View className="flex-auto md:px-4">
+            <StyledText weight={500}>{comment}</StyledText>
           </View>
         </View>
       }
       footerComponent={
         <View className="mt-4">
-          <View className="flex-row justify-around">
+          <View className="md:flex-row justify-around">
             <Rating category="Professionalism" value={professionalismRating} />
             <Rating category="Reliability" value={reliabilityRating} />
             <Rating category="Communication" value={communicationRating} />
@@ -90,7 +96,7 @@ export const ReviewCard = ({
           <View>
             <StyledText
               color="gray83"
-              className="text-xs text-right mt-2"
+              className="text-xs text-right mt-4"
             >{`Posted on: ${date.toLocaleDateString()}`}</StyledText>
           </View>
         </View>

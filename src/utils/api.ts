@@ -1,5 +1,6 @@
-import { Platform } from "react-native";
-import { User, UserWithToken } from "../types";
+import { User, UserWithCounts, UserWithToken } from "../types";
+import { Rating } from "../types/Rating";
+import { Review } from "../types/Review";
 import storage from "./storage";
 
 const baseUrl = "http://192.168.1.132:4200/api";
@@ -71,6 +72,7 @@ const authorizedFetch = async (
   const token = await storage.getItem(storage.TOKEN_KEY);
 
   console.log("token is ", token);
+
   return enhancedFetch(
     input,
     init,
@@ -198,6 +200,34 @@ export async function updateProfileData(data: UpdateProfileData) {
 export async function updateProfilePicture(uri: string) {
   return authorizedFetch(`${baseUrl}/user/profile-picture`, {
     method: "PUT",
-    body: { file: uri },
+    body: { file: uri }
+  });
+}
+
+export async function getSelfReviews(): Promise<Review[]> {
+  return authorizedFetch(`${baseUrl}/user/ratings/self`, { method: "GET" });
+}
+
+export async function getSelfAvgRatings(): Promise<Rating> {
+  return authorizedFetch(`${baseUrl}/user/avg-rating/self`, {
+    method: "GET",
+  });
+}
+
+export async function getUser(userId: User["id"]): Promise<UserWithCounts> {
+  return authorizedFetch(`${baseUrl}/user/${userId}`, {
+    method: "GET",
+  });
+}
+
+export async function getUserAvgRatings(userId: User["id"]): Promise<Rating> {
+  return authorizedFetch(`${baseUrl}/user/avg-rating/${userId}`, {
+    method: "GET",
+  });
+}
+
+export async function getUserReviews(userId: User["id"]): Promise<Review[]> {
+  return authorizedFetch(`${baseUrl}/user/ratings/${userId}`, {
+    method: "GET"
   });
 }

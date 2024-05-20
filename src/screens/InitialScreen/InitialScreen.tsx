@@ -131,7 +131,6 @@ const InitialScreen = ({}: {}) => {
         <StyledStarRating />
         <OverallRateCard
           className="mt-8"
-          overallRating={4.5}
           professionalismRating={4.1}
           reliabilityRating={5}
           communicationRating={2}
@@ -141,30 +140,27 @@ const InitialScreen = ({}: {}) => {
           professionalismRating={4.1}
           reliabilityRating={5}
           communicationRating={2.3}
-          overallRating={4.5}
           date={new Date()}
           isFavourite={true}
           userImage="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          review="What impressed me the most was Logan Davis's strategic thinking and the way they handled challenges. Their clear communication and willingness to listen to team members' ideas created a positive and collaborative work environment."
+          comment="What impressed me the most was Logan Davis's strategic thinking and the way they handled challenges. Their clear communication and willingness to listen to team members' ideas created a positive and collaborative work environment."
         />
         <ReviewCard
           className="mt-8"
           professionalismRating={4.1}
           reliabilityRating={5}
           communicationRating={2.3}
-          overallRating={4.5}
           date={new Date()}
           isFavourite={false}
           isAnonymous={true}
           userImage="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          review="What impressed me the most was Logan Davis's strategic thinking and the way they handled challenges. Their clear communication and willingness to listen to team members' ideas created a positive and collaborative work environment."
+          comment="What impressed me the most was Logan Davis's strategic thinking and the way they handled challenges. Their clear communication and willingness to listen to team members' ideas created a positive and collaborative work environment."
         />
         <SmallReviewCard
           className="mt-8 w-2/3"
           professionalismRating={4.1}
           reliabilityRating={5}
           communicationRating={2.3}
-          overallRating={4.5}
           isFavourite={false}
           userName="Ionel Ionescu"
           isUserVerified={true}
@@ -175,19 +171,12 @@ const InitialScreen = ({}: {}) => {
           professionalismRating={4.1}
           reliabilityRating={5}
           communicationRating={2.3}
-          overallRating={4.5}
           isFavourite={true}
           userName="Ionel Ionescu"
           isUserVerified={false}
           userImage="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         />
-        <MyReviewsCard
-          className="mt-8 "
-          professionalismRating={4.1}
-          reliabilityRating={5}
-          communicationRating={2.3}
-          overallRating={4.5}
-        />
+        <MyReviewsCard className="mt-8 " />
         <ConnectionDetails
           className="mt-8"
           userName="Ionel Ionescu"
@@ -241,35 +230,48 @@ const InitialScreen = ({}: {}) => {
           className="mt-2"
           users={[
             {
-              firstName: "Ionel",
-              lastName: "Ionescu",
-              isVerified: true,
-              position: "Mint rubber",
-              avatar:
+              name: "Ionel Ionescu",
+              isEmailVerified: true,
+              headline: "Mint rubber",
+              id: "clw4y14gv0000hp3iak2kd6xh",
+              addedAt: new Date(),
+              profilePictureUrl:
                 "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
             },
             {
-              firstName: "Alex",
-              lastName: "Alexandrescu",
-              isVerified: true,
-              position: "Designer",
-              avatar:
+              name: "Ionel Ionescu",
+              isEmailVerified: true,
+              headline: "Mint rubber",
+              id: "clw4y14gv0000hp3iak2kd6xh",
+              addedAt: new Date(),
+              profilePictureUrl:
                 "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
             },
             {
-              firstName: "Gigi",
-              lastName: "Popescu",
-              isVerified: true,
-              position: "Mint rubber",
-              avatar:
+              name: "Ionel Ionescu",
+              isEmailVerified: true,
+              headline: "Mint rubber",
+              id: "clw4y14gv0000hp3iak2kd6xh",
+              addedAt: new Date(),
+              profilePictureUrl:
                 "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
             },
             {
-              firstName: "FIfi",
-              lastName: "Ionescu",
-              isVerified: true,
-              position: "Mint rubber",
-              avatar:
+              name: "Ionel Ionescu",
+              isEmailVerified: true,
+              headline: "Mint rubber",
+              id: "clw4y14gv0000hp3iak2kd6xh",
+              addedAt: new Date(),
+              profilePictureUrl:
+                "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            },
+            {
+              name: "Ionel Ionescu",
+              isEmailVerified: true,
+              headline: "Mint rubber",
+              id: "clw4y14gv0000hp3iak2kd6xh",
+              addedAt: new Date(),
+              profilePictureUrl:
                 "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
             },
           ]}

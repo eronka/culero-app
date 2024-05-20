@@ -14,8 +14,12 @@ import { twMerge } from "tailwind-merge";
 import { useScreenInfo } from "../hooks/useScreenInfo";
 import InitialScreen from "../screens/InitialScreen";
 import { WriteReviewScreen } from "../screens/WriteReviewScreen/WriteReviewScreen";
+import { MyReviewsScreen } from "../screens/MyReviewsScreen/MyReviewsScreen";
+import { SearchConnectionsScreen } from "../screens/ConnectionScreens";
+import { DrawerNavigatorParamList } from "../types";
+import { ConnectionStack } from "./ConnectionStack";
 
-const Drawer = createDrawerNavigator();
+const Drawer = createDrawerNavigator<DrawerNavigatorParamList>();
 
 const DrawerHeader = ({
   className,
@@ -104,6 +108,7 @@ export const DrawerNavigator = () => {
       drawerContent={(props) => <CustomDrawerContent {...props} />}
       screenOptions={{
         headerShown: isPhone,
+        headerTitle: "",
         drawerType: isPhone ? "front" : "permanent",
         drawerActiveTintColor: "#F5F6F8",
         drawerLabelStyle: {
@@ -122,21 +127,22 @@ export const DrawerNavigator = () => {
       />
       <Drawer.Screen
         name="My Reviews"
-        component={BottomNavigator}
+        component={MyReviewsScreen}
         options={{
           drawerIcon: () => <Icon name="user-star" size={20} color="gray38" />,
         }}
       />
       <Drawer.Screen
         name="Write a review"
-        component={isPhone ? BottomNavigator : WriteReviewScreen}
+        component={WriteReviewScreen}
         options={{
+          headerTitle: "",
           drawerIcon: () => <Icon name="review" size={20} color="gray38" />,
         }}
       />
       <Drawer.Screen
         name="Connections"
-        component={BottomNavigator}
+        component={ConnectionStack}
         options={{
           drawerIcon: () => <Icon name="user-group" size={20} color="gray38" />,
         }}

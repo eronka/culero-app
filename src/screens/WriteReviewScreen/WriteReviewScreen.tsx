@@ -2,6 +2,7 @@ import { View, ScrollView } from "react-native";
 import {
   Card,
   GiveReviewCard,
+  HorizontalDivider,
   SearchBar,
   StyledText,
   UserCard,
@@ -10,8 +11,11 @@ import { Icon } from "../../icons";
 import { ConnectionReviewCard } from "../../components/ConnectionsReviewCard";
 import { useState } from "react";
 import { getSearchUserResult, sendFeedback } from "../../utils/api";
+import { useScreenInfo } from "../../hooks/useScreenInfo";
+import { DrawerHeader } from "../../components/headers/DrawerHeader";
 
 export const WriteReviewScreen = () => {
+  const { isPhone } = useScreenInfo();
   const [searchResult, setSearchResult] = useState<{
     isInitial: boolean;
     result: any[];
@@ -22,20 +26,15 @@ export const WriteReviewScreen = () => {
 
   return (
     <ScrollView>
-      <View className="p-9">
-        <View className="flex-row">
-          <StyledText lg weight={600} xl4>
-            Write a Review
-          </StyledText>
-          <Icon name="review" className="ml-4" size={30} />
-        </View>
+      <View className="p-4 md:p-9">
+        <DrawerHeader title="Write a Review" iconProps={{ name: "review" }} />
 
-        <View className="flex-row gap-4 mt-12">
+        <View className="md:flex-row gap-4">
           <View className="basis-3/4">
             <Card
-              className=" py-6 px-9"
+              className="py-6 px-3 md:px-9"
               headerComponent={
-                <View className="w-2/3 mb-4">
+                <View className="md:w-2/3 mb-4">
                   <StyledText weight={500} xl2>
                     Search by Social Link
                   </StyledText>
@@ -79,7 +78,7 @@ export const WriteReviewScreen = () => {
                           userAvatar={searchResult.result[0].profilePictureUrl}
                         />
                         <GiveReviewCard
-                          className="hidden md:block mt-8"
+                          className="md:mt-8"
                           isWhiteBg={true}
                           onSubmit={(values) => {
                             sendFeedback(searchResult.result[0].id, values);
@@ -94,7 +93,7 @@ export const WriteReviewScreen = () => {
           </View>
           <ConnectionReviewCard
             expandable={false}
-            className="basis-1/4"
+            className="md:basis-1/4"
             title="Suggested Profiles for Review"
             subtitle="Consider writing reviews for connections you've collaborated with recently."
           />

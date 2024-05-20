@@ -13,10 +13,12 @@ export type CheckboxProps = {
   color?: keyof typeof colors;
   value: boolean;
   onPress?: () => void;
+  checkMarkSize?: number;
 };
 
 export const CheckBox = ({
   size = 24,
+  checkMarkSize = 24,
   label,
   description,
   color = "primary",
@@ -38,7 +40,7 @@ export const CheckBox = ({
           alignItems: "center",
         }}
       >
-        {value && <Icon name="checkmark" color={color} size={size} />}
+        {value && <Icon name="checkmark" color={color} size={checkMarkSize} />}
       </Pressable>
       <View className="flex-1 ml-2">
         {label && <StyledText weight={500}>{label}</StyledText>}
