@@ -1,5 +1,4 @@
 import { Pressable, View, Image } from "react-native";
-import { OnboardingLayout } from "./components";
 import {
   SocialMediaConnections,
   StyledText,
@@ -16,6 +15,7 @@ import * as ImagePicker from "expo-image-picker";
 import { useUpdateProfile } from "../../hooks/useUpdateProfile";
 import * as Yup from "yup";
 import { useUpdateProfilePicture } from "../../hooks/useUpdateProfilePicture";
+import { OnboardingFlow } from "./components/OnboardingFlow";
 
 const SocialAccountsStep = () => {
   return (
@@ -32,7 +32,7 @@ const SocialAccountsStep = () => {
   );
 };
 
-export const SocialAccountsScreen = () => {
+export const OnboardingScreen = () => {
   const updateUserMutation = useUpdateProfile();
   const updateProfilePicMutation = useUpdateProfilePicture();
 
@@ -73,7 +73,7 @@ export const SocialAccountsScreen = () => {
   };
 
   return (
-    <OnboardingLayout
+    <OnboardingFlow
       data={[
         {
           image: step1Image,

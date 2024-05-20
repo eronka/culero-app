@@ -23,7 +23,7 @@ export type OnboardingLayoutProps = {
   data: Array<StepProps>;
 };
 
-export const OnboardingLayout = ({ data }: OnboardingLayoutProps) => {
+export const OnboardingFlow = ({ data }: OnboardingLayoutProps) => {
   const x = useSharedValue(0);
   const flatListRef = useAnimatedRef<Animated.FlatList<StepProps>>();
   const { width, isPhone } = useScreenInfo();

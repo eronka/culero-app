@@ -8,8 +8,8 @@ import { AuthStackNavigator } from "./AuthStack";
 import { useUser } from "../hooks";
 import { EmailVerificationSuccess } from "../screens/AuthScreens";
 import { AuthHeader } from "../components";
-import { OnboardingNavigator } from "./OnboardingNavigation";
 import { DrawerNavigator } from "./DrawerNavigation";
+import { OnboardingScreen } from "../screens/OnboardingScreen/OnboardingScreen";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -23,8 +23,6 @@ const RootNavigator = () => {
         animation: "slide_from_right",
       }}
     >
-      <Stack.Screen name="Onboarding" component={OnboardingNavigator} />
-
       {user ? (
         <>
           <Stack.Screen name="HomeScreen" component={DrawerNavigator} />
@@ -46,6 +44,7 @@ const RootNavigator = () => {
           header: () => <AuthHeader />,
         }}
       />
+      <Stack.Screen name="Onboarding" component={OnboardingScreen} />
     </Stack.Navigator>
   );
 };

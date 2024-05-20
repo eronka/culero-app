@@ -36,9 +36,7 @@ export const EmailVerificationSuccess = () => {
             color="light"
             className="mb-16"
             textClassName="p-1"
-            onPress={() =>
-              navigation.navigate("Onboarding", { screen: "SocialAccounts" })
-            }
+            onPress={() => navigation.navigate("Onboarding")}
           >
             Complete your profile
           </StyledPressable>
