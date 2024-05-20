@@ -54,7 +54,9 @@ export type IconName =
   | "user-avatar"
   | "back"
   | "close"
-  | "delete";
+  | "delete"
+  | "back"
+  | "right-arrow";
 
 export type IconProps = {
   name: IconName;
@@ -207,6 +209,13 @@ export const Icon = ({ name, color, size, className }: IconProps) => {
       {name === "delete" && (
         <Ionicons
           name="trash-outline"
+          size={size}
+          color={color ? colors[color] : colors["black"]}
+        />
+      )}
+      {name === "right-arrow" && (
+        <Material
+          name="arrow-forward-ios"
           size={size}
           color={color ? colors[color] : colors["black"]}
         />

@@ -43,12 +43,20 @@ export type DrawerNavigatorParamList = {
   Connections: NavigatorScreenParams<ConnectionStackParamList>;
   Notifications: undefined;
   "My profile": undefined;
-  Settings: undefined;
+  Settings: NavigatorScreenParams<SettingsStackParamList>;
 };
 
 export type ConnectionStackParamList = {
   SearchConnection: undefined;
   Connection: { userId: User["id"] };
+};
+
+export type SettingsStackParamList = {
+  Settings: undefined;
+  "Account Settings": undefined;
+  Privacy: undefined;
+  "Given reviews": undefined;
+  "Received reviews": undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
