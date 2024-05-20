@@ -185,6 +185,25 @@ export async function regenerateCode(data: RegenerateCodeInput) {
   });
 }
 
+export type UpdateProfileData = {
+  name?: string;
+  headline?: string;
+};
+
+export async function updateProfileData(data: UpdateProfileData) {
+  return authorizedFetch(`${baseUrl}/user`, {
+    method: "PUT",
+    body: data,
+  });
+}
+
+export async function updateProfilePicture(uri: string) {
+  return authorizedFetch(`${baseUrl}/user/profile-picture`, {
+    method: "PUT",
+    body: { file: uri }
+  });
+}
+
 export async function getSelfReviews(): Promise<Review[]> {
   return authorizedFetch(`${baseUrl}/user/ratings/self`, { method: "GET" });
 }
@@ -209,6 +228,6 @@ export async function getUserAvgRatings(userId: User["id"]): Promise<Rating> {
 
 export async function getUserReviews(userId: User["id"]): Promise<Review[]> {
   return authorizedFetch(`${baseUrl}/user/ratings/${userId}`, {
-    method: "GET",
+    method: "GET"
   });
 }

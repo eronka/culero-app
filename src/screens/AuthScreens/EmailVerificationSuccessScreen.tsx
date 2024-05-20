@@ -1,4 +1,4 @@
-import { ScrollView, View } from "react-native";
+import { View } from "react-native";
 import { StyledPressable, StyledText } from "../../components";
 import { useNavigation } from "@react-navigation/native";
 
@@ -36,7 +36,7 @@ export const EmailVerificationSuccess = () => {
             color="light"
             className="mb-16"
             textClassName="p-1"
-            onPress={() => navigation.navigate("HomeScreen")}
+            onPress={() => navigation.navigate("Onboarding")}
           >
             Complete your profile
           </StyledPressable>
