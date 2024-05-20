@@ -4,7 +4,7 @@ import { View, ScrollView, ImageProps, Image, ViewToken } from "react-native";
 import { ReactElement, useCallback } from "react";
 import { StepIndicator } from "./StepIndicator";
 import { useScreenInfo } from "../../../hooks/useScreenInfo";
-import { DefaultTheme } from "@react-navigation/native";
+import { DefaultTheme, useNavigation } from "@react-navigation/native";
 import Animated, {
   useAnimatedRef,
   useAnimatedScrollHandler,
@@ -27,6 +27,7 @@ export const OnboardingFlow = ({ data }: OnboardingLayoutProps) => {
   const x = useSharedValue(0);
   const flatListRef = useAnimatedRef<Animated.FlatList<StepProps>>();
   const { width, isPhone } = useScreenInfo();
+  const navigation = useNavigation();
 
   const scrollHandle = useAnimatedScrollHandler({
     onScroll: (event) => {
@@ -42,6 +43,8 @@ export const OnboardingFlow = ({ data }: OnboardingLayoutProps) => {
             index: index + 1,
             animated: true,
           });
+        } else {
+          navigation.navigate("HomeScreen");
         }
       };
       return (

@@ -32,6 +32,8 @@ const RootNavigator = () => {
           <Stack.Screen name="AuthNav" component={AuthStackNavigator} />
         </>
       )}
+      <Stack.Screen name="Onboarding" component={OnboardingScreen} />
+
       <Stack.Screen
         name="EmailVerificationSuccess"
         component={EmailVerificationSuccess}
@@ -44,7 +46,6 @@ const RootNavigator = () => {
           header: () => <AuthHeader />,
         }}
       />
-      <Stack.Screen name="Onboarding" component={OnboardingScreen} />
     </Stack.Navigator>
   );
 };

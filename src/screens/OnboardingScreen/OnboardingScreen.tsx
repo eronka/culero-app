@@ -16,6 +16,7 @@ import { useUpdateProfile } from "../../hooks/useUpdateProfile";
 import * as Yup from "yup";
 import { useUpdateProfilePicture } from "../../hooks/useUpdateProfilePicture";
 import { OnboardingFlow } from "./components/OnboardingFlow";
+import { useScreenInfo } from "../../hooks/useScreenInfo";
 
 const SocialAccountsStep = () => {
   return (
@@ -35,8 +36,8 @@ const SocialAccountsStep = () => {
 export const OnboardingScreen = () => {
   const updateUserMutation = useUpdateProfile();
   const updateProfilePicMutation = useUpdateProfilePicture();
+  const { platform } = useScreenInfo();
 
-  console.log("err is", updateProfilePicMutation.error?.message);
   const form = useFormik({
     initialValues: {
       name: "",
@@ -53,7 +54,6 @@ export const OnboardingScreen = () => {
       image: Yup.string().required("No image uploaded."),
     }),
     onSubmit: async (values) => {
-      console.log("send with", values.image);
       return updateProfilePicMutation.mutateAsync(values.image);
     },
   });
@@ -65,10 +65,18 @@ export const OnboardingScreen = () => {
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
+      base64: true,
     });
 
     if (!result.canceled) {
-      imageForm.setFieldValue("image", result.assets[0].uri);
+      if (platform !== "web") {
+        imageForm.setFieldValue(
+          "image",
+          `data:${result.assets[0].mimeType};base64,${result.assets[0].base64}`
+        );
+      } else {
+        imageForm.setFieldValue("image", result.assets[0].uri);
+      }
     }
   };
 
