@@ -2,6 +2,7 @@ import { View, ViewProps } from "react-native";
 import { StyledText } from "./StyledText";
 import { PercentageBar } from "./PercentageBar";
 import { twMerge } from "tailwind-merge";
+import colors from "../../colors";
 export type CategoryRatingProps = {
   maxRating?: number;
   rating: number;
@@ -10,6 +11,7 @@ export type CategoryRatingProps = {
   categoryName: string;
   height?: number;
   className?: ViewProps["className"];
+  barBackgroundColor?: keyof typeof colors;
 };
 export const CategoryRating = ({
   maxRating = 5,
@@ -18,6 +20,7 @@ export const CategoryRating = ({
   hideBar,
   hideNumbers,
   height = 15,
+  barBackgroundColor,
   className,
 }: CategoryRatingProps) => {
   return (
@@ -34,7 +37,12 @@ export const CategoryRating = ({
       </View>
       {!hideBar && (
         <View className="flex-grow mr-2">
-          <PercentageBar maxValue={maxRating} value={rating} height={height} />
+          <PercentageBar
+            maxValue={maxRating}
+            value={rating}
+            height={height}
+            backgroundColor={barBackgroundColor}
+          />
         </View>
       )}
       {!hideNumbers && (

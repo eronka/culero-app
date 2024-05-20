@@ -8,9 +8,9 @@ import { Icon } from "../icons";
 import { StyledPressable } from "./StyledPressable";
 
 export type ProfileCardProps = {
-  userName: string;
-  userPosition: string;
-  userAvatar: string;
+  userName?: string;
+  userPosition?: string;
+  userAvatar?: string;
   className?: ViewProps["className"];
   isVerified?: boolean;
   revewisCount: number;
@@ -18,8 +18,7 @@ export type ProfileCardProps = {
   professionalismRating: number;
   reliabilityRating: number;
   communicationRating: number;
-  overallRating: number;
-  userLocation: string;
+  userLocation?: string;
 };
 export const ProfileCard = ({
   userName,
@@ -33,19 +32,17 @@ export const ProfileCard = ({
   professionalismRating,
   communicationRating,
   reliabilityRating,
-  overallRating,
 }: ProfileCardProps) => {
   return (
     <Card
       className={twMerge("bg-transparent", className)}
       bodyComponent={
         <View>
-          <View className="flex-row">
-            <Avatar userImage={userAvatar} hasBadge={false} size={128} />
+          <View className="flex-row items-center">
+            <Avatar userImage={userAvatar} hasBadge={false} size={151} />
             <OverallRateCard
               className="w-1/2 bg-transparent"
               barsContainerClassName="ml-8"
-              overallRating={overallRating}
               professionalismRating={professionalismRating}
               reliabilityRating={reliabilityRating}
               communicationRating={communicationRating}

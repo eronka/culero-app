@@ -54,17 +54,20 @@ export const OverallRateCard = ({
             )}
           >
             <CategoryRating
+              barBackgroundColor="transparent"
               height={isPhone ? 15 : 20}
               categoryName="Professionalsim"
               rating={professionalismRating}
             />
             <CategoryRating
               className="my-2"
+              barBackgroundColor="transparent"
               height={isPhone ? 15 : 20}
               categoryName="Reliability"
               rating={reliabilityRating}
             />
             <CategoryRating
+              barBackgroundColor="transparent"
               height={isPhone ? 15 : 20}
               categoryName="Communication"
               rating={communicationRating}

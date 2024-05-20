@@ -6,7 +6,7 @@ export type PercentageBarProps = {
   value: number;
   height?: ViewStyle["height"];
   maxValue: number;
-  backgroundColor?: keyof typeof colors;
+  backgroundColor?: keyof typeof colors | "transparent";
 };
 export const PercentageBar = ({
   barColor = "light-primary",
@@ -21,7 +21,7 @@ export const PercentageBar = ({
       className={`rounded-md`}
       style={{
         height,
-        backgroundColor: colors[backgroundColor],
+        backgroundColor: colors[backgroundColor] || backgroundColor,
         width: "100%",
       }}
     >

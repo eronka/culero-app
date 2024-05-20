@@ -25,4 +25,5 @@ export default {
   grayF2: "#F2F2F2",
   gray8B: "#8B8B8B",
   verifiedBlue: "#49ADF4",
+  transparent: "transparent",
 };
