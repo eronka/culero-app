@@ -8,19 +8,12 @@ import { AuthStackNavigator } from "./AuthStack";
 import { useUser } from "../hooks";
 import { EmailVerificationSuccess } from "../screens/AuthScreens";
 import { AuthHeader } from "../components";
+import { DrawerNavigator } from "./DrawerNavigation";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const RootNavigator = () => {
   const user = useUser();
-
-  console.log(
-    "user is ----the fuck?",
-    user,
-    !!user && user.isEmailVerified,
-    !user,
-    !!user && !user.isEmailVerified
-  );
 
   return (
     <Stack.Navigator
@@ -31,7 +24,7 @@ const RootNavigator = () => {
     >
       {user ? (
         <>
-          <Stack.Screen name="HomeScreen" component={BottomNavigator} />
+          <Stack.Screen name="HomeScreen" component={DrawerNavigator} />
         </>
       ) : (
         <>

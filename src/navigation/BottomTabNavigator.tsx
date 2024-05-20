@@ -1,12 +1,17 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {
+  BottomTabBarProps,
+  createBottomTabNavigator,
+} from "@react-navigation/bottom-tabs";
 import InitialScreen from "../screens/InitialScreen";
 import { Icon } from "../icons";
 import { useScreenInfo } from "../hooks/useScreenInfo";
 import { WriteReviewScreen } from "../screens/WriteReviewScreen/WriteReviewScreen";
+import { RouteProp } from "@react-navigation/native";
+import { RootStackParamList } from "../types";
 
 const Tab = createBottomTabNavigator();
 
-export function BottomNavigator() {
+export function BottomNavigator(props: { initialRoute?: string }) {
   const { isPhone } = useScreenInfo();
   return (
     <Tab.Navigator
@@ -21,6 +26,7 @@ export function BottomNavigator() {
         },
         tabBarLabelStyle: { fontFamily: "Inter_400Regular", color: "black" },
       }}
+      initialRouteName={props.initialRoute || "Home"}
     >
       <Tab.Screen
         name="Home"
@@ -33,7 +39,7 @@ export function BottomNavigator() {
         }}
       />
       <Tab.Screen
-        name="Home2"
+        name="WriteReview"
         component={WriteReviewScreen}
         options={{
           tabBarLabel: "Write a review",
