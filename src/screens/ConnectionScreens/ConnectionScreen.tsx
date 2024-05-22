@@ -4,7 +4,7 @@ import { IconButton } from "../../components/IconButton";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ConnectionStackParamList } from "../../types";
-import { useGetUser, useUser } from "../../hooks";
+import { useGetUser } from "../../hooks";
 import {
   Card,
   GiveReviewCard,
@@ -13,15 +13,15 @@ import {
   StyledText,
   UserCard,
 } from "../../components";
-import { useOtherUserAvg } from "../../hooks/useOtherUserAvg";
 import { useUserReviews } from "../../hooks/useUserReviews";
+import { useUserRatings } from "../../hooks/useUserRatings";
 
 export const ConnectionScreen = (
   props: NativeStackScreenProps<ConnectionStackParamList, "Connection">
 ) => {
   const navigation = useNavigation();
   const user = useGetUser(props.route.params.userId);
-  const avgs = useOtherUserAvg(props.route.params.userId);
+  const avgs = useUserRatings(props.route.params.userId);
   const reviews = useUserReviews(props.route.params.userId);
 
   console.log(user.isFetched);
@@ -98,9 +98,9 @@ export const ConnectionScreen = (
                         communicationRating={review.communication}
                         isFavourite={false}
                         isAnonymous={review.isAnonymous}
-                        userImage={review.profilePictureUrl}
+                        userImage={review.postedBy?.profilePictureUrl}
                         comment={review.comment}
-                        date={new Date(review.createdOn)}
+                        date={new Date(review.createdAt)}
                       />
                     ))}
                   </View>

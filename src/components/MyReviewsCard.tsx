@@ -3,16 +3,18 @@ import { Card } from "./Card";
 import { StyledText } from "./StyledText";
 import { StyledStarRating } from "./StarRating";
 import { CategoryRating } from "./CategoryRating";
-import { useSelfRatings } from "../hooks/useSelfRatings";
 import { twMerge } from "tailwind-merge";
 import { useScreenInfo } from "../hooks/useScreenInfo";
+import { useUser } from "../hooks";
+import { useUserRatings } from "../hooks/useUserRatings";
 
 export type MyReviewsCardProps = {
   className?: ViewProps["className"];
 };
 
 export const MyReviewsCard = ({ className }: MyReviewsCardProps) => {
-  const rating = useSelfRatings();
+  const user = useUser()!;
+  const rating = useUserRatings(user.id);
   const { isPhone } = useScreenInfo();
 
   return (

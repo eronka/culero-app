@@ -2,13 +2,16 @@ import { View, ScrollView, ActivityIndicator } from "react-native";
 import React from "react";
 import { DrawerHeader } from "../../components/headers/DrawerHeader";
 import { OverallRateCard, ReviewCard, StyledText } from "../../components";
-import { useSelfReviews } from "../../hooks/useSelfReviews";
 import { useScreenInfo } from "../../hooks/useScreenInfo";
-import { useSelfRatings } from "../../hooks/useSelfRatings";
+import { useUser } from "../../hooks";
+import { useUserReviews } from "../../hooks/useUserReviews";
+import { useUserRatings } from "../../hooks/useUserRatings";
 
 export const MyReviewsScreen = ({}: {}) => {
-  const rating = useSelfRatings();
-  const reviews = useSelfReviews();
+  const user = useUser()!;
+  const reviews = useUserReviews(user.id);
+  const rating = useUserRatings(user.id);
+
   const { isPhone } = useScreenInfo();
 
   return (
@@ -45,14 +48,7 @@ export const MyReviewsScreen = ({}: {}) => {
                     <ReviewCard
                       className="mt-4"
                       key={`review-${index}`}
-                      professionalismRating={review.professionalism}
-                      reliabilityRating={review.reliability}
-                      communicationRating={review.communication}
-                      isFavourite={false}
-                      isAnonymous={review.isAnonymous}
-                      userImage={review.profilePictureUrl}
-                      comment={review.comment}
-                      date={new Date(review.createdOn)}
+                      review={review}
                     />
                   ))}
                 </View>

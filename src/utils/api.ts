@@ -200,17 +200,7 @@ export async function updateProfileData(data: UpdateProfileData) {
 export async function updateProfilePicture(uri: string) {
   return authorizedFetch(`${baseUrl}/user/profile-picture`, {
     method: "PUT",
-    body: { file: uri }
-  });
-}
-
-export async function getSelfReviews(): Promise<Review[]> {
-  return authorizedFetch(`${baseUrl}/user/ratings/self`, { method: "GET" });
-}
-
-export async function getSelfAvgRatings(): Promise<Rating> {
-  return authorizedFetch(`${baseUrl}/user/avg-rating/self`, {
-    method: "GET",
+    body: { file: uri },
   });
 }
 
@@ -221,13 +211,25 @@ export async function getUser(userId: User["id"]): Promise<UserWithCounts> {
 }
 
 export async function getUserAvgRatings(userId: User["id"]): Promise<Rating> {
-  return authorizedFetch(`${baseUrl}/user/avg-rating/${userId}`, {
+  return authorizedFetch(`${baseUrl}/reviews/avg-rating/${userId}`, {
     method: "GET",
   });
 }
 
 export async function getUserReviews(userId: User["id"]): Promise<Review[]> {
-  return authorizedFetch(`${baseUrl}/user/ratings/${userId}`, {
-    method: "GET"
+  return authorizedFetch(`${baseUrl}/reviews/${userId}`, {
+    method: "GET",
+  });
+}
+
+export async function likeReview(reviewId: Review["id"]): Promise<Review> {
+  return authorizedFetch(`${baseUrl}/reviews/${reviewId}/like`, {
+    method: "POST",
+  });
+}
+
+export async function unlikeReview(reviewId: Review["id"]): Promise<Review> {
+  return authorizedFetch(`${baseUrl}/reviews/${reviewId}/like`, {
+    method: "DELETE",
   });
 }

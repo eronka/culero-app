@@ -6,17 +6,14 @@ import { StyledStarRating } from "./StarRating";
 import { FavouriteButton } from "./FavouriteButton";
 import { IconButton } from "./IconButton";
 import { twMerge } from "tailwind-merge";
+import { useAvgRating } from "../hooks/useAvgRating";
+import { useLikeReview } from "../hooks/useLikeReview";
+import { useUnlikeReview } from "../hooks/useUnlikeReview";
+import { Review } from "../types/Review";
 
 export type RatingCardProps = {
-  professionalismRating: number;
-  reliabilityRating: number;
-  communicationRating: number;
+  review: Review;
   className?: ViewProps["className"];
-  userImage?: string;
-  isAnonymous?: boolean;
-  isFavourite: boolean;
-  comment: string;
-  date: Date;
 };
 
 const Rating = ({ category, value }: { category: string; value: number }) => {
@@ -32,19 +29,11 @@ const Rating = ({ category, value }: { category: string; value: number }) => {
   );
 };
 
-export const ReviewCard = ({
-  className,
-  professionalismRating,
-  reliabilityRating,
-  communicationRating,
-  comment,
-  date,
-  userImage,
-  isAnonymous,
-  isFavourite,
-}: RatingCardProps) => {
-  const overallRating =
-    (professionalismRating + communicationRating + reliabilityRating) / 3;
+export const ReviewCard = ({ className, review }: RatingCardProps) => {
+  const overallRating = useAvgRating(review);
+  const likeReviewMutation = useLikeReview();
+  const unlikeReviewMutation = useUnlikeReview();
+  console.log(overallRating, review.isAnonymous);
 
   return (
     <Card
@@ -52,7 +41,10 @@ export const ReviewCard = ({
       headerComponent={
         <View className="flex-row justify-between p-2 items-center pb-4">
           <View className="flex-row">
-            <Avatar userImage={userImage} isAnonymous={isAnonymous} />
+            <Avatar
+              userImage={review.postedBy?.profilePictureUrl}
+              isAnonymous={review.isAnonymous}
+            />
             <View className="ml-2">
               <StyledText weight={700} className="text-3xl">
                 {overallRating.toLocaleString("en", {
@@ -69,8 +61,20 @@ export const ReviewCard = ({
           </View>
           <View className="flex-row items-center">
             <FavouriteButton
-              onPress={() => Alert.alert("love")}
-              isFav={isFavourite}
+              isFav={review.isFavorite}
+              onPress={() => {
+                if (!review.isFavorite) {
+                  likeReviewMutation.mutate({
+                    reviewId: review.id,
+                    postedToId: review.postedToId,
+                  });
+                } else {
+                  unlikeReviewMutation.mutate({
+                    reviewId: review.id,
+                    postedToId: review.postedToId,
+                  });
+                }
+              }}
             />
             <IconButton iconProps={{ name: "message" }} className="ml-4" />
           </View>
@@ -82,22 +86,24 @@ export const ReviewCard = ({
             <StyledText color="darkgrey">Review:</StyledText>
           </View>
           <View className="flex-auto md:px-4">
-            <StyledText weight={500}>{comment}</StyledText>
+            <StyledText weight={500}>{review.comment}</StyledText>
           </View>
         </View>
       }
       footerComponent={
         <View className="mt-4">
           <View className="md:flex-row justify-around">
-            <Rating category="Professionalism" value={professionalismRating} />
-            <Rating category="Reliability" value={reliabilityRating} />
-            <Rating category="Communication" value={communicationRating} />
+            <Rating category="Professionalism" value={review.professionalism} />
+            <Rating category="Reliability" value={review.reliability} />
+            <Rating category="Communication" value={review.communication} />
           </View>
           <View>
             <StyledText
               color="gray83"
               className="text-xs text-right mt-4"
-            >{`Posted on: ${date.toLocaleDateString()}`}</StyledText>
+            >{`Posted on: ${new Date(
+              review.createdAt
+            ).toLocaleDateString()}`}</StyledText>
           </View>
         </View>
       }
