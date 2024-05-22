@@ -17,6 +17,7 @@ import { Item } from "react-native-picker-select";
 import { ConnectionStackParamList } from "../types";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useConnections } from "../hooks/useConnections";
+import { useScreenInfo } from "../hooks/useScreenInfo";
 
 export type SearchableConnectionsCardProps = {
   className?: ViewProps["className"];
@@ -42,6 +43,7 @@ export const SearchableConnectionsCard = ({
   className,
 }: SearchableConnectionsCardProps) => {
   const connections = useConnections();
+  const { isPhone } = useScreenInfo();
   const [sortBy, setSortBy] = useState(sortByItems[0]);
   const [searchTerm, setSearchTerm] = useState("");
   const navigation = useNavigation<NavigationProp<ConnectionStackParamList>>();
@@ -50,9 +52,9 @@ export const SearchableConnectionsCard = ({
     <Card
       className={className}
       headerComponent={
-        <View className="flex-row justify-between p-2 py-4">
-          <View>
-            <StyledText className="mb-1" weight={500} xl2>{`${
+        <View className="md:flex-row md:justify-between p-2 py-4">
+          <View className="self-start">
+            <StyledText className="mb-2" weight={500} xl2>{`${
               connections.data?.length || 0
             } connections`}</StyledText>
             <SortBy
@@ -63,7 +65,7 @@ export const SearchableConnectionsCard = ({
           <View>
             <SearchBar
               placeholder="Search All"
-              containerClassName="mt-2 p-2"
+              containerClassName="md:my-0 my-6 p-2"
               value={searchTerm}
               onChangeText={(value) => setSearchTerm(value)}
             />
@@ -89,7 +91,7 @@ export const SearchableConnectionsCard = ({
                 </View>
               )}
               renderItem={({ item }) => (
-                <View className="flex-row justify-between items-center p-4 py-8 px-6 hover:bg-white7 rounded-lg">
+                <View className="flex-row justify-between items-center p-4 py-8 px-2 md:px-6 hover:bg-white7 rounded-lg">
                   <Pressable
                     className="flex-grow"
                     onPress={() => {
@@ -98,25 +100,25 @@ export const SearchableConnectionsCard = ({
                     }}
                   >
                     <ConnectionDetails
-                      avatarSize={86}
-                      badgeSize={34}
+                      avatarSize={isPhone ? 64 : 86}
+                      badgeSize={isPhone ? 24 : 34}
                       userAvatar={item.profilePictureUrl}
                       userName={item.name!}
                       userPosition={item.headline!}
                       isVerified={item.isEmailVerified}
                     />
                   </Pressable>
-                  <View className="flex-row items-center">
+                  <View className="md:flex-row-reverse items-center md:justify">
+                    <IconButton
+                      onPress={() => {}}
+                      className="-mt-6 md:mt-0 md:mt-0 mb-4 md:mb-0"
+                      iconProps={{ name: "dots-horizontal", size: 25 }}
+                    />
                     <IconButton
                       className="mr-2 md:mr-16"
                       onPress={() => {}}
                       iconProps={{ name: "message" }}
                       label="Write review"
-                    />
-
-                    <IconButton
-                      onPress={() => {}}
-                      iconProps={{ name: "dots-horizontal", size: 25 }}
                     />
                   </View>
                 </View>

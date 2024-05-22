@@ -24,9 +24,7 @@ export const DrawerHeader = ({
   return (
     <>
       <View className="mb-4">
-        <View className="hidden md:block self-start py-4">
-          {!!leftIcon && leftIcon}
-        </View>
+        <View className="self-start md:py-4">{!!leftIcon && leftIcon}</View>
         <View className="flex-row">
           <StyledText weight={600} xl4={!isPhone} lg={isPhone}>
             {title}
