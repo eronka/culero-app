@@ -27,7 +27,7 @@ export const StyledTextInput = ({
     <>
       <View
         className={twMerge(
-          `bg-white flex rounded-md p-3 flex-row`,
+          `bg-white flex rounded-md p-3 flex-row items-center`,
           containerClassName
         )}
       >

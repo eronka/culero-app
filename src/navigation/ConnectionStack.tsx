@@ -9,9 +9,8 @@ import { useScreenInfo } from "../hooks/useScreenInfo";
 const Stack = createNativeStackNavigator<ConnectionStackParamList>();
 
 export const ConnectionStack = () => {
-  const { isPhone } = useScreenInfo();
   return (
-    <Stack.Navigator screenOptions={{ headerShown: isPhone }}>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen
         name="SearchConnection"
         component={SearchConnectionsScreen}
