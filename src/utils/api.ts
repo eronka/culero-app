@@ -150,7 +150,7 @@ export async function verifyEmail(
 
 export async function getSearchUserResult(query: string) {
   return authorizedFetch(
-    `${baseUrl}/user/search?query=${encodeURIComponent(query)}`,
+    `${baseUrl}/connections/search/${encodeURIComponent(query)}`,
     {
       method: "GET",
     }
