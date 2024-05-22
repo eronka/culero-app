@@ -34,7 +34,7 @@ export const DrawerHeader = ({
           )}
         </View>
       </View>
-      <HorizontalDivider className="md:hidden" />
+      <HorizontalDivider className="md:hidden mb-6" />
     </>
   );
 };
