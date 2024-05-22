@@ -1,4 +1,4 @@
-import { User, UserWithCounts, UserWithToken } from "../types";
+import { Connection, User, UserWithCounts, UserWithToken } from "../types";
 import { Rating } from "../types/Rating";
 import { Review } from "../types/Review";
 import storage from "./storage";
@@ -204,8 +204,8 @@ export async function updateProfilePicture(uri: string) {
   });
 }
 
-export async function getUser(userId: User["id"]): Promise<UserWithCounts> {
-  return authorizedFetch(`${baseUrl}/user/${userId}`, {
+export async function getConnection(userId: User["id"]): Promise<Connection> {
+  return authorizedFetch(`${baseUrl}/connections/${userId}`, {
     method: "GET",
   });
 }
@@ -230,6 +230,36 @@ export async function likeReview(reviewId: Review["id"]): Promise<Review> {
 
 export async function unlikeReview(reviewId: Review["id"]): Promise<Review> {
   return authorizedFetch(`${baseUrl}/reviews/${reviewId}/like`, {
+    method: "DELETE",
+  });
+}
+
+export async function getConnections(): Promise<Connection[]> {
+  return authorizedFetch(`${baseUrl}/connections`, {
+    method: "GET",
+  });
+}
+
+export async function getSuggestedForReviewConnections(): Promise<
+  Connection[]
+> {
+  return authorizedFetch(`${baseUrl}/connections`, {
+    method: "GET",
+  });
+}
+
+export async function connectWithUser(
+  userId: Connection["id"]
+): Promise<Connection> {
+  return authorizedFetch(`${baseUrl}/connections/connect/${userId}`, {
+    method: "POST",
+  });
+}
+
+export async function unconnectWithUser(
+  userId: Connection["id"]
+): Promise<Connection> {
+  return authorizedFetch(`${baseUrl}/connections/connect/${userId}`, {
     method: "DELETE",
   });
 }

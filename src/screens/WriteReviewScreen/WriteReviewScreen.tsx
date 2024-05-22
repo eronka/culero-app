@@ -66,16 +66,7 @@ export const WriteReviewScreen = () => {
                       <>
                         <UserCard
                           className="mt-2"
-                          userName={searchResult.result[0].name}
-                          userPosition={searchResult.result[0].jobTitle}
-                          isVerified={searchResult.result[0].isEmailVerified}
-                          revewisCount={searchResult.result[0].ratingsCount}
-                          connectionsCount={
-                            searchResult.result[0].connectionsCount
-                          }
-                          isConnection={searchResult.result[0].isConnection}
-                          joinedDate={new Date(searchResult.result[0].joinedAt)}
-                          userAvatar={searchResult.result[0].profilePictureUrl}
+                          connection={searchResult.result[0]}
                         />
                         <GiveReviewCard
                           className="md:mt-8"

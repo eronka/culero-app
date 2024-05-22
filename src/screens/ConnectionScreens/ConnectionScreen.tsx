@@ -4,7 +4,6 @@ import { IconButton } from "../../components/IconButton";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ConnectionStackParamList } from "../../types";
-import { useGetUser } from "../../hooks";
 import {
   Card,
   GiveReviewCard,
@@ -15,12 +14,13 @@ import {
 } from "../../components";
 import { useUserReviews } from "../../hooks/useUserReviews";
 import { useUserRatings } from "../../hooks/useUserRatings";
+import { useConnection } from "../../hooks/useConnection";
 
 export const ConnectionScreen = (
   props: NativeStackScreenProps<ConnectionStackParamList, "Connection">
 ) => {
   const navigation = useNavigation();
-  const user = useGetUser(props.route.params.userId);
+  const user = useConnection(props.route.params.userId);
   const avgs = useUserRatings(props.route.params.userId);
   const reviews = useUserReviews(props.route.params.userId);
 
@@ -42,21 +42,13 @@ export const ConnectionScreen = (
 
         {user.isFetched && user.data && (
           <View className="" style={{ maxWidth: 850 }}>
-            <UserCard
-              userName={user.data.name}
-              userPosition={user.data.headline}
-              isVerified={user.data.isEmailVerified}
-              userAvatar={user.data.profilePictureUrl}
-              revewisCount={user.data.ratingsCount}
-              connectionsCount={user.data.connectionsCount}
-              isConnection={user.data.isConnection}
-              joinedDate={new Date(user.data.joinedAt)}
-            />
+            <UserCard connection={user.data} />
             {avgs.isFetched &&
               avgs.data &&
               avgs.data.professionalism +
                 avgs.data.communication +
-                avgs.data.reliability && (
+                avgs.data.reliability !==
+                0 && (
                 <OverallRateCard
                   className="mt-2"
                   professionalismRating={avgs.data.professionalism}
@@ -93,14 +85,7 @@ export const ConnectionScreen = (
                       <ReviewCard
                         className="mt-4"
                         key={`review-${index}`}
-                        professionalismRating={review.professionalism}
-                        reliabilityRating={review.reliability}
-                        communicationRating={review.communication}
-                        isFavourite={false}
-                        isAnonymous={review.isAnonymous}
-                        userImage={review.postedBy?.profilePictureUrl}
-                        comment={review.comment}
-                        date={new Date(review.createdAt)}
+                        review={review}
                       />
                     ))}
                   </View>

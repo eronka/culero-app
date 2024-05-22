@@ -1,4 +1,4 @@
-enum ReviewState {
+export enum ReviewState {
   PENDING,
   APPROVED,
   BLOCKED,
