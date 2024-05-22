@@ -6,6 +6,7 @@ import { HorizontalDivider } from "./HorizontalDivider";
 import { ConnectionDetails } from "./ConnectionDetails";
 import { useState } from "react";
 import { IconButton } from "./IconButton";
+import { useSuggestedForReviewConnections } from "../hooks/useSuggestedForReviewConenctions";
 
 export type ConnectionsReviewCardProps = {
   className?: ViewProps["className"];
@@ -14,57 +15,6 @@ export type ConnectionsReviewCardProps = {
   expandable?: boolean;
 };
 
-const data = [
-  {
-    name: "Ion Ionescu",
-    isVerified: true,
-    position: "Mint rubber",
-    avatar:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    name: "Ion Ionescu",
-    isVerified: true,
-    position: "Mint rubber",
-    avatar:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    name: "Ion Ionescu",
-    isVerified: true,
-    position: "Mint rubber",
-    avatar:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    name: "Ion Ionescu",
-    isVerified: true,
-    position: "Mint rubber",
-    avatar:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    name: "Ion Ionescu",
-    isVerified: true,
-    position: "Mint rubber",
-    avatar:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    name: "Ion Ionescu",
-    isVerified: true,
-    position: "Mint rubber",
-    avatar:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    name: "Ion Ionescu",
-    isVerified: true,
-    position: "Mint rubber",
-    avatar:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-];
 export const ConnectionReviewCard = ({
   className,
   title,
@@ -72,6 +22,7 @@ export const ConnectionReviewCard = ({
   expandable = true,
 }: ConnectionsReviewCardProps) => {
   const [expanded, setExpand] = useState(false);
+  const connections = useSuggestedForReviewConnections();
   return (
     <Card
       className={className}
@@ -96,21 +47,35 @@ export const ConnectionReviewCard = ({
               </StyledText>
             )}
           </View>
-          <FlatList
-            data={!expandable || expanded ? data : data.slice(0, 3)}
-            ItemSeparatorComponent={() => <HorizontalDivider />}
-            renderItem={({ item }) => (
-              <View className="flex-row justify-between items-center p-2">
-                <ConnectionDetails
-                  userAvatar={item.avatar}
-                  userName={item.name}
-                  userPosition={item.position}
-                  isVerified={item.isVerified}
-                />
-                <IconButton onPress={() => {}} iconProps={{ name: "review" }} />
-              </View>
-            )}
-          />
+          {connections.isFetched && connections.data && (
+            <FlatList
+              data={
+                !expandable || expanded
+                  ? connections.data
+                  : connections.data.slice(0, 3)
+              }
+              ListEmptyComponent={() => (
+                <View>
+                  <StyledText>You have no connections</StyledText>
+                </View>
+              )}
+              ItemSeparatorComponent={() => <HorizontalDivider />}
+              renderItem={({ item }) => (
+                <View className="flex-row justify-between items-center p-2">
+                  <ConnectionDetails
+                    userAvatar={item.profilePictureUrl}
+                    userName={item.name}
+                    userPosition={item.headline}
+                    isVerified={item.isEmailVerified}
+                  />
+                  <IconButton
+                    onPress={() => {}}
+                    iconProps={{ name: "review" }}
+                  />
+                </View>
+              )}
+            />
+          )}
         </View>
       }
     />
