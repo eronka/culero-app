@@ -1,27 +1,33 @@
-import { View, ScrollView } from "react-native";
+import { View, ScrollView, ActivityIndicator } from "react-native";
 import {
   Card,
   GiveReviewCard,
-  HorizontalDivider,
+  NewUserCard,
   SearchBar,
   StyledText,
   UserCard,
 } from "../../components";
-import { Icon } from "../../icons";
 import { ConnectionReviewCard } from "../../components/ConnectionsReviewCard";
 import { useState } from "react";
-import { getSearchUserResult, sendFeedback } from "../../utils/api";
+import { searchByUserLink, sendFeedback } from "../../utils/api";
 import { useScreenInfo } from "../../hooks/useScreenInfo";
 import { DrawerHeader } from "../../components/headers/DrawerHeader";
+import { useQueryClient } from "@tanstack/react-query";
+import { AuthType, Connection } from "../../types";
 
 export const WriteReviewScreen = () => {
   const { isPhone } = useScreenInfo();
+  const queryClient = useQueryClient();
   const [searchResult, setSearchResult] = useState<{
     isInitial: boolean;
-    result: any[];
+    result?: Connection;
+    isLoading: boolean;
+    error?: boolean;
   }>({
-    result: [],
+    result: undefined,
     isInitial: true,
+    error: false,
+    isLoading: false,
   });
 
   return (
@@ -49,9 +55,26 @@ export const WriteReviewScreen = () => {
                       if (!value) {
                         return;
                       }
-                      const result = await getSearchUserResult(value);
-                      console.log("search result is", result);
-                      setSearchResult({ isInitial: false, result });
+
+                      try {
+                        setSearchResult({ isInitial: false, isLoading: true });
+                        const data = await queryClient.fetchQuery({
+                          queryKey: ["search-connection", value],
+                          queryFn: () => searchByUserLink(value),
+                        });
+                        setSearchResult({
+                          isInitial: false,
+                          result: data,
+                          isLoading: false,
+                        });
+                      } catch (error) {
+                        setSearchResult({
+                          error: true,
+                          isLoading: false,
+                          result: undefined,
+                          isInitial: false,
+                        });
+                      }
                     }}
                   />
                 </View>
@@ -59,20 +82,31 @@ export const WriteReviewScreen = () => {
               bodyComponent={
                 !searchResult.isInitial ? (
                   <View>
-                    <StyledText weight={500} lg color="gray39" className="mt-2">
+                    <StyledText weight={500} lg color="gray39" className="my-2">
                       Search result:
                     </StyledText>
-                    {searchResult.result.length > 0 && (
+                    {searchResult.isLoading && (
+                      <ActivityIndicator className="self-center" />
+                    )}
+                    {searchResult.result && !searchResult.isLoading && (
                       <>
-                        <UserCard
-                          className="mt-2"
-                          connection={searchResult.result[0]}
-                        />
+                        {(searchResult.result.authType as unknown as string) !==
+                        "EXTERNAL" ? (
+                          <UserCard
+                            className="mt-2"
+                            connection={searchResult.result}
+                          />
+                        ) : (
+                          <NewUserCard
+                            className="mt-2"
+                            connection={searchResult.result}
+                          />
+                        )}
                         <GiveReviewCard
                           className="md:mt-8"
                           isWhiteBg={true}
                           onSubmit={(values) => {
-                            sendFeedback(searchResult.result[0].id, values);
+                            // sendFeedback(searchResult.result[0].id, values);
                           }}
                         />
                       </>

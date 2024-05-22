@@ -29,6 +29,7 @@ import { SearchableConnectionsCard } from "../../components/SearchableConnection
 import { useLogout } from "../../hooks/useLogout";
 import { useUser } from "../../hooks";
 import { ReviewState } from "../../types/Review";
+import { AuthType } from "../../types";
 
 const InitialScreen = ({}: {}) => {
   const user = useUser()!;
@@ -250,8 +251,20 @@ const InitialScreen = ({}: {}) => {
         <InviteCard className="mt-8 w-3/4" />
         <NewUserCard
           className="mt-8"
-          userName="Ethan Moore"
-          userPosition="profession"
+          connection={{
+            name: "Logan Davis",
+            headline: "UX designer",
+            isEmailVerified: true,
+            reviewsCount: 20,
+            connectionsCount: 100,
+            joinedAt: new Date(),
+            authType: AuthType.EMAIL,
+            id: "321312",
+            isConnection: false,
+            email: "daskdla@dasl.com",
+            profilePictureUrl:
+              "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          }}
         />
         <UserCard
           className="mt-8"
@@ -262,6 +275,7 @@ const InitialScreen = ({}: {}) => {
             reviewsCount: 20,
             connectionsCount: 100,
             joinedAt: new Date(),
+            authType: AuthType.EMAIL,
             id: "321312",
             isConnection: false,
             email: "daskdla@dasl.com",

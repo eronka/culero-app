@@ -1,3 +1,11 @@
+export enum AuthType {
+  EXTERNAL,
+  EMAIL,
+  LINKEDIN,
+  APPLE,
+  GOOGLE,
+  FACEBOOK,
+}
 export type Connection = {
   name?: string;
   headline?: string;
@@ -10,4 +18,6 @@ export type Connection = {
   reviewsCount: number;
   connectionsCount: number;
   isConnection: boolean;
+
+  authType: AuthType;
 };

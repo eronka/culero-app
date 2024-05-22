@@ -2,6 +2,7 @@ import { Connection, User, UserWithCounts, UserWithToken } from "../types";
 import { Rating } from "../types/Rating";
 import { Review } from "../types/Review";
 import storage from "./storage";
+import Base64 from "Base64";
 
 const baseUrl = "http://192.168.1.132:4200/api";
 const signInUrl = `${baseUrl}/auth/sign-in`;
@@ -262,4 +263,11 @@ export async function unconnectWithUser(
   return authorizedFetch(`${baseUrl}/connections/connect/${userId}`, {
     method: "DELETE",
   });
+}
+
+export async function searchByUserLink(link: string): Promise<Connection> {
+  return authorizedFetch(
+    `${baseUrl}/connections/search-by-external-profile/${Base64.btoa(link)}`,
+    { method: "GET" }
+  );
 }
