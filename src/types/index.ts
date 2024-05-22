@@ -57,3 +57,4 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
 export type RootTabParamList = {};
 
 export * from "./User";
+export * from "./Connection";

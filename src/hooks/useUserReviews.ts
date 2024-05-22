@@ -4,7 +4,7 @@ import { getUserReviews } from "../utils/api";
 
 export function useUserReviews(userId: User["id"]) {
   return useQuery({
-    queryKey: ["reviews", userId],
+    queryKey: ["reviews", { postedToId: userId }],
     queryFn: () => getUserReviews(userId),
   });
 }

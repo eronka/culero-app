@@ -1,11 +1,33 @@
-export type Review = {
-  userName?: string;
+export enum ReviewState {
+  PENDING,
+  APPROVED,
+  BLOCKED,
+}
+export type PostedBy = {
+  name?: string;
+
   profilePictureUrl?: string;
+  isEmailVerified?: boolean;
+  id: string;
+};
+
+export type Review = {
+  id: string;
+  comment: string;
   professionalism: number;
   reliability: number;
   communication: number;
+
+  createdAt: string;
+
+  postedToId: string;
+
+  isOwnReview: boolean;
+
   isAnonymous: boolean;
-  isEmailVerified: boolean;
-  createdOn: string;
-  comment: string;
+  isFavorite: boolean;
+
+  postedBy?: PostedBy;
+
+  state: ReviewState;
 };

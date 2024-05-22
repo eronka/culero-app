@@ -7,32 +7,25 @@ import { FavouriteButton } from "./FavouriteButton";
 import { CategoryRating } from "./CategoryRating";
 import { IconButton } from "./IconButton";
 import { twMerge } from "tailwind-merge";
+import { Review } from "../types/Review";
+import { Rating } from "../types/Rating";
+import { useAvgRating } from "../hooks/useAvgRating";
+import { useLikeReview } from "../hooks/useLikeReview";
+import { useUnlikeReview } from "../hooks/useUnlikeReview";
 
 export type SmallReviewCardProps = {
-  professionalismRating: number;
-  reliabilityRating: number;
-  communicationRating: number;
   className?: ViewProps["className"];
-  userImage?: string;
-  isFavourite: boolean;
-  userName?: string;
-  isUserVerified?: boolean;
-  isAnonymous?: boolean;
+  review: Review;
 };
 
 export const SmallReviewCard = ({
   className,
-  professionalismRating,
-  reliabilityRating,
-  communicationRating,
-  userImage,
-  isFavourite,
-  userName,
-  isUserVerified,
-  isAnonymous,
+  review,
 }: SmallReviewCardProps) => {
-  const overallRating =
-    (professionalismRating + reliabilityRating + communicationRating) / 3;
+  const overallRating = useAvgRating(review);
+  const likeReviewMutation = useLikeReview();
+  const unlikeReviewMutation = useUnlikeReview();
+
   return (
     <View className="py-6 px-3">
       <Card
@@ -48,13 +41,13 @@ export const SmallReviewCard = ({
             />
             <View className="flex justify-center items-center">
               <Avatar
-                userImage={userImage}
-                hasBadge={true}
-                isAnonymous={isAnonymous}
-                isVerified={isUserVerified}
+                userImage={review?.postedBy?.profilePictureUrl}
+                hasBadge={!review.isAnonymous}
+                isAnonymous={review.isAnonymous}
+                isVerified={review.postedBy?.isEmailVerified}
               />
               <StyledText weight={500} className="text-lg">
-                {userName || "Anonymous"}
+                {review.postedBy?.name || "Anonymous"}
               </StyledText>
               <StyledStarRating readonly startingValue={overallRating} />
             </View>
@@ -62,24 +55,40 @@ export const SmallReviewCard = ({
               <CategoryRating
                 hideBar={true}
                 categoryName="Professionalsim"
-                rating={professionalismRating}
+                rating={review.professionalism}
               />
               <CategoryRating
                 hideBar={true}
                 categoryName="Reliability"
-                rating={reliabilityRating}
+                rating={review.reliability}
               />
               <CategoryRating
                 hideBar={true}
                 categoryName="Communication"
-                rating={communicationRating}
+                rating={review.communication}
               />
             </View>
           </View>
         }
         footerComponent={
           <View className="mt-4 flex-row justify-between items-center px-2">
-            <FavouriteButton size={24} isFav={isFavourite} onPress={() => {}} />
+            <FavouriteButton
+              size={24}
+              isFav={review.isFavorite}
+              onPress={() => {
+                if (!review.isFavorite) {
+                  likeReviewMutation.mutate({
+                    reviewId: review.id,
+                    postedToId: review.postedToId,
+                  });
+                } else {
+                  unlikeReviewMutation.mutate({
+                    reviewId: review.id,
+                    postedToId: review.postedToId,
+                  });
+                }
+              }}
+            />
             <IconButton iconProps={{ name: "message" }} onPress={() => {}} />
           </View>
         }

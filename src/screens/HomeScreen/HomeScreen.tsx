@@ -7,14 +7,16 @@ import {
   SmallReviewCard,
   StyledText,
 } from "../../components";
-import { useSelfReviews } from "../../hooks/useSelfReviews";
 import { ConnectionReviewCard } from "../../components/ConnectionsReviewCard";
 import { SocialMediaCard } from "../../icons/SocialMediaCard";
 import { useScreenInfo } from "../../hooks/useScreenInfo";
+import { useUser } from "../../hooks";
+import { useUserReviews } from "../../hooks/useUserReviews";
 
 const ReviewsList = () => {
-  const reviews = useSelfReviews();
   const { isPhone } = useScreenInfo();
+  const user = useUser()!;
+  const reviews = useUserReviews(user.id);
 
   if (reviews.isLoading) {
     return <ActivityIndicator size="large" className="self-center mt-8" />;
@@ -35,18 +37,7 @@ const ReviewsList = () => {
         showsHorizontalScrollIndicator={false}
         contentContainerClassName="pb-4"
         renderItem={({ item }) => (
-          <SmallReviewCard
-            className="w-80 mr-4 min-w-48"
-            professionalismRating={item.professionalism}
-            communicationRating={item.communication}
-            reliabilityRating={item.reliability}
-            userName={item.userName}
-            userImage={item.profilePictureUrl}
-            isUserVerified={item.isEmailVerified}
-            isAnonymous={item.isAnonymous}
-            // TODO: Add property after it is implement on the backend
-            isFavourite={false}
-          />
+          <SmallReviewCard className="w-80 mr-4 min-w-48" review={item} />
         )}
       />
     </View>
