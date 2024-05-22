@@ -158,21 +158,6 @@ export async function getSearchUserResult(query: string) {
   );
 }
 
-export type SendReviewData = {
-  professtionalsim: number;
-  reliability: number;
-  communication: number;
-  comment: string;
-  anonymous: boolean;
-};
-
-export async function sendFeedback(ratedUserId: string, data: SendReviewData) {
-  return authorizedFetch(`${baseUrl}/user/rate/${ratedUserId}`, {
-    method: "POST",
-    body: data,
-  });
-}
-
 export async function getMe(): Promise<User> {
   return authorizedFetch(`${baseUrl}/user`, { method: "GET" });
 }
@@ -270,4 +255,22 @@ export async function searchByUserLink(link: string): Promise<Connection> {
     `${baseUrl}/connections/search-by-external-profile/${Base64.btoa(link)}`,
     { method: "GET" }
   );
+}
+
+export type SendReviewData = {
+  professtionalsim: number;
+  reliability: number;
+  communication: number;
+  comment: string;
+  anonymous: boolean;
+};
+
+export async function sendReview(ratedUserId: string, data: SendReviewData) {
+  return authorizedFetch(`${baseUrl}/reviews`, {
+    method: "POST",
+    body: {
+      postedToId: ratedUserId,
+      review: data,
+    },
+  });
 }

@@ -9,7 +9,7 @@ import {
 } from "../../components";
 import { ConnectionReviewCard } from "../../components/ConnectionsReviewCard";
 import { useState } from "react";
-import { searchByUserLink, sendFeedback } from "../../utils/api";
+import { searchByUserLink, sendReview } from "../../utils/api";
 import { useScreenInfo } from "../../hooks/useScreenInfo";
 import { DrawerHeader } from "../../components/headers/DrawerHeader";
 import { useQueryClient } from "@tanstack/react-query";
@@ -106,7 +106,7 @@ export const WriteReviewScreen = () => {
                           className="md:mt-8"
                           isWhiteBg={true}
                           onSubmit={(values) => {
-                            // sendFeedback(searchResult.result[0].id, values);
+                            sendReview(searchResult.result?.id!, values);
                           }}
                         />
                       </>
