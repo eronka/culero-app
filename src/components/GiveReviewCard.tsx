@@ -34,23 +34,23 @@ export const ReviewSubmitedModal = ({
   return (
     <StyledModal isVisible={isVisible} setVisibility={setVisibility}>
       <View className="items-center md:pb-20 md:px-20 md:pt-8">
-        <StyledText weight={600}>Review Pending</StyledText>
+        <StyledText weight={600}>Review Submitted</StyledText>
         <StyledText weight={600} xl2>
-          Awaiting Approval
+          Review submitted
         </StyledText>
         <StyledText color="gray33" center>{`
 Thank you for submitting your review.
-We are currently reviewing it to ensure it meets our community guidelines.
-Your review will be live within 24 hours.
+
           `}</StyledText>
         <StyledPressable
+          className="min-w-32"
           onPress={() => setVisibility(false)}
           color="primary"
           textVariant={{
             color: "white",
           }}
         >
-          Back to Home
+          Close
         </StyledPressable>
       </View>
     </StyledModal>
@@ -211,6 +211,15 @@ export const GiveReviewCard = ({
     [myReviewForUser.data, isEditingEnabled]
   );
 
+  // Indicates wheter to show just the review card or the form
+  const isInEditingMode = useMemo(
+    () =>
+      !myReviewForUser.data ||
+      isEditingEnabled ||
+      myReviewForUser.data.state == ReviewState.PENDING,
+    [myReviewForUser.data, isEditingEnabled]
+  );
+
   return (
     <>
       <ReviewSubmitedModal
@@ -229,16 +238,22 @@ export const GiveReviewCard = ({
       />
       <Card
         className={twMerge("bg-transparent", className)}
+        style={
+          isWhiteBg || !isInEditingMode
+            ? {}
+            : {
+                borderWidth: 1,
+                borderColor: colors.primary,
+              }
+        }
         bodyComponent={
           <View>
             <>
               {/** Display editing form */}
-              {!myReviewForUser.data ||
-              isEditingEnabled ||
-              myReviewForUser.data.state == ReviewState.PENDING ? (
+              {isInEditingMode ? (
                 <>
-                  <View className="md:flex-row">
-                    <View className="md:w-3/4 md:pr-8">
+                  <View className="flex md:flex-row">
+                    <View className="shrink md:pr-8">
                       <View className="flex-row justify-between">
                         <StyledText
                           weight={700}
@@ -276,11 +291,11 @@ export const GiveReviewCard = ({
                         description="Your honest feedback is valuable. If you prefer, you can submit this review anonymously by checking the box."
                       />
                     </View>
-                    <View className="mt-4 md:mt-0 md:w-1/4">
+                    <View className=" flex mt-4 md:mt-0">
                       <StyledText weight={700} color="primary" className="mb-2">
                         Star Rating:
                       </StyledText>
-                      <View className="flex-row justify-between">
+                      <View className="flex-row">
                         <View className="mr-2 w-32">
                           <StyledText weight={600} color="darkgrey">
                             Professionalism
@@ -303,7 +318,7 @@ export const GiveReviewCard = ({
                       </View>
                       <ErrorLabel error={errors.professionalism} />
 
-                      <View className="flex-row justify-between mt-4">
+                      <View className="flex-row mt-4">
                         <View className="mr-2 w-32 ">
                           <StyledText weight={600} color="darkgrey">
                             Reliability
@@ -398,13 +413,13 @@ export const GiveReviewCard = ({
                         right: 0,
                         left: 0,
                         bottom: 0,
-                        backgroundColor: "#ECF3FF",
+                        backgroundColor: colors.primary,
                         zIndex: 200,
-                        opacity: 0.4,
+                        opacity: 0.1,
                       }}
                     ></View>
                     <ReviewCard
-                      review={myReviewForUser.data}
+                      review={myReviewForUser.data!}
                       className="border border-primary"
                     />
                   </View>

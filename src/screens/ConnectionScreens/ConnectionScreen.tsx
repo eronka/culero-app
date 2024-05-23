@@ -5,7 +5,6 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ConnectionStackParamList } from "../../types";
 import {
-  Card,
   GiveReviewCard,
   OverallRateCard,
   ReviewCard,
@@ -23,8 +22,6 @@ export const ConnectionScreen = (
   const user = useConnection(props.route.params.userId);
   const avgs = useUserRatings(props.route.params.userId);
   const reviews = useUserReviews(props.route.params.userId);
-
-  console.log(user.isFetched);
 
   return (
     <ScrollView>
@@ -57,22 +54,14 @@ export const ConnectionScreen = (
                 />
               )}
             <View className="md:mt-10">
-              <StyledText
-                className="mb-2"
-                weight={600}
-                xl2
-              >{`Do you know ${user.data.name}? Leave him a review`}</StyledText>
-              <Card
+              <GiveReviewCard isWhiteBg={false} ratedUser={user.data} />
+
+              {/* <Card
                 className="border border-primary bg-transparent"
                 bodyComponent={
-                  <GiveReviewCard
-                    isWhiteBg={false}
-                    onSubmit={(values) => {
-                      console.log("values", values);
-                    }}
-                  />
+                  <GiveReviewCard isWhiteBg={false} ratedUser={user.data} />
                 }
-              />
+              /> */}
 
               {reviews.isFetched && reviews.data && (
                 <View className="md:mt-4">

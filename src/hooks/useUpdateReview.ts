@@ -66,6 +66,9 @@ export function useUpdateReview() {
       queryClient.invalidateQueries({
         queryKey: ["reviews", { postedToId: variables.ratedUserId }],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["rating-avg", variables.ratedUserId],
+      });
     },
   });
 }
