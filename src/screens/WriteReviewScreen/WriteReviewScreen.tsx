@@ -105,9 +105,7 @@ export const WriteReviewScreen = () => {
                         <GiveReviewCard
                           className="md:mt-8"
                           isWhiteBg={true}
-                          onSubmit={(values) => {
-                            sendReview(searchResult.result?.id!, values);
-                          }}
+                          ratedUser={searchResult.result}
                         />
                       </>
                     )}

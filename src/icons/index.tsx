@@ -52,7 +52,9 @@ export type IconName =
   | "eye"
   | "checkmark"
   | "user-avatar"
-  | "back";
+  | "back"
+  | "close"
+  | "delete";
 
 export type IconProps = {
   name: IconName;
@@ -64,7 +66,7 @@ export type IconProps = {
 export const Icon = ({ name, color, size, className }: IconProps) => {
   return (
     <View className={twMerge("mx-1 justify-center", className)}>
-      {name == "edit" && <EditIcon />}
+      {name == "edit" && <EditIcon color={color} size={size} />}
       {name == "google" && <GoogleIcon />}
       {name == "search" && <SearchIcon />}
       {name == "arrow-down" && (
@@ -191,6 +193,20 @@ export const Icon = ({ name, color, size, className }: IconProps) => {
       {name === "back" && (
         <Material
           name="arrow-back-ios"
+          size={size}
+          color={color ? colors[color] : colors["black"]}
+        />
+      )}
+      {name === "close" && (
+        <Ionicons
+          name="close"
+          size={size}
+          color={color ? colors[color] : colors["black"]}
+        />
+      )}
+      {name === "delete" && (
+        <Ionicons
+          name="trash-outline"
           size={size}
           color={color ? colors[color] : colors["black"]}
         />

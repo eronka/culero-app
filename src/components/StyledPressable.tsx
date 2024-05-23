@@ -12,6 +12,7 @@ const button = tv({
       light: "bg-light-primary",
       white: "bg-white",
       primary: "bg-primary weight-900",
+      transparent: "bg-transparent",
     },
     // full width button
     fw: {
