@@ -258,7 +258,7 @@ export async function searchByUserLink(link: string): Promise<Connection> {
 }
 
 export type SendReviewData = {
-  professtionalsim: number;
+  professionalism: number;
   reliability: number;
   communication: number;
   comment: string;
@@ -272,5 +272,27 @@ export async function sendReview(ratedUserId: string, data: SendReviewData) {
       postedToId: ratedUserId,
       review: data,
     },
+  });
+}
+
+export async function getMyReviewForUser(userId: string): Promise<Review> {
+  return authorizedFetch(`${baseUrl}/reviews/my-review/${userId}`, {
+    method: "GET",
+  });
+}
+
+export async function deleteReview(reviewId: string) {
+  return authorizedFetch(`${baseUrl}/reviews/${reviewId}`, {
+    method: "DELETE",
+  });
+}
+
+export async function updateReview(
+  reviewId: string,
+  reviewData: SendReviewData
+): Promise<Review> {
+  return authorizedFetch(`${baseUrl}/reviews/${reviewId}`, {
+    method: "PUT",
+    body: reviewData,
   });
 }

@@ -19,6 +19,7 @@ export const StyledTextInput = ({
   leftIconProps,
   error,
   style,
+  editable = true,
   ...props
 }: StyledTextInputProps) => {
   const [value, setValue] = useState<string>("");
@@ -46,11 +47,12 @@ export const StyledTextInput = ({
               //@ts-ignore
               outlineStyle: "none",
             },
-            value === "" && (!props.value || props.value === "")
+            (value === "" && (!props.value || props.value === "")) || !editable
               ? { fontStyle: "italic" }
               : {},
             style,
           ]}
+          editable={editable}
           {...props}
         />
         {!!submitProps && (

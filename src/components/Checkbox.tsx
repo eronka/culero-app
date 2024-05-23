@@ -14,6 +14,7 @@ export type CheckboxProps = {
   value: boolean;
   onPress?: () => void;
   checkMarkSize?: number;
+  disabled?: boolean;
 };
 
 export const CheckBox = ({
@@ -24,28 +25,44 @@ export const CheckBox = ({
   color = "primary",
   value,
   onPress,
+  disabled,
   className,
 }: CheckboxProps) => {
   return (
     <View className={twMerge("flex-row", className)}>
       <Pressable
+        disabled={disabled}
         onPress={onPress}
-        style={{
-          height: size,
-          width: size,
-          borderRadius: 5,
-          borderColor: colors[color],
-          borderWidth: 2,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
+        style={[
+          {
+            height: size,
+            width: size,
+            borderRadius: 5,
+            borderColor: colors[color],
+            borderWidth: 2,
+            justifyContent: "center",
+            alignItems: "center",
+          },
+          disabled ? { opacity: 0.5 } : { opacity: 1 },
+        ]}
       >
         {value && <Icon name="checkmark" color={color} size={checkMarkSize} />}
       </Pressable>
       <View className="flex-1 ml-2">
-        {label && <StyledText weight={500}>{label}</StyledText>}
+        {label && (
+          <StyledText
+            weight={500}
+            style={disabled ? { fontStyle: "italic" } : {}}
+          >
+            {label}
+          </StyledText>
+        )}
         {description && (
-          <StyledText className="text-sm" color="gray33">
+          <StyledText
+            className="text-sm"
+            color="gray33"
+            style={disabled ? { fontStyle: "italic" } : {}}
+          >
             {description}
           </StyledText>
         )}
