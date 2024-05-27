@@ -12,7 +12,7 @@ export const SettingsLayout = ({ children, canGoBack }: LayoutProps) => {
   const navigation = useNavigation();
   return (
     <ScrollView>
-      <View className="p-4 md:p-9">
+      <View className="p-4 md:p-9" style={{ maxWidth: 1000 }}>
         <DrawerHeader
           title="Settings"
           iconProps={{ name: "settings", color: "black" }}

@@ -3,7 +3,7 @@ import { SettingsStackParamList } from "../types";
 import { useScreenInfo } from "../hooks/useScreenInfo";
 import {
   AccountSettingsScreen,
-  GivenReviwesSettings,
+  GivenReviewsSettings,
   PrivacySettingsScreen,
   ReceivedReviewsScreen,
   SettingsScreen,
@@ -18,7 +18,7 @@ export const SettingsStack = () => {
       <Stack.Screen name="Settings" component={SettingsScreen} />
       <Stack.Screen name="Account Settings" component={AccountSettingsScreen} />
       <Stack.Screen name="Privacy" component={PrivacySettingsScreen} />
-      <Stack.Screen name="Given reviews" component={GivenReviwesSettings} />
+      <Stack.Screen name="Given reviews" component={GivenReviewsSettings} />
       <Stack.Screen name="Received reviews" component={ReceivedReviewsScreen} />
     </Stack.Navigator>
   );

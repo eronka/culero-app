@@ -296,3 +296,11 @@ export async function updateReview(
     body: reviewData,
   });
 }
+
+export async function getReviewsPostedByMe(): Promise<Review[]> {
+  return authorizedFetch(`${baseUrl}/reviews/posted`, { method: "GET" });
+}
+
+export async function getReviewdUsers(): Promise<Connection[]> {
+  return authorizedFetch(`${baseUrl}/connections/reviewed`, { method: "GET" });
+}
