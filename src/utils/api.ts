@@ -327,3 +327,7 @@ export async function updateUserSettings(
     body: data,
   });
 }
+
+export async function deleteAccount() {
+  return authorizedFetch(`${baseUrl}/user`, { method: "DELETE" });
+}
