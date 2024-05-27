@@ -1,7 +1,7 @@
 import { View } from "react-native";
-import { StyledText } from "./StyledText";
+import { StyledText } from "../StyledText";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useScreenInfo } from "../hooks/useScreenInfo";
+import { useScreenInfo } from "../../hooks/useScreenInfo";
 
 export const AuthHeader = () => {
   const insets = useSafeAreaInsets();

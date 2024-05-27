@@ -29,10 +29,10 @@ export const Avatar = ({
     <View className="pb-2 pr-2">
       <Userpic
         source={
-          userImage
-            ? !isAnonymous
-              ? { uri: userImage }
-              : ANONYMOUS_IMAGE
+          isAnonymous
+            ? ANONYMOUS_IMAGE
+            : userImage
+            ? { uri: userImage }
             : USER_DEFAULT_IMAGE
         }
         defaultSource={USER_DEFAULT_IMAGE}

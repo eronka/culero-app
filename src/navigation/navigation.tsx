@@ -9,6 +9,7 @@ import { useUser } from "../hooks";
 import { EmailVerificationSuccess } from "../screens/AuthScreens";
 import { AuthHeader } from "../components";
 import { DrawerNavigator } from "./DrawerNavigation";
+import { OnboardingScreen } from "../screens/OnboardingScreen/OnboardingScreen";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -31,6 +32,8 @@ const RootNavigator = () => {
           <Stack.Screen name="AuthNav" component={AuthStackNavigator} />
         </>
       )}
+      <Stack.Screen name="Onboarding" component={OnboardingScreen} />
+
       <Stack.Screen
         name="EmailVerificationSuccess"
         component={EmailVerificationSuccess}

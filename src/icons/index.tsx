@@ -22,6 +22,7 @@ import { UserStarIcon } from "./UserStarIcon";
 import { UserGroupIcon } from "./UserGroupIcon";
 import { HomeIcon } from "./HomeIcon";
 import { UserIcon } from "./UserIcon";
+import { UserAvatar } from "./UserAvatar";
 
 export type IconName =
   | "edit"
@@ -49,7 +50,11 @@ export type IconName =
   | "user"
   | "settings"
   | "eye"
-  | "checkmark";
+  | "checkmark"
+  | "user-avatar"
+  | "back"
+  | "close"
+  | "delete";
 
 export type IconProps = {
   name: IconName;
@@ -61,7 +66,7 @@ export type IconProps = {
 export const Icon = ({ name, color, size, className }: IconProps) => {
   return (
     <View className={twMerge("mx-1 justify-center", className)}>
-      {name == "edit" && <EditIcon />}
+      {name == "edit" && <EditIcon color={color} size={size} />}
       {name == "google" && <GoogleIcon />}
       {name == "search" && <SearchIcon />}
       {name == "arrow-down" && (
@@ -180,6 +185,28 @@ export const Icon = ({ name, color, size, className }: IconProps) => {
       {name === "checkmark" && (
         <Ionicons
           name="checkmark"
+          size={size}
+          color={color ? colors[color] : colors["black"]}
+        />
+      )}
+      {name === "user-avatar" && <UserAvatar color={color || "black"} />}
+      {name === "back" && (
+        <Material
+          name="arrow-back-ios"
+          size={size}
+          color={color ? colors[color] : colors["black"]}
+        />
+      )}
+      {name === "close" && (
+        <Ionicons
+          name="close"
+          size={size}
+          color={color ? colors[color] : colors["black"]}
+        />
+      )}
+      {name === "delete" && (
+        <Ionicons
+          name="trash-outline"
           size={size}
           color={color ? colors[color] : colors["black"]}
         />

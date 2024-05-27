@@ -19,6 +19,7 @@ export const StyledTextInput = ({
   leftIconProps,
   error,
   style,
+  editable = true,
   ...props
 }: StyledTextInputProps) => {
   const [value, setValue] = useState<string>("");
@@ -27,14 +28,14 @@ export const StyledTextInput = ({
     <>
       <View
         className={twMerge(
-          `bg-white flex rounded-md p-3 flex-row`,
+          `bg-white flex rounded-md p-3 flex-row items-center`,
           containerClassName
         )}
       >
         {!!leftIconProps && <Icon {...leftIconProps} />}
         <TextInput
           autoCapitalize="none"
-          value={value}
+          value={props.value || value}
           textAlignVertical={props.multiline ? "top" : "auto"}
           onChangeText={(newValue) => setValue(newValue)}
           style={[
@@ -46,8 +47,12 @@ export const StyledTextInput = ({
               //@ts-ignore
               outlineStyle: "none",
             },
+            (value === "" && (!props.value || props.value === "")) || !editable
+              ? { fontStyle: "italic" }
+              : {},
             style,
           ]}
+          editable={editable}
           {...props}
         />
         {!!submitProps && (

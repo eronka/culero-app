@@ -28,6 +28,8 @@ import { SocialMediaCard } from "../../icons/SocialMediaCard";
 import { SearchableConnectionsCard } from "../../components/SearchableConnectionsCard";
 import { useLogout } from "../../hooks/useLogout";
 import { useUser } from "../../hooks";
+import { ReviewState } from "../../types/Review";
+import { AuthType } from "../../types";
 
 const InitialScreen = ({}: {}) => {
   const user = useUser()!;
@@ -131,63 +133,103 @@ const InitialScreen = ({}: {}) => {
         <StyledStarRating />
         <OverallRateCard
           className="mt-8"
-          overallRating={4.5}
           professionalismRating={4.1}
           reliabilityRating={5}
           communicationRating={2}
         />
         <ReviewCard
           className="mt-8"
-          professionalismRating={4.1}
-          reliabilityRating={5}
-          communicationRating={2.3}
-          overallRating={4.5}
-          date={new Date()}
-          isFavourite={true}
-          userImage="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          review="What impressed me the most was Logan Davis's strategic thinking and the way they handled challenges. Their clear communication and willingness to listen to team members' ideas created a positive and collaborative work environment."
+          review={{
+            professionalism: 2,
+            reliability: 4,
+            communication: 2,
+            postedBy: {
+              profilePictureUrl:
+                "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+              name: "asdas",
+              id: "sdas",
+            },
+            isFavorite: true,
+            postedToId: "dasda",
+            isAnonymous: false,
+            isOwnReview: false,
+            state: ReviewState.APPROVED,
+            id: "dasdas",
+            createdAt: new Date().toISOString(),
+            comment:
+              "What impressed me the most was Logan Davis's strategic thinking and the way they handled challenges. Their clear communication and willingness to listen to team members' ideas created a positive and collaborative work environment.",
+          }}
         />
         <ReviewCard
           className="mt-8"
-          professionalismRating={4.1}
-          reliabilityRating={5}
-          communicationRating={2.3}
-          overallRating={4.5}
-          date={new Date()}
-          isFavourite={false}
-          isAnonymous={true}
-          userImage="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          review="What impressed me the most was Logan Davis's strategic thinking and the way they handled challenges. Their clear communication and willingness to listen to team members' ideas created a positive and collaborative work environment."
+          review={{
+            professionalism: 2,
+            reliability: 4,
+            communication: 2,
+            postedBy: {
+              profilePictureUrl:
+                "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+              name: "asdas",
+              id: "sdas",
+            },
+            isFavorite: true,
+            postedToId: "dasda",
+            isAnonymous: false,
+            isOwnReview: false,
+            state: ReviewState.APPROVED,
+            id: "dasdas",
+            createdAt: new Date().toISOString(),
+            comment:
+              "What impressed me the most was Logan Davis's strategic thinking and the way they handled challenges. Their clear communication and willingness to listen to team members' ideas created a positive and collaborative work environment.",
+          }}
         />
         <SmallReviewCard
           className="mt-8 w-2/3"
-          professionalismRating={4.1}
-          reliabilityRating={5}
-          communicationRating={2.3}
-          overallRating={4.5}
-          isFavourite={false}
-          userName="Ionel Ionescu"
-          isUserVerified={true}
-          userImage="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          review={{
+            professionalism: 2,
+            reliability: 4,
+            communication: 2,
+            postedBy: {
+              profilePictureUrl:
+                "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+              name: "asdas",
+              id: "sdas",
+            },
+            isFavorite: true,
+            postedToId: "dasda",
+            isAnonymous: false,
+            isOwnReview: false,
+            state: ReviewState.APPROVED,
+            id: "dasdas",
+            createdAt: new Date().toISOString(),
+            comment:
+              "What impressed me the most was Logan Davis's strategic thinking and the way they handled challenges. Their clear communication and willingness to listen to team members' ideas created a positive and collaborative work environment.",
+          }}
         />
         <SmallReviewCard
           className="mt-8 flex-auto w-2/3"
-          professionalismRating={4.1}
-          reliabilityRating={5}
-          communicationRating={2.3}
-          overallRating={4.5}
-          isFavourite={true}
-          userName="Ionel Ionescu"
-          isUserVerified={false}
-          userImage="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          review={{
+            professionalism: 2,
+            reliability: 4,
+            communication: 2,
+            postedBy: {
+              profilePictureUrl:
+                "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+              name: "asdas",
+              id: "sdas",
+            },
+            isFavorite: true,
+            postedToId: "dasda",
+            isAnonymous: false,
+            isOwnReview: false,
+            state: ReviewState.APPROVED,
+            id: "dasdas",
+            createdAt: new Date().toISOString(),
+            comment:
+              "What impressed me the most was Logan Davis's strategic thinking and the way they handled challenges. Their clear communication and willingness to listen to team members' ideas created a positive and collaborative work environment.",
+          }}
         />
-        <MyReviewsCard
-          className="mt-8 "
-          professionalismRating={4.1}
-          reliabilityRating={5}
-          communicationRating={2.3}
-          overallRating={4.5}
-        />
+        <MyReviewsCard className="mt-8 " />
         <ConnectionDetails
           className="mt-8"
           userName="Ionel Ionescu"
@@ -209,18 +251,37 @@ const InitialScreen = ({}: {}) => {
         <InviteCard className="mt-8 w-3/4" />
         <NewUserCard
           className="mt-8"
-          userName="Ethan Moore"
-          userPosition="profession"
+          connection={{
+            name: "Logan Davis",
+            headline: "UX designer",
+            isEmailVerified: true,
+            reviewsCount: 20,
+            connectionsCount: 100,
+            joinedAt: new Date(),
+            authType: AuthType.EMAIL,
+            id: "321312",
+            isConnection: false,
+            email: "daskdla@dasl.com",
+            profilePictureUrl:
+              "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          }}
         />
         <UserCard
           className="mt-8"
-          userName="Logan Davis"
-          userPosition="UX designer"
-          isVerified={true}
-          revewisCount={20}
-          connectionsCount={100}
-          joinedDate={new Date()}
-          userAvatar="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          connection={{
+            name: "Logan Davis",
+            headline: "UX designer",
+            isEmailVerified: true,
+            reviewsCount: 20,
+            connectionsCount: 100,
+            joinedAt: new Date(),
+            authType: AuthType.EMAIL,
+            id: "321312",
+            isConnection: false,
+            email: "daskdla@dasl.com",
+            profilePictureUrl:
+              "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          }}
         />
         <ProfileCard
           className="hidden md:block mt-8"
@@ -237,43 +298,7 @@ const InitialScreen = ({}: {}) => {
           userAvatar="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         />
         <GiveReviewCard className="hidden md:block mt-8" />
-        <SearchableConnectionsCard
-          className="mt-2"
-          users={[
-            {
-              firstName: "Ionel",
-              lastName: "Ionescu",
-              isVerified: true,
-              position: "Mint rubber",
-              avatar:
-                "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            },
-            {
-              firstName: "Alex",
-              lastName: "Alexandrescu",
-              isVerified: true,
-              position: "Designer",
-              avatar:
-                "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            },
-            {
-              firstName: "Gigi",
-              lastName: "Popescu",
-              isVerified: true,
-              position: "Mint rubber",
-              avatar:
-                "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            },
-            {
-              firstName: "FIfi",
-              lastName: "Ionescu",
-              isVerified: true,
-              position: "Mint rubber",
-              avatar:
-                "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            },
-          ]}
-        />
+        <SearchableConnectionsCard className="mt-2" />
       </View>
     </ScrollView>
   );

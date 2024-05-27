@@ -1,35 +1,23 @@
 import { Alert, View, ViewProps } from "react-native";
 import { Card } from "./Card";
-import { VerticalDivider } from "./VerticalDivider";
 import { StyledText } from "./StyledText";
 import { StyledPressable } from "./StyledPressable";
 import { twMerge } from "tailwind-merge";
 import { ConnectionDetails } from "./ConnectionDetails";
 import { IconButton } from "./IconButton";
 import { Icon } from "../icons";
+import { Connection } from "../types";
+import { useConnectWithUser } from "../hooks/useConnectWithUser";
+import { useUnconnectWithUser } from "../hooks/useUnconnectWIthUser";
 
 export type UserCardProps = {
-  userName: string;
-  userPosition: string;
-  userAvatar: string;
   className?: ViewProps["className"];
-  isVerified?: boolean;
-  revewisCount: number;
-  connectionsCount: number;
-  joinedDate: Date;
-  isConnection?: boolean;
+  connection: Connection;
 };
-export const UserCard = ({
-  userName,
-  isVerified,
-  userAvatar,
-  userPosition,
-  className,
-  revewisCount,
-  connectionsCount,
-  joinedDate,
-  isConnection,
-}: UserCardProps) => {
+export const UserCard = ({ className, connection }: UserCardProps) => {
+  const connectMutation = useConnectWithUser();
+  const unconnectMutation = useUnconnectWithUser();
+
   return (
     <Card
       className={twMerge("bg-primary", className)}
@@ -47,20 +35,26 @@ export const UserCard = ({
               <ConnectionDetails
                 usernameTextClassName="text-white"
                 positionTextClassName="text-white7"
-                userName={userName}
-                userPosition={userPosition}
-                userAvatar={userAvatar}
-                isVerified={isVerified}
+                userName={connection.name}
+                userPosition={connection.headline}
+                userAvatar={connection.profilePictureUrl}
+                isVerified={connection.isEmailVerified}
               />
             </View>
             <View className="hidden md:flex flex-1">
               <StyledPressable
-                disabled={isConnection}
                 color="white"
                 className="self-end mt-2"
                 textVariant={{ color: "primary", weight: 500 }}
+                onPress={() => {
+                  if (!connection.isConnection) {
+                    connectMutation.mutate(connection.id);
+                  } else {
+                    unconnectMutation.mutate(connection.id);
+                  }
+                }}
               >
-                Connect
+                {connection.isConnection ? "Unfollow" : "Connect"}
               </StyledPressable>
             </View>
           </View>
@@ -69,32 +63,40 @@ export const UserCard = ({
               <View className="flex-row">
                 <Icon name="user-star" color="grayC5" size={15} />
                 <StyledText color="whiteFA" sm>
-                  {`${revewisCount} reviews`}
+                  {`${connection.reviewsCount} reviews`}
                 </StyledText>
               </View>
 
               <View className="flex-row md:mx-4">
                 <Icon name="user-group" color="grayC5" size={15} />
                 <StyledText color="whiteFA" sm>
-                  {`${connectionsCount} connections`}
+                  {`${connection.connectionsCount} connections`}
                 </StyledText>
               </View>
 
               <View className="flex-row">
                 <Icon name="verified" color="grayC5" size={15} />
                 <StyledText color="whiteFA" sm>
-                  {`Member since ${joinedDate.getFullYear()}`}
+                  {`Member since ${new Date(
+                    connection.joinedAt
+                  ).getFullYear()}`}
                 </StyledText>
               </View>
             </View>
             <View className="md:hidden self-end">
               <StyledPressable
-                disabled={isConnection}
                 color="white"
                 className="self-end mt-2"
                 textVariant={{ color: "primary", weight: 500 }}
+                onPress={() => {
+                  if (!connection.isConnection) {
+                    connectMutation.mutate(connection.id);
+                  } else {
+                    unconnectMutation.mutate(connection.id);
+                  }
+                }}
               >
-                Connect
+                {connection.isConnection ? "Unfollow" : "Connect"}
               </StyledPressable>
             </View>
           </View>

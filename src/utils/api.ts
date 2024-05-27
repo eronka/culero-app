@@ -1,5 +1,8 @@
-import { User, UserWithToken } from "../types";
+import { Connection, User, UserWithCounts, UserWithToken } from "../types";
+import { Rating } from "../types/Rating";
+import { Review } from "../types/Review";
 import storage from "./storage";
+import Base64 from "Base64";
 
 const baseUrl = "http://192.168.1.132:4200/api";
 const signInUrl = `${baseUrl}/auth/sign-in`;
@@ -68,6 +71,8 @@ const authorizedFetch = async (
   init: FetchInit | object
 ): Promise<any> => {
   const token = await storage.getItem(storage.TOKEN_KEY);
+
+  console.log("token is ", token);
 
   return enhancedFetch(
     input,
@@ -146,26 +151,11 @@ export async function verifyEmail(
 
 export async function getSearchUserResult(query: string) {
   return authorizedFetch(
-    `${baseUrl}/user/search?query=${encodeURIComponent(query)}`,
+    `${baseUrl}/connections/search/${encodeURIComponent(query)}`,
     {
       method: "GET",
     }
   );
-}
-
-export type SendReviewData = {
-  professtionalsim: number;
-  reliability: number;
-  communication: number;
-  comment: string;
-  anonymous: boolean;
-};
-
-export async function sendFeedback(ratedUserId: string, data: SendReviewData) {
-  return authorizedFetch(`${baseUrl}/user/rate/${ratedUserId}`, {
-    method: "POST",
-    body: data,
-  });
 }
 
 export async function getMe(): Promise<User> {
@@ -178,5 +168,131 @@ export type RegenerateCodeInput = {
 export async function regenerateCode(data: RegenerateCodeInput) {
   return enhancedFetch(`${baseUrl}/auth/regenerate-code/${data.email}`, {
     method: "PUT",
+  });
+}
+
+export type UpdateProfileData = {
+  name?: string;
+  headline?: string;
+};
+
+export async function updateProfileData(data: UpdateProfileData) {
+  return authorizedFetch(`${baseUrl}/user`, {
+    method: "PUT",
+    body: data,
+  });
+}
+
+export async function updateProfilePicture(uri: string) {
+  return authorizedFetch(`${baseUrl}/user/profile-picture`, {
+    method: "PUT",
+    body: { file: uri },
+  });
+}
+
+export async function getConnection(userId: User["id"]): Promise<Connection> {
+  return authorizedFetch(`${baseUrl}/connections/${userId}`, {
+    method: "GET",
+  });
+}
+
+export async function getUserAvgRatings(userId: User["id"]): Promise<Rating> {
+  return authorizedFetch(`${baseUrl}/reviews/avg-rating/${userId}`, {
+    method: "GET",
+  });
+}
+
+export async function getUserReviews(userId: User["id"]): Promise<Review[]> {
+  return authorizedFetch(`${baseUrl}/reviews/${userId}`, {
+    method: "GET",
+  });
+}
+
+export async function likeReview(reviewId: Review["id"]): Promise<Review> {
+  return authorizedFetch(`${baseUrl}/reviews/${reviewId}/like`, {
+    method: "POST",
+  });
+}
+
+export async function unlikeReview(reviewId: Review["id"]): Promise<Review> {
+  return authorizedFetch(`${baseUrl}/reviews/${reviewId}/like`, {
+    method: "DELETE",
+  });
+}
+
+export async function getConnections(): Promise<Connection[]> {
+  return authorizedFetch(`${baseUrl}/connections`, {
+    method: "GET",
+  });
+}
+
+export async function getSuggestedForReviewConnections(): Promise<
+  Connection[]
+> {
+  return authorizedFetch(`${baseUrl}/connections`, {
+    method: "GET",
+  });
+}
+
+export async function connectWithUser(
+  userId: Connection["id"]
+): Promise<Connection> {
+  return authorizedFetch(`${baseUrl}/connections/connect/${userId}`, {
+    method: "POST",
+  });
+}
+
+export async function unconnectWithUser(
+  userId: Connection["id"]
+): Promise<Connection> {
+  return authorizedFetch(`${baseUrl}/connections/connect/${userId}`, {
+    method: "DELETE",
+  });
+}
+
+export async function searchByUserLink(link: string): Promise<Connection> {
+  return authorizedFetch(
+    `${baseUrl}/connections/search-by-external-profile/${Base64.btoa(link)}`,
+    { method: "GET" }
+  );
+}
+
+export type SendReviewData = {
+  professionalism: number;
+  reliability: number;
+  communication: number;
+  comment: string;
+  anonymous: boolean;
+};
+
+export async function sendReview(ratedUserId: string, data: SendReviewData) {
+  return authorizedFetch(`${baseUrl}/reviews`, {
+    method: "POST",
+    body: {
+      postedToId: ratedUserId,
+      review: data,
+    },
+  });
+}
+
+export async function getMyReviewForUser(userId: string): Promise<Review> {
+  return authorizedFetch(`${baseUrl}/reviews/my-review/${userId}`, {
+    method: "GET",
+  });
+}
+
+export async function deleteReview(reviewId: string) {
+  return authorizedFetch(`${baseUrl}/reviews/${reviewId}`, {
+    method: "DELETE",
+  });
+}
+
+export async function updateReview(
+  reviewId: string,
+  reviewData: SendReviewData
+): Promise<Review> {
+  return authorizedFetch(`${baseUrl}/reviews/${reviewId}`, {
+    method: "PUT",
+    body: reviewData,
   });
 }
