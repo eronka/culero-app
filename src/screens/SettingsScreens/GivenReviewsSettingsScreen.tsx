@@ -7,7 +7,6 @@ import {
 } from "../../components";
 
 import { SettingsLayout } from "./components/SettingsLayout";
-import { useGivenReviews } from "../../hooks/useGivenReviews";
 import { useReviewedUsers } from "../../hooks/useReviewedUsers";
 
 export const GivenReviewsSettings = () => {
