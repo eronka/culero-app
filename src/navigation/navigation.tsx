@@ -23,7 +23,7 @@ const RootNavigator = () => {
         animation: "slide_from_right",
       }}
     >
-      {user.isFetched && user.data ? (
+      {user ? (
         <>
           <Stack.Screen name="HomeScreen" component={DrawerNavigator} />
         </>
