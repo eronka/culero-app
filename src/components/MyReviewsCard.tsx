@@ -25,34 +25,36 @@ export const MyReviewsCard = ({ className }: MyReviewsCardProps) => {
           <StyledText weight={600} xl2>
             My Reviews
           </StyledText>
-          {!rating.isLoading && rating.data && rating.data.professionalism && (
-            <View className="items-end">
-              <StyledText weight={700} className="text-3xl">
-                {(
-                  (rating.data.communication +
-                    rating.data.professionalism +
-                    rating.data.reliability) /
-                  3
-                ).toLocaleString("en", {
-                  maximumFractionDigits: 1,
-                })}
-                <StyledText
-                  weight={300}
-                  className="text-lg"
-                >{`/ 5`}</StyledText>
-              </StyledText>
+          {!rating.isLoading &&
+            !!rating.data &&
+            !!rating.data.professionalism && (
+              <View className="items-end">
+                <StyledText weight={700} className="text-3xl">
+                  {(
+                    (rating.data.communication +
+                      rating.data.professionalism +
+                      rating.data.reliability) /
+                    3
+                  ).toLocaleString("en", {
+                    maximumFractionDigits: 1,
+                  })}
+                  <StyledText
+                    weight={300}
+                    className="text-lg"
+                  >{`/ 5`}</StyledText>
+                </StyledText>
 
-              <StyledStarRating
-                readonly
-                startingValue={
-                  (rating.data.communication +
-                    rating.data.professionalism +
-                    rating.data.reliability) /
-                  3
-                }
-              />
-            </View>
-          )}
+                <StyledStarRating
+                  readonly
+                  startingValue={
+                    (rating.data.communication +
+                      rating.data.professionalism +
+                      rating.data.reliability) /
+                    3
+                  }
+                />
+              </View>
+            )}
         </View>
       }
       hideHeaderDivider
@@ -65,29 +67,31 @@ export const MyReviewsCard = ({ className }: MyReviewsCardProps) => {
             <StyledText className="mt-5">You have no reviews yet</StyledText>
           )}
 
-          {!rating.isLoading && rating.data && rating.data.professionalism && (
-            <View className="flex-grow mt-6">
-              <CategoryRating
-                height={isPhone ? 15 : 20}
-                hideNumbers={true}
-                categoryName="Professionalsim"
-                rating={rating.data.professionalism}
-              />
-              <CategoryRating
-                height={isPhone ? 15 : 20}
-                className="md:my-6"
-                hideNumbers={true}
-                categoryName="Reliability"
-                rating={rating.data.reliability}
-              />
-              <CategoryRating
-                height={isPhone ? 15 : 20}
-                hideNumbers={true}
-                categoryName="Communication"
-                rating={rating.data.communication}
-              />
-            </View>
-          )}
+          {!rating.isLoading &&
+            rating.data &&
+            !!rating.data.professionalism && (
+              <View className="flex-grow mt-6">
+                <CategoryRating
+                  height={isPhone ? 15 : 20}
+                  hideNumbers={true}
+                  categoryName="Professionalsim"
+                  rating={rating.data.professionalism}
+                />
+                <CategoryRating
+                  height={isPhone ? 15 : 20}
+                  className="md:my-6"
+                  hideNumbers={true}
+                  categoryName="Reliability"
+                  rating={rating.data.reliability}
+                />
+                <CategoryRating
+                  height={isPhone ? 15 : 20}
+                  hideNumbers={true}
+                  categoryName="Communication"
+                  rating={rating.data.communication}
+                />
+              </View>
+            )}
         </>
       }
     />
