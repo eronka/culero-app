@@ -69,6 +69,9 @@ export function useUpdateReview() {
       queryClient.invalidateQueries({
         queryKey: ["rating-avg", variables.ratedUserId],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["given-reviews"],
+      });
     },
   });
 }

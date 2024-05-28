@@ -33,6 +33,7 @@ const text = tv({
       white7: "text-white7",
       whiteFA: "text-whiteFA",
       gray7C: "text-gray7C",
+      gray65: "text-gray65",
       "deep-red": "text-deep-red",
       "light-primary": "text-light-primary",
     },

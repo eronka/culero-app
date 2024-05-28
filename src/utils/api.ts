@@ -1,4 +1,10 @@
-import { Connection, User, UserWithCounts, UserWithToken } from "../types";
+import {
+  Connection,
+  User,
+  UserSettings,
+  UserWithCounts,
+  UserWithToken,
+} from "../types";
 import { Rating } from "../types/Rating";
 import { Review } from "../types/Review";
 import storage from "./storage";
@@ -296,4 +302,33 @@ export async function updateReview(
     method: "PUT",
     body: reviewData,
   });
+}
+
+export async function getReviewsPostedByMe(): Promise<Review[]> {
+  return authorizedFetch(`${baseUrl}/reviews/posted`, { method: "GET" });
+}
+
+export async function getReviewdUsers(): Promise<Connection[]> {
+  return authorizedFetch(`${baseUrl}/connections/reviewed`, { method: "GET" });
+}
+
+export async function getUserSettings(): Promise<UserSettings> {
+  return authorizedFetch(`${baseUrl}/user/settings`, { method: "GET" });
+}
+
+export type UpdateUserSettingsData = {
+  reviewsVisible?: boolean;
+  anonymous?: boolean;
+};
+export async function updateUserSettings(
+  data: UpdateUserSettingsData
+): Promise<UserSettings> {
+  return authorizedFetch(`${baseUrl}/user/settings`, {
+    method: "PUT",
+    body: data,
+  });
+}
+
+export async function deleteAccount() {
+  return authorizedFetch(`${baseUrl}/user`, { method: "DELETE" });
 }

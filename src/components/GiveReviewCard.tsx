@@ -19,7 +19,6 @@ import { ErrorLabel } from "./ErrorLabel";
 import { StyledModal } from "./StyledModal";
 import { useDeleteReview } from "../hooks/useDeleteReview";
 import { useUpdateReview } from "../hooks/useUpdateReview";
-import { useQueryClient } from "@tanstack/react-query";
 import { ReviewState } from "../types/Review";
 import { ReviewCard } from "./ReviewCard";
 

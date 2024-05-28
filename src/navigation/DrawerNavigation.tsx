@@ -18,6 +18,7 @@ import { DrawerNavigatorParamList } from "../types";
 import { ConnectionStack } from "./ConnectionStack";
 import { useUser } from "../hooks";
 import { MyProfileScreen } from "../screens/MyProfileScreen";
+import { SettingsStack } from "./SettingsStack";
 
 const Drawer = createDrawerNavigator<DrawerNavigatorParamList>();
 
@@ -157,7 +158,7 @@ export const DrawerNavigator = () => {
       />
       <Drawer.Screen
         name="Settings"
-        component={BottomNavigator}
+        component={SettingsStack}
         options={{
           drawerIcon: () => <Icon name="settings" size={20} color="gray38" />,
         }}

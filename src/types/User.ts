@@ -17,3 +17,8 @@ export type UserWithCounts = User & {
   ratingsCount: number;
   joinedAt: Date;
 };
+
+export type UserSettings = {
+  reviewsVisible: boolean;
+  anonymous: boolean;
+};
