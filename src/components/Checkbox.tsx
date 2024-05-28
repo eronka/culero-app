@@ -15,6 +15,7 @@ export type CheckboxProps = {
   onPress?: () => void;
   checkMarkSize?: number;
   disabled?: boolean;
+  style?: ViewProps["style"];
 };
 
 export const CheckBox = ({
@@ -27,6 +28,7 @@ export const CheckBox = ({
   onPress,
   disabled,
   className,
+  style,
 }: CheckboxProps) => {
   return (
     <View className={twMerge("flex-row", className)}>
@@ -44,6 +46,7 @@ export const CheckBox = ({
             alignItems: "center",
           },
           disabled ? { opacity: 0.5 } : { opacity: 1 },
+          style,
         ]}
       >
         {value && <Icon name="checkmark" color={color} size={checkMarkSize} />}

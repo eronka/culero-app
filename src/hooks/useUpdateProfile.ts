@@ -7,9 +7,8 @@ export function useUpdateProfile() {
 
   return useMutation<User, Error, UpdateProfileData, unknown>({
     mutationFn: (data) => updateProfileData(data),
-    mutationKey: ["user-data"],
+    mutationKey: ["user"],
     onSuccess: (result) => {
-      console.log("result", result);
       queryClient.setQueryData(["user"], result);
     },
   });

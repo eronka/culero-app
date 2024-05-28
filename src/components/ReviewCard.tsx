@@ -59,25 +59,27 @@ export const ReviewCard = ({ className, review }: RatingCardProps) => {
               <StyledStarRating readonly startingValue={overallRating} />
             </View>
           </View>
-          <View className="flex-row items-center">
-            <FavouriteButton
-              isFav={review.isFavorite}
-              onPress={() => {
-                if (!review.isFavorite) {
-                  likeReviewMutation.mutate({
-                    reviewId: review.id,
-                    postedToId: review.postedToId,
-                  });
-                } else {
-                  unlikeReviewMutation.mutate({
-                    reviewId: review.id,
-                    postedToId: review.postedToId,
-                  });
-                }
-              }}
-            />
-            <IconButton iconProps={{ name: "message" }} className="ml-4" />
-          </View>
+          {!review.isOwnReview && (
+            <View className="flex-row items-center">
+              <FavouriteButton
+                isFav={review.isFavorite}
+                onPress={() => {
+                  if (!review.isFavorite) {
+                    likeReviewMutation.mutate({
+                      reviewId: review.id,
+                      postedToId: review.postedToId,
+                    });
+                  } else {
+                    unlikeReviewMutation.mutate({
+                      reviewId: review.id,
+                      postedToId: review.postedToId,
+                    });
+                  }
+                }}
+              />
+              <IconButton iconProps={{ name: "message" }} className="ml-4" />
+            </View>
+          )}
         </View>
       }
       bodyComponent={

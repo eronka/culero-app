@@ -57,6 +57,12 @@ export function useSendReview() {
       queryClient.invalidateQueries({
         queryKey: ["rating-avg", variables.ratedUserId],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["given-reviews"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["reviews-posted"],
+      });
     },
   });
 }
