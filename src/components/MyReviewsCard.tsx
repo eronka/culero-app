@@ -16,6 +16,7 @@ export const MyReviewsCard = ({ className }: MyReviewsCardProps) => {
   const user = useUser()!;
   const rating = useUserRatings(user.id);
   const { isPhone } = useScreenInfo();
+  console.log("s");
 
   return (
     <Card

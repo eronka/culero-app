@@ -41,9 +41,18 @@ importers:
       Base64:
         specifier: ^1.3.0
         version: 1.3.0
+      date-fns:
+        specifier: ^3.6.0
+        version: 3.6.0
       expo:
         specifier: ~50.0.14
         version: 50.0.17(@babel/core@7.24.5)(@react-native/babel-preset@0.74.81(@babel/core@7.24.5)(@babel/preset-env@7.24.5(@babel/core@7.24.5)))
+      expo-constants:
+        specifier: ~15.4.6
+        version: 15.4.6(expo@50.0.17(@babel/core@7.24.5)(@react-native/babel-preset@0.74.81(@babel/core@7.24.5)(@babel/preset-env@7.24.5(@babel/core@7.24.5))))
+      expo-device:
+        specifier: ~5.9.4
+        version: 5.9.4(expo@50.0.17(@babel/core@7.24.5)(@react-native/babel-preset@0.74.81(@babel/core@7.24.5)(@babel/preset-env@7.24.5(@babel/core@7.24.5))))
       expo-font:
         specifier: ~11.10.3
         version: 11.10.3(expo@50.0.17(@babel/core@7.24.5)(@react-native/babel-preset@0.74.81(@babel/core@7.24.5)(@babel/preset-env@7.24.5(@babel/core@7.24.5))))
@@ -53,6 +62,9 @@ importers:
       expo-linking:
         specifier: ^6.2.2
         version: 6.2.2(expo@50.0.17(@babel/core@7.24.5)(@react-native/babel-preset@0.74.81(@babel/core@7.24.5)(@babel/preset-env@7.24.5(@babel/core@7.24.5))))
+      expo-notifications:
+        specifier: ~0.27.7
+        version: 0.27.7(expo@50.0.17(@babel/core@7.24.5)(@react-native/babel-preset@0.74.81(@babel/core@7.24.5)(@babel/preset-env@7.24.5(@babel/core@7.24.5))))
       expo-splash-screen:
         specifier: ^0.26.4
         version: 0.26.4(expo-modules-autolinking@1.10.3)(expo@50.0.17(@babel/core@7.24.5)(@react-native/babel-preset@0.74.81(@babel/core@7.24.5)(@babel/preset-env@7.24.5(@babel/core@7.24.5))))
@@ -1045,6 +1057,9 @@ packages:
   '@humanwhocodes/object-schema@2.0.3':
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
 
+  '@ide/backoff@1.0.0':
+    resolution: {integrity: sha512-F0YfUDjvT+Mtt/R4xdl2X0EYCHMMiJqNLdxHD++jDT5ydEFIyqbCHh51Qx2E211dgZprPKhV7sHmnXKpLuvc5g==}
+
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
     engines: {node: '>=12'}
@@ -1533,6 +1548,9 @@ packages:
   asap@2.0.6:
     resolution: {integrity: sha512-BSHWgDSAiKs50o2Re8ppvp3seVHXSRM44cdSsT9FfNEUUZLOGWVCsiWaRPWM1Znn+mqZ1OfVZ3z3DWEzSp7hRA==}
 
+  assert@2.1.0:
+    resolution: {integrity: sha512-eLHpSK/Y4nhMJ07gDaAzoX/XAKS8PSaojml3M0DM4JpV1LAi5JOJ/p6H/XWrl8L+DzVEvVCW1z3vWAaB9oTsQw==}
+
   ast-types@0.15.2:
     resolution: {integrity: sha512-c27loCv9QkZinsa5ProX751khO9DJl/AcB5c2KNtA6NRvHKS0PgLfcftz72KVq504vB0Gku5s2kUZzDBvQWvHg==}
     engines: {node: '>=4'}
@@ -1597,6 +1615,9 @@ packages:
     resolution: {integrity: sha512-9ywCsCvo1ojrw0b+XYk7aFvTH6D9064t0RIL1rtMf3nsa02Xw41MS7sZw216Im35xj/UY0PDBQsa1brUDDF1Ow==}
     peerDependencies:
       '@babel/core': ^7.0.0
+
+  badgin@1.2.3:
+    resolution: {integrity: sha512-NQGA7LcfCpSzIbGRbkgjgdWkjy7HI+Th5VLxTJfW5EeaAf3fnS+xWQaQOCYiny+q6QSvxqoSO04vCx+4u++EJw==}
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -1925,6 +1946,9 @@ packages:
     resolution: {integrity: sha512-t/Ygsytq+R995EJ5PZlD4Cu56sWa8InXySaViRzw9apusqsOO2bQP+SbYzAhR0pFKoB+43lYy8rWban9JSuXnA==}
     engines: {node: '>= 0.4'}
 
+  date-fns@3.6.0:
+    resolution: {integrity: sha512-fRHTG8g/Gif+kSh50gaGEdToemgfj74aRX3swtiouboip5JDLAyDE9F11nHMIcvOaXeOC6D7SpNhi7uFyB7Uww==}
+
   dayjs@1.11.11:
     resolution: {integrity: sha512-okzr3f11N6WuqYtZSvm+F776mB41wRZMhKP+hc34YdW+KmtYYK9iqvHSwo2k9FEH3fhGXvOPV6yz2IcSrfRUDg==}
 
@@ -2206,11 +2230,21 @@ packages:
     resolution: {integrity: sha512-8uSpZZocAZRBAPIEINJj3Lo9HyGitllczc27Eh5YYojjMFMn8yHMDMaUHE2Jqfq05D/wucwI4JGURyXt1vchyg==}
     engines: {node: '>=10'}
 
+  expo-application@5.8.4:
+    resolution: {integrity: sha512-mH0gSlFzMuiT20TkZnBppzUtdF6TFHwcaTRnvkSZanN9iTOeEEfQQ60hHT4lBizHjFWRs/QYZVtXGvkQ/cyMpg==}
+    peerDependencies:
+      expo: '*'
+
   expo-asset@9.0.2:
     resolution: {integrity: sha512-PzYKME1MgUOoUvwtdzhAyXkjXOXGiSYqGKG/MsXwWr0Ef5wlBaBm2DCO9V6KYbng5tBPFu6hTjoRNil1tBOSow==}
 
   expo-constants@15.4.6:
     resolution: {integrity: sha512-vizE69dww2Vl0PTWWvDmK0Jo2/J+WzdcMZlA05YEnEYofQuhKxTVsiuipf79mSOmFavt4UQYC1UnzptzKyfmiQ==}
+    peerDependencies:
+      expo: '*'
+
+  expo-device@5.9.4:
+    resolution: {integrity: sha512-nleq3GghLWWJrj4YH8HiCumnTF/gy4zRd3jedCkO8lMKQg6R1yn3v0ch8NtgPDci749FkNzOtXx/vmFImQalwg==}
     peerDependencies:
       expo: '*'
 
@@ -2259,6 +2293,11 @@ packages:
 
   expo-modules-core@1.11.13:
     resolution: {integrity: sha512-2H5qrGUvmLzmJNPDOnovH1Pfk5H/S/V0BifBmOQyDc9aUh9LaDwkqnChZGIXv8ZHDW8JRlUW0QqyWxTggkbw1A==}
+
+  expo-notifications@0.27.7:
+    resolution: {integrity: sha512-qcetBEQlmV3VHvsJrpbQYDWpxXxFLs9HgUCb75YlGNzLrLG9puCE5lBIVskgErrG5ph8LaJs3JmazuwgW4qpQA==}
+    peerDependencies:
+      expo: '*'
 
   expo-splash-screen@0.26.4:
     resolution: {integrity: sha512-2DwofTQ0FFQCsvDysm/msENsbyNsJiAJwK3qK/oXeizECAPqD7bK19J4z9kuEbr7ORPX9MLnTQYKl6kmX3keUg==}
@@ -2481,12 +2520,15 @@ packages:
 
   glob@6.0.4:
     resolution: {integrity: sha512-MKZeRNyYZAVVVG1oZeLaWie1uweH40m9AZwIwxyPbTSX4hHrVYSzLg0Ro5Z5R7XKkIX+Cc6oD1rqeDJnwsB8/A==}
+    deprecated: Glob versions prior to v9 are no longer supported
 
   glob@7.1.6:
     resolution: {integrity: sha512-LwaxwyZ72Lk7vZINtNNrywX0ZuLyStrdDtabefZKAY5ZGJhVtgdznluResxNmPitE0SAO+O26sWTHeKSI2wMBA==}
+    deprecated: Glob versions prior to v9 are no longer supported
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
+    deprecated: Glob versions prior to v9 are no longer supported
 
   globals@11.12.0:
     resolution: {integrity: sha512-WOBp/EEGUiIsJSp7wcv/y6MO+lV9UoncWqxuFfm8eBwzWNgyfBd6Gz+IeKQ9jCmyhoH99g15M3T+QaVHFjizVA==}
@@ -2630,6 +2672,7 @@ packages:
 
   inflight@1.0.6:
     resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
+    deprecated: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
 
   inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
@@ -2658,6 +2701,10 @@ packages:
   ipaddr.js@1.9.1:
     resolution: {integrity: sha512-0KI/607xoxSToH7GjN1FfSbLoU0+btTicjsQSWQlh/hZykN8KpmMf7uYwPW3R+akZ6R/w18ZlXSHBYXiYUPO3g==}
     engines: {node: '>= 0.10'}
+
+  is-arguments@1.1.1:
+    resolution: {integrity: sha512-8Q7EARjzEnKpt/PCD7e1cgUS0a6X8u5tdSiMqXhojOdoV9TsMsiO+9VLC5vAmO8N7/GmXn7yjR8qnA6bVAEzfA==}
+    engines: {node: '>= 0.4'}
 
   is-array-buffer@3.0.4:
     resolution: {integrity: sha512-wcjaerHw0ydZwfhiKbXJWLDY8A7yV7KhjQOpb83hGgGfId/aQa4TOvwyzn2PuswW2gPCYEL/nEAiSVpdOj1lXw==}
@@ -2723,6 +2770,10 @@ packages:
     resolution: {integrity: sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg==}
     engines: {node: '>=8'}
 
+  is-generator-function@1.0.10:
+    resolution: {integrity: sha512-jsEjy9l3yiXEQ+PsXdmBwEPcOxaXWLspKdplFUVI9vq1iZgIekeC0L167qeu86czQaxed3q/Uzuw0swL0irL8A==}
+    engines: {node: '>= 0.4'}
+
   is-glob@2.0.1:
     resolution: {integrity: sha512-a1dBeB19NXsf/E0+FHqkagizel/LQw2DjSQpvQrj3zT+jYPpaUCryPnrQajXKFLCMuf4I6FhRpaGtw4lPrG6Eg==}
     engines: {node: '>=0.10.0'}
@@ -2738,6 +2789,10 @@ packages:
   is-invalid-path@0.1.0:
     resolution: {integrity: sha512-aZMG0T3F34mTg4eTdszcGXx54oiZ4NtHSft3hWNJMGJXUUqdIj3cOZuHcU0nCWWcY3jd7yRe/3AEm3vSNTpBGQ==}
     engines: {node: '>=0.10.0'}
+
+  is-nan@1.3.2:
+    resolution: {integrity: sha512-E+zBKpQ2t6MEo1VsonYmluk9NxGrbzpeeLC2xIViuO2EjU2xsXsBPwTr3Ykv9l08UYEVEdWeRZNouaZqF6RN0w==}
+    engines: {node: '>= 0.4'}
 
   is-negative-zero@2.0.3:
     resolution: {integrity: sha512-5KoIu2Ngpyek75jXodFvnafB6DJgr3u8uuK0LEZJjrU19DrMD3EVERaR8sjz8CCGgpZvxPl9SuE1GMVPFHx1mw==}
@@ -3447,6 +3502,10 @@ packages:
   object-inspect@1.13.1:
     resolution: {integrity: sha512-5qoj1RUiKOMsCCNLV1CBiPYE10sziTsnmNxkAI/rZhiD63CF7IqdFGC/XzjWjpSgLf0LxXX3bDFIh0E18f6UhQ==}
 
+  object-is@1.1.6:
+    resolution: {integrity: sha512-F8cZ+KfGlSGi09lJT7/Nd6KJZ9ygtvYC0/UYYLI9nmQKLMnydpB9yvbv9K1uSkEu7FU9vYPmVwLg328tX+ot3Q==}
+    engines: {node: '>= 0.4'}
+
   object-keys@1.1.1:
     resolution: {integrity: sha512-NuAESUOUMrlIXOfHKzD6bpPu3tYt3xvjNdRIQ+FeT0lNb4K8WR70CaDxhuNguS2XG+GjkyMwOzsN5ZktImfhLA==}
     engines: {node: '>= 0.4'}
@@ -3989,18 +4048,22 @@ packages:
 
   rimraf@2.4.5:
     resolution: {integrity: sha512-J5xnxTyqaiw06JjMftq7L9ouA448dw/E7dKghkP9WpKNuwmARNNg+Gk8/u5ryb9N/Yo2+z3MCwuqFK/+qPOPfQ==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
   rimraf@2.6.3:
     resolution: {integrity: sha512-mwqeW5XsA2qAejG46gYdENaxXjx9onRNCfn7L0duuP4hCuTIi/QO7PDK07KJfp1d+izWPrzEJDcSqBa0OZQriA==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
   rimraf@2.7.1:
     resolution: {integrity: sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
   rimraf@3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
   run-parallel@1.2.0:
@@ -4474,6 +4537,9 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
+  ua-parser-js@0.7.37:
+    resolution: {integrity: sha512-xV8kqRKM+jhMvcHWUKthV9fNebIzrNy//2O9ZwWcfiBFR5f25XVZPLlEajk/sf3Ra15V92isyQqnIEXRDaZWEA==}
+
   ua-parser-js@1.0.37:
     resolution: {integrity: sha512-bhTyI94tZofjo+Dn8SN6Zv8nBDvyXTymAdM3LDI/0IboIUwTu1rEhW7v2TfiVsoYWgkQ4kOVqnI8APUFbIQIFQ==}
 
@@ -4548,6 +4614,9 @@ packages:
 
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
+
+  util@0.12.5:
+    resolution: {integrity: sha512-kZf/K6hEIrWHI6XqOFUiiMa+79wE/D8Q+NCNAWclkyg3b4d2k7s0QGepNjiABc+aR3N1PAyHL7p6UcLY6LmrnA==}
 
   utils-merge@1.0.1:
     resolution: {integrity: sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==}
@@ -6057,6 +6126,8 @@ snapshots:
 
   '@humanwhocodes/object-schema@2.0.3': {}
 
+  '@ide/backoff@1.0.0': {}
+
   '@isaacs/cliui@8.0.2':
     dependencies:
       string-width: 5.1.2
@@ -6825,6 +6896,14 @@ snapshots:
 
   asap@2.0.6: {}
 
+  assert@2.1.0:
+    dependencies:
+      call-bind: 1.0.7
+      is-nan: 1.3.2
+      object-is: 1.1.6
+      object.assign: 4.1.5
+      util: 0.12.5
+
   ast-types@0.15.2:
     dependencies:
       tslib: 2.6.2
@@ -6935,6 +7014,8 @@ snapshots:
       '@babel/plugin-transform-spread': 7.24.1(@babel/core@7.24.5)
       '@babel/plugin-transform-template-literals': 7.24.1(@babel/core@7.24.5)
       babel-plugin-syntax-trailing-function-commas: 7.0.0-beta.0
+
+  badgin@1.2.3: {}
 
   balanced-match@1.0.2: {}
 
@@ -7305,6 +7386,8 @@ snapshots:
       es-errors: 1.3.0
       is-data-view: 1.0.1
 
+  date-fns@3.6.0: {}
+
   dayjs@1.11.11: {}
 
   debug@2.6.9:
@@ -7633,6 +7716,10 @@ snapshots:
       signal-exit: 3.0.7
       strip-final-newline: 2.0.0
 
+  expo-application@5.8.4(expo@50.0.17(@babel/core@7.24.5)(@react-native/babel-preset@0.74.81(@babel/core@7.24.5)(@babel/preset-env@7.24.5(@babel/core@7.24.5)))):
+    dependencies:
+      expo: 50.0.17(@babel/core@7.24.5)(@react-native/babel-preset@0.74.81(@babel/core@7.24.5)(@babel/preset-env@7.24.5(@babel/core@7.24.5)))
+
   expo-asset@9.0.2(expo@50.0.17(@babel/core@7.24.5)(@react-native/babel-preset@0.74.81(@babel/core@7.24.5)(@babel/preset-env@7.24.5(@babel/core@7.24.5)))):
     dependencies:
       '@react-native/assets-registry': 0.73.1
@@ -7651,6 +7738,11 @@ snapshots:
       expo: 50.0.17(@babel/core@7.24.5)(@react-native/babel-preset@0.74.81(@babel/core@7.24.5)(@babel/preset-env@7.24.5(@babel/core@7.24.5)))
     transitivePeerDependencies:
       - supports-color
+
+  expo-device@5.9.4(expo@50.0.17(@babel/core@7.24.5)(@react-native/babel-preset@0.74.81(@babel/core@7.24.5)(@babel/preset-env@7.24.5(@babel/core@7.24.5)))):
+    dependencies:
+      expo: 50.0.17(@babel/core@7.24.5)(@react-native/babel-preset@0.74.81(@babel/core@7.24.5)(@babel/preset-env@7.24.5(@babel/core@7.24.5)))
+      ua-parser-js: 0.7.37
 
   expo-eas-client@0.11.2: {}
 
@@ -7708,6 +7800,21 @@ snapshots:
   expo-modules-core@1.11.13:
     dependencies:
       invariant: 2.2.4
+
+  expo-notifications@0.27.7(expo@50.0.17(@babel/core@7.24.5)(@react-native/babel-preset@0.74.81(@babel/core@7.24.5)(@babel/preset-env@7.24.5(@babel/core@7.24.5)))):
+    dependencies:
+      '@expo/image-utils': 0.4.2
+      '@ide/backoff': 1.0.0
+      abort-controller: 3.0.0
+      assert: 2.1.0
+      badgin: 1.2.3
+      expo: 50.0.17(@babel/core@7.24.5)(@react-native/babel-preset@0.74.81(@babel/core@7.24.5)(@babel/preset-env@7.24.5(@babel/core@7.24.5)))
+      expo-application: 5.8.4(expo@50.0.17(@babel/core@7.24.5)(@react-native/babel-preset@0.74.81(@babel/core@7.24.5)(@babel/preset-env@7.24.5(@babel/core@7.24.5))))
+      expo-constants: 15.4.6(expo@50.0.17(@babel/core@7.24.5)(@react-native/babel-preset@0.74.81(@babel/core@7.24.5)(@babel/preset-env@7.24.5(@babel/core@7.24.5))))
+      fs-extra: 9.1.0
+    transitivePeerDependencies:
+      - encoding
+      - supports-color
 
   expo-splash-screen@0.26.4(expo-modules-autolinking@1.10.3)(expo@50.0.17(@babel/core@7.24.5)(@react-native/babel-preset@0.74.81(@babel/core@7.24.5)(@babel/preset-env@7.24.5(@babel/core@7.24.5)))):
     dependencies:
@@ -8185,6 +8292,11 @@ snapshots:
 
   ipaddr.js@1.9.1: {}
 
+  is-arguments@1.1.1:
+    dependencies:
+      call-bind: 1.0.7
+      has-tostringtag: 1.0.2
+
   is-array-buffer@3.0.4:
     dependencies:
       call-bind: 1.0.7
@@ -8235,6 +8347,10 @@ snapshots:
 
   is-fullwidth-code-point@3.0.0: {}
 
+  is-generator-function@1.0.10:
+    dependencies:
+      has-tostringtag: 1.0.2
+
   is-glob@2.0.1:
     dependencies:
       is-extglob: 1.0.0
@@ -8248,6 +8364,11 @@ snapshots:
   is-invalid-path@0.1.0:
     dependencies:
       is-glob: 2.0.1
+
+  is-nan@1.3.2:
+    dependencies:
+      call-bind: 1.0.7
+      define-properties: 1.2.1
 
   is-negative-zero@2.0.3: {}
 
@@ -9006,6 +9127,11 @@ snapshots:
   object-hash@3.0.0: {}
 
   object-inspect@1.13.1: {}
+
+  object-is@1.1.6:
+    dependencies:
+      call-bind: 1.0.7
+      define-properties: 1.2.1
 
   object-keys@1.1.1: {}
 
@@ -10115,6 +10241,8 @@ snapshots:
 
   typescript@5.4.5: {}
 
+  ua-parser-js@0.7.37: {}
+
   ua-parser-js@1.0.37: {}
 
   unbox-primitive@1.0.2:
@@ -10178,6 +10306,14 @@ snapshots:
       react: 18.2.0
 
   util-deprecate@1.0.2: {}
+
+  util@0.12.5:
+    dependencies:
+      inherits: 2.0.4
+      is-arguments: 1.1.1
+      is-generator-function: 1.0.10
+      is-typed-array: 1.1.13
+      which-typed-array: 1.1.15
 
   utils-merge@1.0.1: {}
 

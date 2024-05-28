@@ -28,7 +28,15 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-font"
+      "expo-font",
+      [
+        "expo-notifications",
+        {
+          "icon": "./local/assets/adaptive-icon.png",
+          "color": "#ffffff"
+          
+        }
+      ]
     ],
     "extra": {
       "eas": {

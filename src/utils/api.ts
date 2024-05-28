@@ -1,4 +1,5 @@
 import { Connection, User, UserWithCounts, UserWithToken } from "../types";
+import { DbNotification } from "../types/Notification";
 import { Rating } from "../types/Rating";
 import { Review } from "../types/Review";
 import storage from "./storage";
@@ -295,4 +296,15 @@ export async function updateReview(
     method: "PUT",
     body: reviewData,
   });
+}
+
+export async function addPushToken(token: string) {
+  return authorizedFetch(`${baseUrl}/notifications/token`, {
+    method: "POST",
+    body: { token },
+  });
+}
+
+export async function getNotifications(): Promise<DbNotification[]> {
+  return authorizedFetch(`${baseUrl}/notifications`, { method: "GET" });
 }
