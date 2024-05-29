@@ -99,12 +99,13 @@ export const DrawerNavigator = () => {
 
   return (
     <Drawer.Navigator
+      backBehavior="history"
       drawerContent={(props) => <CustomDrawerContent {...props} />}
       screenOptions={{
         headerShown: isPhone,
         headerTitle: "",
         drawerType: isPhone ? "front" : "permanent",
-        drawerActiveTintColor: "#F5F6F8",
+        drawerActiveTintColor: "black",
         drawerLabelStyle: {
           fontFamily: "Inter_500Medium",
           fontSize: 18,
@@ -138,6 +139,7 @@ export const DrawerNavigator = () => {
         name="Connections"
         component={ConnectionStack}
         options={{
+          unmountOnBlur: true,
           drawerIcon: () => <Icon name="user-group" size={20} color="gray38" />,
         }}
       />

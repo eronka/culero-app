@@ -4,13 +4,28 @@ import {
   SearchConnectionsScreen,
 } from "../screens/ConnectionScreens";
 import { ConnectionStackParamList } from "../types";
-import { useScreenInfo } from "../hooks/useScreenInfo";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { useCallback } from "react";
 
 const Stack = createNativeStackNavigator<ConnectionStackParamList>();
 
+function useResetScreenOnBlur() {
+  const navigation = useNavigation();
+  useFocusEffect(
+    useCallback(() => {
+      return () =>
+        navigation.setParams({ screen: undefined, params: undefined });
+    }, [navigation])
+  );
+}
+
 export const ConnectionStack = () => {
+  useResetScreenOnBlur();
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator
+      screenOptions={{ headerShown: false }}
+      initialRouteName="SearchConnection"
+    >
       <Stack.Screen
         name="SearchConnection"
         component={SearchConnectionsScreen}
