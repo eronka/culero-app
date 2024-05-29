@@ -58,7 +58,8 @@ export type IconName =
   | "delete"
   | "back"
   | "right-arrow"
-  | "user-not-found";
+  | "user-not-found"
+  | "grid";
 
 export type IconProps = {
   name: IconName;
@@ -223,6 +224,13 @@ export const Icon = ({ name, color, size, className }: IconProps) => {
         />
       )}
       {name === "user-not-found" && <UserNotFoundIcon />}
+      {name === "grid" && (
+        <Ionicons
+          name="grid"
+          size={size}
+          color={color ? colors[color] : colors["black"]}
+        />
+      )}
     </View>
   );
 };
