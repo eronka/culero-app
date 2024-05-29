@@ -2,7 +2,11 @@ import { Alert, Pressable, View, ViewProps } from "react-native";
 import { twMerge } from "tailwind-merge";
 import { Card } from "./Card";
 import { Avatar } from "./Avatar";
-import { OverallRateCard } from "./OverallRateCard";
+import {
+  OverallBarsRating,
+  OverallRateCard,
+  OverallScore,
+} from "./OverallRateCard";
 import { StyledText } from "./StyledText";
 import { Icon } from "../icons";
 import { StyledPressable } from "./StyledPressable";
@@ -98,9 +102,9 @@ const EditModal = ({ visible, setVisibility, user }: EditModalProps) => {
     <StyledModal
       isVisible={visible}
       setVisibility={onModalClose}
-      containerClassName="w-1/2"
+      containerClassName="w-full px-2 md:w-1/2"
     >
-      <View className="px-10">
+      <View className="md:px-10">
         <StyledText weight={600} xl2>
           Edit profile
         </StyledText>
@@ -153,12 +157,13 @@ export const ProfileCard = ({ user, className }: ProfileCardProps) => {
   const [isModalOpen, openModal] = useState(false);
   const avgs = useUserRatings(user.id);
   const connectionData = useConnection(user.id);
+  const { isPhone } = useScreenInfo();
 
   return (
     <>
       <EditModal visible={isModalOpen} setVisibility={openModal} user={user} />
       <Card
-        className={twMerge("bg-transparent", className)}
+        className={twMerge("bg-transparent md:p-4 p-0 px-2", className)}
         bodyComponent={
           <View>
             <View className="flex-row items-center">
@@ -167,17 +172,37 @@ export const ProfileCard = ({ user, className }: ProfileCardProps) => {
                 hasBadge={false}
                 size={151}
               />
-              {avgs.isFetched && avgs.data && (
-                <OverallRateCard
-                  className="w-1/2 bg-transparent"
-                  barsContainerClassName="ml-8"
-                  professionalismRating={avgs.data.professionalism}
-                  reliabilityRating={avgs.data.reliability}
-                  communicationRating={avgs.data.communication}
-                />
-              )}
+              {avgs.isFetched &&
+                avgs.data &&
+                (!isPhone ? (
+                  <>
+                    <OverallRateCard
+                      className="w-1/2 bg-transparent hidden md:flex"
+                      barsContainerClassName="ml-8"
+                      professionalismRating={avgs.data.professionalism}
+                      reliabilityRating={avgs.data.reliability}
+                      communicationRating={avgs.data.communication}
+                    />
+                  </>
+                ) : (
+                  <OverallScore
+                    className="ml-2"
+                    professionalismRating={avgs.data.professionalism}
+                    reliabilityRating={avgs.data.reliability}
+                    communicationRating={avgs.data.communication}
+                    big={true}
+                  />
+                ))}
             </View>
-            <View className="flex-row justify-between">
+            {avgs.isFetched && avgs.data && (
+              <OverallBarsRating
+                className="mb-4 md:hidden"
+                professionalismRating={avgs.data.professionalism}
+                reliabilityRating={avgs.data.reliability}
+                communicationRating={avgs.data.communication}
+              />
+            )}
+            <View className="md:flex-row justify-between">
               <View className="space-y-2">
                 {user.name && (
                   <StyledText weight={600} xl4 color="gray38">
