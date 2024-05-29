@@ -25,12 +25,13 @@ export const RadioButtons = ({
       {options.map((option) => (
         <Pressable
           onPress={() => onSelect(option)}
-          className="flex-row items-center"
+          className="flex-row items-center md:py-0 py-1"
         >
           <CheckBox
             value={option.selected}
             style={{ borderRadius: 99 }}
             checkMarkSize={18}
+            onPress={() => onSelect(option)}
           />
           <StyledText weight={600} lg className="ml-4">
             {option.label}

@@ -13,6 +13,7 @@ export function useUpdateUserSettings() {
         queryKey: ["user-settings"],
       });
 
+      console.log("MUTATE WITH ", data);
       queryClient.setQueryData(["user-settings"], (old: any) => ({
         ...old,
         ...data,
