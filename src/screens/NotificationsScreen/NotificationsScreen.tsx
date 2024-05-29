@@ -43,56 +43,70 @@ export const NotificationsScreen = () => {
               className="p-8"
               bodyComponent={
                 <View>
-                  <View className="flex-wrap flex-row space-x-4 mb-10 ">
-                    <StyledPressable
-                      color="white"
-                      className="h-8 w-32 rounded-sm"
-                      textVariant={{ color: "primary", xs: true, weight: 500 }}
-                      style={{
-                        borderWidth: 1,
-                        borderColor:
-                          selectedNotifications == "All"
-                            ? colors.primary
-                            : colors["light-primary"],
-                      }}
-                      onPress={() => setSelectedNotifications("All")}
-                    >
-                      All
-                    </StyledPressable>
-                    <StyledPressable
-                      color="white"
-                      className="h-8 w-32 rounded-sm"
-                      textVariant={{ color: "primary", xs: true, weight: 500 }}
-                      style={{
-                        borderWidth: 1,
-                        borderColor:
-                          selectedNotifications == NotificationType.REVIEW
-                            ? colors.primary
-                            : colors["light-primary"],
-                      }}
-                      onPress={() =>
-                        setSelectedNotifications(NotificationType.REVIEW)
-                      }
-                    >
-                      New reviews
-                    </StyledPressable>
-                    <StyledPressable
-                      color="white"
-                      className="h-8 w-38 rounded-sm"
-                      textVariant={{ color: "primary", xs: true, weight: 500 }}
-                      style={{
-                        borderWidth: 1,
-                        borderColor:
-                          selectedNotifications == NotificationType.CONNECTION
-                            ? colors.primary
-                            : colors["light-primary"],
-                      }}
-                      onPress={() =>
-                        setSelectedNotifications(NotificationType.CONNECTION)
-                      }
-                    >
-                      New connections
-                    </StyledPressable>
+                  <View className="flex-row">
+                    <View className="flex flex-row mb-10">
+                      <StyledPressable
+                        color="white"
+                        className="h-8 w-38 md:w-32 rounded-sm"
+                        textVariant={{
+                          color: "primary",
+                          xs: true,
+                          weight: 500,
+                        }}
+                        style={{
+                          borderWidth: 1,
+                          borderColor:
+                            selectedNotifications == "All"
+                              ? colors.primary
+                              : colors["light-primary"],
+                        }}
+                        onPress={() => setSelectedNotifications("All")}
+                      >
+                        All
+                      </StyledPressable>
+                      <StyledPressable
+                        color="white"
+                        className="h-8 w-38 md:w-32 rounded-sm mx-4"
+                        textVariant={{
+                          color: "primary",
+                          xs: true,
+                          weight: 500,
+                        }}
+                        style={{
+                          borderWidth: 1,
+                          borderColor:
+                            selectedNotifications == NotificationType.REVIEW
+                              ? colors.primary
+                              : colors["light-primary"],
+                        }}
+                        onPress={() =>
+                          setSelectedNotifications(NotificationType.REVIEW)
+                        }
+                      >
+                        New reviews
+                      </StyledPressable>
+                      <StyledPressable
+                        color="white"
+                        className="h-8 w-38 rounded-sm"
+                        textVariant={{
+                          color: "primary",
+                          xs: true,
+                          weight: 500,
+                        }}
+                        style={{
+                          borderWidth: 1,
+                          borderColor:
+                            selectedNotifications == NotificationType.CONNECTION
+                              ? colors.primary
+                              : colors["light-primary"],
+                        }}
+                        onPress={() =>
+                          setSelectedNotifications(NotificationType.CONNECTION)
+                        }
+                      >
+                        New connections
+                      </StyledPressable>
+                    </View>
                   </View>
                   {!notifications.isFetched && (
                     <ActivityIndicator size="large" className="self-center" />
