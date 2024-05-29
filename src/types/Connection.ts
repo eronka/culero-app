@@ -21,3 +21,8 @@ export type Connection = {
 
   authType: AuthType;
 };
+
+export type ConnectionPreview = Pick<
+  Connection,
+  "name" | "headline" | "profilePictureUrl" | "id"
+>;

@@ -2,6 +2,7 @@ import { DbNotification } from "../types/Notification";
 
 import {
   Connection,
+  ConnectionPreview,
   User,
   UserSettings,
   UserWithCounts,
@@ -157,7 +158,9 @@ export async function verifyEmail(
   return responseData;
 }
 
-export async function getSearchUserResult(query: string) {
+export async function getSearchUserResult(
+  query: string
+): Promise<ConnectionPreview[]> {
   return authorizedFetch(
     `${baseUrl}/connections/search/${encodeURIComponent(query)}`,
     {
