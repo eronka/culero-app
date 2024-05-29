@@ -1,4 +1,4 @@
-import { Alert, View, ViewProps } from "react-native";
+import { Alert, Pressable, View, ViewProps } from "react-native";
 import { Card } from "./Card";
 import { StyledText } from "./StyledText";
 import { Avatar } from "./Avatar";
@@ -12,6 +12,7 @@ import { Rating } from "../types/Rating";
 import { useAvgRating } from "../hooks/useAvgRating";
 import { useLikeReview } from "../hooks/useLikeReview";
 import { useUnlikeReview } from "../hooks/useUnlikeReview";
+import { useNavToConnection } from "../hooks/useNavToConnection";
 
 export type SmallReviewCardProps = {
   className?: ViewProps["className"];
@@ -25,6 +26,7 @@ export const SmallReviewCard = ({
   const overallRating = useAvgRating(review);
   const likeReviewMutation = useLikeReview();
   const unlikeReviewMutation = useUnlikeReview();
+  const connectionNav = useNavToConnection();
 
   return (
     <View className="py-6 px-3">
@@ -39,7 +41,15 @@ export const SmallReviewCard = ({
                 Alert.alert("Settings");
               }}
             />
-            <View className="flex justify-center items-center">
+            <Pressable
+              className="flex justify-center items-center"
+              disabled={review.isAnonymous}
+              onPress={() => {
+                if (review.postedBy?.id) {
+                  connectionNav.navigate(review.postedBy.id);
+                }
+              }}
+            >
               <Avatar
                 userImage={review?.postedBy?.profilePictureUrl}
                 hasBadge={!review.isAnonymous}
@@ -50,7 +60,7 @@ export const SmallReviewCard = ({
                 {review.postedBy?.name || "Anonymous"}
               </StyledText>
               <StyledStarRating readonly startingValue={overallRating} />
-            </View>
+            </Pressable>
             <View className="flex-grow mt-4 mb-4">
               <CategoryRating
                 hideBar={true}

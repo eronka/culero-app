@@ -11,21 +11,19 @@ import { getSearchUserResult } from "../../utils/api";
 import { FlatList } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { IconButton } from "../IconButton";
+import { useNavToConnection } from "../../hooks/useNavToConnection";
 
 /** This can be used in the screen components. The reason that this is not
  * added in the navigation header is because on mobile the original header shall be kept.
  */
 
 const UserSearchResult = ({ user }: { user: ConnectionPreview }) => {
-  const navigation = useNavigation();
+  const connectionNav = useNavToConnection();
   return (
     <Pressable
       className="flex-row hover:bg-whiteFA items-center p-2"
       onPress={() => {
-        navigation.navigate("HomeScreen", {
-          screen: "Connections",
-          params: { screen: "Connection", params: { userId: user.id } },
-        });
+        connectionNav.navigate(user.id);
       }}
     >
       <View>
@@ -78,6 +76,7 @@ const SearchUsersBar = () => {
         onChangeText={(v: string) => {
           setSearchQuery(v);
         }}
+        style={{ minWidth: 300 }}
       />
       <View
         className="absolute z-[90] w-full top-12 rounded-lg mt-2"
