@@ -6,6 +6,7 @@ export type User = {
   profilePictureUrl?: string;
   headline?: string;
   name?: string;
+  location?: string;
 };
 
 export type UserWithToken = User & { token: string };

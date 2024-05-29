@@ -1,10 +1,12 @@
-import { Modal, Pressable, View } from "react-native";
+import { Modal, Pressable, View, ViewProps } from "react-native";
 import { IconButton } from "./IconButton";
+import { twMerge } from "tailwind-merge";
 
 export type ModalProps = {
   isVisible: boolean;
   setVisibility: (isVisible: boolean) => void;
-
+  whiteContainerClassName?: ViewProps["className"];
+  containerClassName?: ViewProps["className"];
   children?: React.ReactNode;
 };
 
@@ -12,6 +14,8 @@ export const StyledModal = ({
   isVisible,
   setVisibility,
   children,
+  whiteContainerClassName,
+  containerClassName,
 }: ModalProps) => {
   return (
     <Modal
@@ -24,8 +28,18 @@ export const StyledModal = ({
         className="bg-gray38/80 h-full justify-center"
         onPress={() => setVisibility(false)}
       >
-        <Pressable className="flex self-center cursor-default">
-          <View className="bg-white rounded-lg p-6">
+        <Pressable
+          className={twMerge(
+            "flex self-center cursor-default",
+            containerClassName
+          )}
+        >
+          <View
+            className={twMerge(
+              "bg-white rounded-lg p-6",
+              whiteContainerClassName
+            )}
+          >
             <IconButton
               className="self-end"
               onPress={() => setVisibility(false)}
