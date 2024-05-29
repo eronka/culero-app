@@ -1,3 +1,5 @@
+import { DbNotification } from "../types/Notification";
+
 import {
   Connection,
   User,
@@ -302,6 +304,17 @@ export async function updateReview(
     method: "PUT",
     body: reviewData,
   });
+}
+
+export async function addPushToken(token: string) {
+  return authorizedFetch(`${baseUrl}/notifications/token`, {
+    method: "POST",
+    body: { token },
+  });
+}
+
+export async function getNotifications(): Promise<DbNotification[]> {
+  return authorizedFetch(`${baseUrl}/notifications`, { method: "GET" });
 }
 
 export async function getReviewsPostedByMe(): Promise<Review[]> {

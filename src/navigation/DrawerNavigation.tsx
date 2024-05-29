@@ -17,6 +17,7 @@ import { MyReviewsScreen } from "../screens/MyReviewsScreen/MyReviewsScreen";
 import { DrawerNavigatorParamList } from "../types";
 import { ConnectionStack } from "./ConnectionStack";
 import { useUser } from "../hooks";
+import { NotificationsScreen } from "../screens/NotificationsScreen/NotificationsScreen";
 import { MyProfileScreen } from "../screens/MyProfileScreen";
 import { SettingsStack } from "./SettingsStack";
 
@@ -142,7 +143,7 @@ export const DrawerNavigator = () => {
       />
       <Drawer.Screen
         name="Notifications"
-        component={BottomNavigator}
+        component={NotificationsScreen}
         options={{
           drawerIcon: () => (
             <Icon name="notifications" size={20} color="gray38" />
