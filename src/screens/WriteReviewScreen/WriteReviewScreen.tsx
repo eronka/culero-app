@@ -14,6 +14,7 @@ import { useScreenInfo } from "../../hooks/useScreenInfo";
 import { DrawerHeader } from "../../components/headers/DrawerHeader";
 import { useQueryClient } from "@tanstack/react-query";
 import { AuthType, Connection } from "../../types";
+import { Icon } from "../../icons";
 
 export const WriteReviewScreen = () => {
   const { isPhone } = useScreenInfo();
@@ -108,6 +109,25 @@ export const WriteReviewScreen = () => {
                           ratedUser={searchResult.result}
                         />
                       </>
+                    )}
+                    {!searchResult.result && !searchResult.isLoading && (
+                      <View className="items-center my-4">
+                        <Icon name="user-not-found" />
+                        <StyledText
+                          color="light-primary"
+                          weight={900}
+                          xl6
+                          className="my-6"
+                        >
+                          No result found
+                        </StyledText>
+                        <StyledText color="gray33">
+                          We couldn’t find what you searched for.
+                        </StyledText>
+                        <StyledText color="gray33">
+                          Try searching again
+                        </StyledText>
+                      </View>
                     )}
                   </View>
                 ) : undefined

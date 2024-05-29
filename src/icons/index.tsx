@@ -23,6 +23,7 @@ import { UserGroupIcon } from "./UserGroupIcon";
 import { HomeIcon } from "./HomeIcon";
 import { UserIcon } from "./UserIcon";
 import { UserAvatar } from "./UserAvatar";
+import { UserNotFoundIcon } from "./UserNotFound";
 
 export type IconName =
   | "edit"
@@ -56,7 +57,8 @@ export type IconName =
   | "close"
   | "delete"
   | "back"
-  | "right-arrow";
+  | "right-arrow"
+  | "user-not-found";
 
 export type IconProps = {
   name: IconName;
@@ -220,6 +222,7 @@ export const Icon = ({ name, color, size, className }: IconProps) => {
           color={color ? colors[color] : colors["black"]}
         />
       )}
+      {name === "user-not-found" && <UserNotFoundIcon />}
     </View>
   );
 };
