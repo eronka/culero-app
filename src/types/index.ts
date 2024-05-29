@@ -27,6 +27,7 @@ export type RootStackParamList = {
   AuthNav: NavigatorScreenParams<AuthStackParamList>;
   EmailVerificationSuccess: undefined;
   Onboarding: undefined;
+  Connections: NavigatorScreenParams<ConnectionStackParamList>;
 };
 
 export type AuthStackParamList = {
