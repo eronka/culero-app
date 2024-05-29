@@ -60,12 +60,12 @@ export const MyReviewsCard = ({ className }: MyReviewsCardProps) => {
       }
       hideHeaderDivider
       bodyComponent={
-        <>
+        <View>
           {rating.isLoading && (
             <ActivityIndicator size="small" className="self-center mt-6" />
           )}
           {!rating.isLoading && !rating.data?.professionalism && (
-            <StyledText className="mt-5">You have no reviews yet</StyledText>
+            <StyledText className="mt-5">You have no reviews.</StyledText>
           )}
 
           {!rating.isLoading &&
@@ -93,7 +93,7 @@ export const MyReviewsCard = ({ className }: MyReviewsCardProps) => {
                 />
               </View>
             )}
-        </>
+        </View>
       }
     />
   );

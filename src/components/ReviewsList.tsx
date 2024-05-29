@@ -17,14 +17,12 @@ export const ReviewsList = ({ userId }: { userId: string }) => {
       {!reviews.isFetched && (
         <ActivityIndicator size="large" className="self-center" />
       )}
-      {reviews.data && reviews.isFetched && (
+      {reviews.isFetched && !!reviews.data && !reviews.data.length && (
+        <StyledText className="mt-5">You have no reviews.</StyledText>
+      )}
+      {reviews.data && reviews.isFetched && !!reviews.data.length && (
         <FlatList
           data={reviews.data}
-          ListEmptyComponent={
-            <View className="flex">
-              <StyledText>You have no reviews.</StyledText>
-            </View>
-          }
           // list dosen't scroll on web when overflow is visible
           style={isPhone ? { overflow: "visible" } : {}}
           horizontal={true}

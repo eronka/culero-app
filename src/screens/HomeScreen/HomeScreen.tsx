@@ -21,7 +21,7 @@ const HomeScreen = ({}: {}) => {
               bodyComponent={<ReviewsList userId={user.id} />}
               hideHeaderDivider
               headerComponent={
-                <StyledText xl2 weight={500}>
+                <StyledText xl2 weight={600}>
                   My latest reviews
                 </StyledText>
               }
