@@ -1,7 +1,8 @@
 import { Userpic } from "react-native-userpic";
 import colors from "../../colors";
-import { View } from "react-native";
+import { View, ViewProps } from "react-native";
 import { Icon } from "../icons";
+import { twMerge } from "tailwind-merge";
 const ANONYMOUS_IMAGE = require("../../assets/anonymous.png");
 const USER_DEFAULT_IMAGE = require("../../assets/default-user-image.png");
 
@@ -13,6 +14,7 @@ export type AvatarProps = {
   isVerified?: boolean;
   badgeSize?: number;
   hideBorder?: boolean;
+  className?: ViewProps["className"];
   borderColor?: keyof typeof colors;
 };
 export const Avatar = ({
@@ -24,9 +26,10 @@ export const Avatar = ({
   isVerified,
   hideBorder = false,
   borderColor = "black",
+  className,
 }: AvatarProps) => {
   return (
-    <View className="pb-2 pr-2">
+    <View className={twMerge("pb-2 pr-2", className)}>
       <Userpic
         source={
           isAnonymous

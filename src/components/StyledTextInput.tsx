@@ -4,12 +4,14 @@ import { Icon, IconProps } from "../icons";
 import { twMerge } from "tailwind-merge";
 import { StyledPressable, StyledPressableProps } from "./StyledPressable";
 import { useState } from "react";
-import { StyledText } from "./StyledText";
+import { StyledText, StyledTextProps } from "./StyledText";
 
 export type StyledTextInputProps = TextInputProps & {
   containerClassName?: ViewProps["className"];
   leftIconProps?: IconProps;
   error?: string;
+  label?: string;
+  labelProps?: StyledTextProps;
   submitProps?: StyledPressableProps & { onSubmit: (value: string) => void };
 };
 
@@ -20,12 +22,19 @@ export const StyledTextInput = ({
   error,
   style,
   editable = true,
+  label,
+  labelProps,
   ...props
 }: StyledTextInputProps) => {
   const [value, setValue] = useState<string>("");
 
   return (
-    <>
+    <View>
+      {label && (
+        <StyledText className="italic pl-2" {...labelProps}>
+          {label}
+        </StyledText>
+      )}
       <View
         className={twMerge(
           `bg-white flex rounded-md p-3 flex-row items-center`,
@@ -67,6 +76,6 @@ export const StyledTextInput = ({
           {error}
         </StyledText>
       )}
-    </>
+    </View>
   );
 };

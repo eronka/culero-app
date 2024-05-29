@@ -182,6 +182,7 @@ export async function regenerateCode(data: RegenerateCodeInput) {
 export type UpdateProfileData = {
   name?: string;
   headline?: string;
+  location?: string;
 };
 
 export async function updateProfileData(data: UpdateProfileData) {

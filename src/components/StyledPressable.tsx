@@ -1,4 +1,9 @@
-import { Pressable, PressableProps, TextProps } from "react-native";
+import {
+  ActivityIndicator,
+  Pressable,
+  PressableProps,
+  TextProps,
+} from "react-native";
 import React, { Children } from "react";
 import { StyledText, StyledTextProps, type TextVariant } from "./StyledText";
 import { VariantProps, tv } from "tailwind-variants";
@@ -45,22 +50,28 @@ export const StyledPressable = ({
   textClassName,
   leftIconProps,
   rightIconProps,
+  isLoading,
+  disabled,
   children,
   ...props
 }: StyledPressableProps) => (
   <Pressable
     className={button({ color, fw, rounded, className })}
-    style={props.disabled ? { opacity: 0.5 } : { opacity: 1 }}
+    style={disabled ? { opacity: 0.5 } : { opacity: 1 }}
+    disabled={isLoading || disabled}
     {...props}
   >
     {leftIconProps && <Icon {...leftIconProps} />}
-    <StyledText
-      weight={500}
-      {...textVariant}
-      className={twMerge("text-center", textClassName)}
-    >
-      {children}
-    </StyledText>
+    {!isLoading && (
+      <StyledText
+        weight={500}
+        {...textVariant}
+        className={twMerge("text-center", textClassName)}
+      >
+        {children}
+      </StyledText>
+    )}
+    {isLoading && <ActivityIndicator className="self-center" color="#000" />}
     {rightIconProps && <Icon {...rightIconProps} />}
   </Pressable>
 );

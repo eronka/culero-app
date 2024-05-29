@@ -1,50 +1,15 @@
-import { View, FlatList, ScrollView, ActivityIndicator } from "react-native";
+import { View, ScrollView } from "react-native";
 import React from "react";
 import { DrawerHeader } from "../../components/headers/DrawerHeader";
-import {
-  Card,
-  MyReviewsCard,
-  SmallReviewCard,
-  StyledText,
-} from "../../components";
+import { Card, MyReviewsCard, StyledText } from "../../components";
 import { ConnectionReviewCard } from "../../components/ConnectionsReviewCard";
 import { SocialMediaCard } from "../../icons/SocialMediaCard";
-import { useScreenInfo } from "../../hooks/useScreenInfo";
 import { useUser } from "../../hooks";
-import { useUserReviews } from "../../hooks/useUserReviews";
-
-const ReviewsList = () => {
-  const { isPhone } = useScreenInfo();
-  const user = useUser()!;
-  const reviews = useUserReviews(user.id);
-
-  if (reviews.isLoading) {
-    return <ActivityIndicator size="large" className="self-center mt-8" />;
-  }
-
-  return (
-    <View>
-      <FlatList
-        data={reviews.data}
-        ListEmptyComponent={
-          <View className="flex">
-            <StyledText>You have no reviews.</StyledText>
-          </View>
-        }
-        // list dosen't scroll on web when overflow is visible
-        style={isPhone ? { overflow: "visible" } : {}}
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        contentContainerClassName="pb-4"
-        renderItem={({ item }) => (
-          <SmallReviewCard className="w-80 mr-4 min-w-48" review={item} />
-        )}
-      />
-    </View>
-  );
-};
+import { ReviewsList } from "../../components/ReviewsList";
 
 const HomeScreen = ({}: {}) => {
+  const user = useUser()!;
+
   return (
     <ScrollView>
       <View className="p-4 md:p-9">
@@ -53,7 +18,7 @@ const HomeScreen = ({}: {}) => {
         <View className="flex">
           <View className="w-full">
             <Card
-              bodyComponent={<ReviewsList />}
+              bodyComponent={<ReviewsList userId={user.id} />}
               hideHeaderDivider
               headerComponent={
                 <StyledText xl2 weight={500}>
