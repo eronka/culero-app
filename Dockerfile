@@ -22,7 +22,6 @@ RUN pnpm expo export -p web
 FROM base AS runner
 
 WORKDIR /app
-
 COPY --from=builder /app/dist /app/dist
 
 RUN npm i -g serve

@@ -4,9 +4,6 @@ on:
       - develop
     paths: ['src/**', '.github/workflows/stage-web.yml', 'Dockerfile', 'package.json', 'fly.toml']
 
-env:
-  EXPO_PUBLIC_API_BASE_URL: ${{ secrets.EXPO_PUBLIC_API_BASE_URL }}
-
 jobs:
   deploy-backend-stage:
     runs-on: ubuntu-latest
