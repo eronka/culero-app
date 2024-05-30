@@ -8,8 +8,6 @@ import Base64 from 'Base64';
 // @ts-ignore TODO: Fix this
 const baseUrl = process.env.EXPO_PUBLIC_API_BASE_URL;
 
-console.log("process.env")
-console.log(process.env)
 const signInUrl = `${baseUrl}/auth/sign-in`;
 const signUpUrl = `${baseUrl}/auth/sign-up`;
 const verifyEmailUrl = `${baseUrl}/auth/verify-email`;
