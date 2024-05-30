@@ -318,7 +318,7 @@ export const GiveReviewCard = ({
                       <ErrorLabel error={errors.professionalism} />
 
                       <View className="flex-row mt-4">
-                        <View className="mr-2 w-32 ">
+                        <View className="mr-2 w-32">
                           <StyledText weight={600} color="darkgrey">
                             Reliability
                           </StyledText>
@@ -340,7 +340,7 @@ export const GiveReviewCard = ({
                       </View>
                       <ErrorLabel error={errors.reliability} />
 
-                      <View className="flex-row justify-between mt-4">
+                      <View className="flex-row mt-4">
                         <View className="mr-2 w-32">
                           <StyledText weight={600} color="darkgrey">
                             Communication

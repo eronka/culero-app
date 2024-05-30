@@ -11,21 +11,19 @@ import { getSearchUserResult } from "../../utils/api";
 import { FlatList } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { IconButton } from "../IconButton";
+import { useNavToConnection } from "../../hooks/useNavToConnection";
 
 /** This can be used in the screen components. The reason that this is not
  * added in the navigation header is because on mobile the original header shall be kept.
  */
 
 const UserSearchResult = ({ user }: { user: ConnectionPreview }) => {
-  const navigation = useNavigation();
+  const connectionNav = useNavToConnection();
   return (
     <Pressable
       className="flex-row hover:bg-whiteFA items-center p-2"
       onPress={() => {
-        navigation.navigate("HomeScreen", {
-          screen: "Connections",
-          params: { screen: "Connection", params: { userId: user.id } },
-        });
+        connectionNav.navigate(user.id);
       }}
     >
       <View>
@@ -62,12 +60,13 @@ const SearchUsersBar = () => {
       }, 1000);
     }
   }, [isFocused]);
+  console.log("height", height);
 
   return (
     <View className="flex-row w-10/12 z-[90]" style={{ minWidth: 300 }}>
       <SearchBar
         placeholder="Discover and review people"
-        containerClassName="mt-2 h-12 w-full self-end z-0"
+        containerClassName="mt-2 h-12 w-full md:self-end z-0"
         onFocus={() => {
           setFocused(true);
         }}
@@ -78,6 +77,7 @@ const SearchUsersBar = () => {
         onChangeText={(v: string) => {
           setSearchQuery(v);
         }}
+        style={{ minWidth: 300 }}
       />
       <View
         className="absolute z-[90] w-full top-12 rounded-lg mt-2"
@@ -85,7 +85,7 @@ const SearchUsersBar = () => {
       >
         <View className="bg-white shadow-md  rounded-b-lg  mx-5">
           <FlatList
-            style={{ maxHeight: height / 2 }}
+            style={{ maxHeight: height / 3 }}
             data={results}
             ItemSeparatorComponent={() => <HorizontalDivider />}
             renderItem={({ item }) => <UserSearchResult user={item} />}
@@ -113,8 +113,10 @@ export const DrawerHeader = ({
     <>
       <View className="mb-4 z-[90]">
         <View className="flex-row z-[90] justify-between">
-          <View className="self-start md:py-4">{!!leftIcon && leftIcon}</View>
-          <View className="flex-row self-end z-[90] w-1/2 items-center justify-between ">
+          <View className=" hidden md:flex md:self-start md:py-4">
+            {!!leftIcon && leftIcon}
+          </View>
+          <View className="flex-row md:self-end z-[90] grow md:grow-0 md:w-1/2 items-center justify-between self-start mb-4 md:mb-0">
             <SearchUsersBar />
             <IconButton
               onPress={() => {
@@ -123,19 +125,28 @@ export const DrawerHeader = ({
                 });
               }}
               iconProps={{ name: "notifications", size: 16 }}
-              className="bg-white shadow-md rounded-full h-9 w-9 hover:bg-whiteFA"
+              className="bg-white shadow-md rounded-full h-9 w-9 hover:bg-whiteFA ml-2"
             />
           </View>
         </View>
-        <View className="flex-row z-0">
-          <StyledText weight={600} xl4={!isPhone} lg={isPhone}>
-            {title}
-          </StyledText>
-          {!!iconProps && (
-            <Icon className="ml-4" size={isPhone ? 18 : 30} {...iconProps} />
-          )}
+        <View className="flex-row justify-between">
+          <View className="flex-row z-0">
+            <StyledText weight={600} xl4={!isPhone} lg={isPhone}>
+              {title}
+            </StyledText>
+            {!!iconProps && (
+              <Icon className="ml-4" size={isPhone ? 18 : 30} {...iconProps} />
+            )}
+          </View>
+          {/* 
+          <IconButton
+            className="md:hidden border border-[##5C5C5C] rounded-lg w-14"
+            iconProps={{ name: "grid", color: "primary", size: 12 }}
+            onPress={() => setSearchOpen(!isSearchOpen)}
+          /> */}
         </View>
       </View>
+
       <HorizontalDivider className="md:hidden mb-6" />
     </>
   );

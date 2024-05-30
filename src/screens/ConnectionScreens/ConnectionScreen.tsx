@@ -53,7 +53,7 @@ export const ConnectionScreen = (
                   reliabilityRating={avgs.data.reliability}
                 />
               )}
-            <View className="md:mt-10">
+            <View className="mt-2 md:mt-10">
               <GiveReviewCard isWhiteBg={false} ratedUser={user.data} />
 
               {/* <Card
@@ -64,7 +64,7 @@ export const ConnectionScreen = (
               /> */}
 
               {reviews.isFetched && reviews.data && (
-                <View className="md:mt-4">
+                <View className="mt-4">
                   <StyledText
                     weight={600}
                     xl2

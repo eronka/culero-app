@@ -1,4 +1,4 @@
-import { Alert, View, ViewProps } from "react-native";
+import { Alert, Pressable, View, ViewProps } from "react-native";
 import { Card } from "./Card";
 import { StyledText } from "./StyledText";
 import { Avatar } from "./Avatar";
@@ -10,6 +10,7 @@ import { useAvgRating } from "../hooks/useAvgRating";
 import { useLikeReview } from "../hooks/useLikeReview";
 import { useUnlikeReview } from "../hooks/useUnlikeReview";
 import { Review } from "../types/Review";
+import { useNavToConnection } from "../hooks/useNavToConnection";
 
 export type RatingCardProps = {
   review: Review;
@@ -33,14 +34,22 @@ export const ReviewCard = ({ className, review }: RatingCardProps) => {
   const overallRating = useAvgRating(review);
   const likeReviewMutation = useLikeReview();
   const unlikeReviewMutation = useUnlikeReview();
-  console.log(overallRating, review.isAnonymous);
+  const connectionNav = useNavToConnection();
 
   return (
     <Card
       className={twMerge("px-9 py-4", className)}
       headerComponent={
         <View className="flex-row justify-between p-2 items-center pb-4">
-          <View className="flex-row">
+          <Pressable
+            className="flex-row"
+            disabled={review.isAnonymous}
+            onPress={() => {
+              if (review.postedBy?.id) {
+                connectionNav.navigate(review.postedBy.id);
+              }
+            }}
+          >
             <Avatar
               userImage={review.postedBy?.profilePictureUrl}
               isAnonymous={review.isAnonymous}
@@ -58,7 +67,7 @@ export const ReviewCard = ({ className, review }: RatingCardProps) => {
 
               <StyledStarRating readonly startingValue={overallRating} />
             </View>
-          </View>
+          </Pressable>
           {!review.isOwnReview && (
             <View className="flex-row items-center">
               <FavouriteButton

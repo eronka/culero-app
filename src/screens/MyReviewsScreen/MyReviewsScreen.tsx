@@ -29,33 +29,35 @@ export const MyReviewsScreen = ({}: {}) => {
             <StyledText>You have no reviews</StyledText>
           </View>
         )}
-        {!rating.isLoading && rating.data && rating.data.professionalism && (
-          <View style={{ maxWidth: 831 }}>
-            <OverallRateCard
-              professionalismRating={rating.data.professionalism}
-              communicationRating={rating.data.communication}
-              reliabilityRating={rating.data.reliability}
-            />
-            {reviews.isFetched && reviews.data && (
-              <>
-                <StyledText
-                  className="ml-4 mt-2"
-                  weight={600}
-                  xl2={!isPhone}
-                >{`${reviews.data.length} Reviews`}</StyledText>
-                <View>
-                  {reviews.data.map((review, index) => (
-                    <ReviewCard
-                      className="mt-4"
-                      key={`review-${index}`}
-                      review={review}
-                    />
-                  ))}
-                </View>
-              </>
-            )}
-          </View>
-        )}
+        {!rating.isLoading &&
+          !!rating.data &&
+          !!rating.data.professionalism && (
+            <View style={{ maxWidth: 831 }}>
+              <OverallRateCard
+                professionalismRating={rating.data.professionalism}
+                communicationRating={rating.data.communication}
+                reliabilityRating={rating.data.reliability}
+              />
+              {reviews.isFetched && reviews.data && (
+                <>
+                  <StyledText
+                    className="ml-4 mt-2"
+                    weight={600}
+                    xl2={!isPhone}
+                  >{`${reviews.data.length} Reviews`}</StyledText>
+                  <View>
+                    {reviews.data.map((review, index) => (
+                      <ReviewCard
+                        className="mt-4"
+                        key={`review-${index}`}
+                        review={review}
+                      />
+                    ))}
+                  </View>
+                </>
+              )}
+            </View>
+          )}
       </View>
     </ScrollView>
   );

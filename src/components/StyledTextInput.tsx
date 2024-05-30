@@ -29,7 +29,7 @@ export const StyledTextInput = ({
   const [value, setValue] = useState<string>("");
 
   return (
-    <View>
+    <View className="w-full">
       {label && (
         <StyledText className="italic pl-2" {...labelProps}>
           {label}

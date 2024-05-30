@@ -14,7 +14,7 @@ export const GivenReviewsSettings = () => {
   return (
     <SettingsLayout canGoBack={true}>
       <Card
-        className="px-20"
+        className="md:px-20"
         bodyComponent={
           connections.isFetched ? (
             <>

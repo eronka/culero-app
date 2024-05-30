@@ -51,7 +51,7 @@ export const CheckBox = ({
       >
         {value && <Icon name="checkmark" color={color} size={checkMarkSize} />}
       </Pressable>
-      <View className="flex-1 ml-2">
+      <View className="flex ml-2">
         {label && (
           <StyledText
             weight={500}

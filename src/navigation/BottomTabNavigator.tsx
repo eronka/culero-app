@@ -9,6 +9,7 @@ import { WriteReviewScreen } from "../screens/WriteReviewScreen/WriteReviewScree
 import { RouteProp } from "@react-navigation/native";
 import { RootStackParamList } from "../types";
 import HomeScreen from "../screens/HomeScreen";
+import { MyReviewsScreen } from "../screens/MyReviewsScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -49,7 +50,7 @@ export function BottomNavigator(props: { initialRoute?: string }) {
       />
       <Tab.Screen
         name="Home3"
-        component={InitialScreen}
+        component={MyReviewsScreen}
         options={{
           tabBarLabel: "My reviews",
           tabBarIcon: ({ focused }) => (

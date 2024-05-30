@@ -23,6 +23,7 @@ import { UserGroupIcon } from "./UserGroupIcon";
 import { HomeIcon } from "./HomeIcon";
 import { UserIcon } from "./UserIcon";
 import { UserAvatar } from "./UserAvatar";
+import { UserNotFoundIcon } from "./UserNotFound";
 
 export type IconName =
   | "edit"
@@ -56,7 +57,9 @@ export type IconName =
   | "close"
   | "delete"
   | "back"
-  | "right-arrow";
+  | "right-arrow"
+  | "user-not-found"
+  | "grid";
 
 export type IconProps = {
   name: IconName;
@@ -216,6 +219,14 @@ export const Icon = ({ name, color, size, className }: IconProps) => {
       {name === "right-arrow" && (
         <Material
           name="arrow-forward-ios"
+          size={size}
+          color={color ? colors[color] : colors["black"]}
+        />
+      )}
+      {name === "user-not-found" && <UserNotFoundIcon />}
+      {name === "grid" && (
+        <Ionicons
+          name="grid"
           size={size}
           color={color ? colors[color] : colors["black"]}
         />

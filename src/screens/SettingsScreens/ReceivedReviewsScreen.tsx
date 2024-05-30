@@ -16,7 +16,7 @@ export const ReceivedReviewsScreen = () => {
   return (
     <SettingsLayout canGoBack={true}>
       <Card
-        className="px-20"
+        className="md:px-20"
         bodyComponent={
           reviews.isFetched ? (
             <>
@@ -34,7 +34,7 @@ export const ReceivedReviewsScreen = () => {
                       review={item}
                       className="border border-[#EEEEEE] drop-shadow-md"
                     />
-                    <View className="flex-row justify-between mt-5 items-center">
+                    <View className="md:flex-row justify-between mt-5 items-center">
                       <StyledText color="gray65">
                         Notice something off about a review? Report it!
                       </StyledText>

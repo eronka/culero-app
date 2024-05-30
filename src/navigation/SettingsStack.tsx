@@ -14,7 +14,7 @@ const Stack = createNativeStackNavigator<SettingsStackParamList>();
 export const SettingsStack = () => {
   const { isPhone } = useScreenInfo();
   return (
-    <Stack.Navigator screenOptions={{ headerShown: isPhone }}>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Settings" component={SettingsScreen} />
       <Stack.Screen name="Account Settings" component={AccountSettingsScreen} />
       <Stack.Screen name="Privacy" component={PrivacySettingsScreen} />
