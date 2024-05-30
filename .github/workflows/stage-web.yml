@@ -19,10 +19,6 @@ jobs:
       - name: Install fly CLI
         run: |
           curl -L https://fly.io/install.sh | sh
-      - name: Install pnpm
-        run: npm install -g pnpm
-      - name: pnpm install
-        run: pnpm install
       - name: Deploy to stage
         run: |
           ~/.fly/bin/fly deploy \
