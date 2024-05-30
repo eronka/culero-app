@@ -4,6 +4,9 @@ on:
       - develop
     paths: ['src/**', '.github/workflows/stage-web.yml', 'Dockerfile', 'package.json', 'fly.toml']
 
+env:
+  EXPO_PUBLIC_API_BASE_URL: ${{ secrets.EXPO_PUBLIC_API_BASE_URL }}
+
 jobs:
   deploy-backend-stage:
     runs-on: ubuntu-latest
@@ -16,6 +19,10 @@ jobs:
       - name: Install fly CLI
         run: |
           curl -L https://fly.io/install.sh | sh
+      - name: Install pnpm
+        run: npm install -g pnpm
+      - name: pnpm install
+        run: pnpm install
       - name: Deploy to stage
         run: |
           ~/.fly/bin/fly deploy \
