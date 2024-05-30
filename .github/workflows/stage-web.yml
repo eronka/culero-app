@@ -1,0 +1,25 @@
+on:
+  push:
+    branches:
+      - develop
+    paths: ['src/**', '.github/workflows/stage-web.yml', 'Dockerfile', 'package.json', 'fly.toml']
+
+jobs:
+  deploy-backend-stage:
+    runs-on: ubuntu-latest
+    name: Deploy to stage
+    if: github.ref == 'refs/heads/develop'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install fly CLI
+        run: |
+          curl -L https://fly.io/install.sh | sh
+      - name: Deploy to stage
+        run: |
+          ~/.fly/bin/fly deploy \
+            --config fly.toml \
+            --dockerfile Dockerfile \
+            --app culero-stage-web \
+            --access-token ${{ secrets.FLY_ACCESS_TOKEN }}
