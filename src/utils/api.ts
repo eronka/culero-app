@@ -6,7 +6,7 @@ import storage from './storage';
 import Base64 from 'Base64';
 
 // @ts-ignore TODO: Fix this
-const baseUrl = process.env.EXPO_PUBLIC_API_BASE_URL;
+export const baseUrl = process.env.EXPO_PUBLIC_API_BASE_URL;
 
 const signInUrl = `${baseUrl}/auth/sign-in`;
 const signUpUrl = `${baseUrl}/auth/sign-up`;
