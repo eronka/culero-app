@@ -8,7 +8,6 @@ jobs:
   deploy-backend-stage:
     runs-on: ubuntu-latest
     name: Deploy to stage
-    if: github.ref == 'refs/heads/develop'
 
     steps:
       - name: Checkout
@@ -17,9 +16,4 @@ jobs:
         run: |
           curl -L https://fly.io/install.sh | sh
       - name: Deploy to stage
-        run: |
-          ~/.fly/bin/fly deploy \
-            --config fly.toml \
-            --dockerfile Dockerfile \
-            --app culero-stage-web \
-            --access-token ${{ secrets.FLY_ACCESS_TOKEN }}
+        run: ~/.fly/bin/fly deploy --config fly.toml --dockerfile Dockerfile --app culero-stage-web --access-token ${{ secrets.FLY_ACCESS_TOKEN }}
