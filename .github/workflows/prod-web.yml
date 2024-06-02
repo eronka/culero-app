@@ -5,7 +5,7 @@ on:
     paths: ['src/**', '.github/workflows/prod-web.yml', 'Dockerfile', 'package.json', 'fly.toml']
 
 jobs:
-  deploy-backend-prod:
+  deploy-app-prod:
     runs-on: ubuntu-latest
     name: Deploy to production
 
