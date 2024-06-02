@@ -7,14 +7,14 @@ WORKDIR /app
 
 RUN npm i -g pnpm
 
-# COPY package.json package.json
-# COPY pnpm-lock.yaml pnpm-lock.yaml
-# COPY tsconfig.json tsconfig.json
 COPY . .
 
 RUN pnpm i
 RUN pnpm i @babel/runtime
 RUN npx tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/global.css.web.css
+
+ARG API_BASE_URL
+RUN echo "EXPO_PUBLIC_API_BASE_URL=$API_BASE_URL" > .env
 
 RUN pnpm expo export -p web
 

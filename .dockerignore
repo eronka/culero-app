@@ -3,3 +3,7 @@
 dist
 node_modules
 .env*
+fly.toml
+.gitignore
+Dockerfile
+.github/
