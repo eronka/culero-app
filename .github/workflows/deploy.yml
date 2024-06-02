@@ -1,0 +1,53 @@
+on:
+  push:
+    branches:
+      - main
+      - develop
+    paths: ['src/**', '.github/workflows/deploy.yml', 'Dockerfile', 'package.json', 'fly.toml']
+
+jobs:
+  deploy-app-prod:
+    runs-on: ubuntu-latest
+    name: Deploy to production
+    if: github.ref == 'refs/heads/main'
+    environment: production
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install fly CLI
+        run: |
+          curl -L https://fly.io/install.sh | sh
+      - name: Deploy to production
+        env:
+          API_BASE_URL: ${{ vars.API_BASE_URL }}
+        run: |
+          ~/.fly/bin/fly deploy \
+            --config fly.toml \
+            --dockerfile Dockerfile \
+            --app culero-prod-web \
+            --build-arg API_BASE_URL=$API_BASE_URL \
+            --access-token ${{ secrets.FLY_ACCESS_TOKEN }}
+
+  deploy-app-stage:
+    runs-on: ubuntu-latest
+    name: Deploy to stage
+    if: github.ref == 'refs/heads/develop'
+    environment: stage
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install fly CLI
+        run: |
+          curl -L https://fly.io/install.sh | sh
+      - name: Deploy to stage
+        env:
+          API_BASE_URL: ${{ vars.API_BASE_URL }}
+        run: |
+          ~/.fly/bin/fly deploy \
+            --config fly.toml \
+            --dockerfile Dockerfile \
+            --app culero-stage-web \
+            --build-arg API_BASE_URL=$API_BASE_URL \
+            --access-token ${{ secrets.FLY_ACCESS_TOKEN }}
