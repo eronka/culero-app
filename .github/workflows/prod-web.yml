@@ -1,14 +1,13 @@
 on:
   push:
     branches:
-      - develop
+      - main
     paths: ['src/**', '.github/workflows/prod-web.yml', 'Dockerfile', 'package.json', 'fly.toml']
 
 jobs:
   deploy-backend-prod:
     runs-on: ubuntu-latest
     name: Deploy to production
-    if: github.ref == 'refs/heads/develop'
 
     steps:
       - name: Checkout
@@ -17,9 +16,4 @@ jobs:
         run: |
           curl -L https://fly.io/install.sh | sh
       - name: Deploy to production
-        run: |
-          ~/.fly/bin/fly deploy \
-            --config fly.toml \
-            --dockerfile Dockerfile \
-            --app culero-prod-web \
-            --access-token ${{ secrets.FLY_ACCESS_TOKEN }}
+        run: ~/.fly/bin/fly deploy --config fly.toml --dockerfile Dockerfile --app culero-prod-web --access-token ${{ secrets.FLY_ACCESS_TOKEN }}
