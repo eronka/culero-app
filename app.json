@@ -15,13 +15,15 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.culero.eronka"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.culero.eronka"
     },
     "web": {
       "bundler": "metro",
@@ -34,7 +36,6 @@
         {
           "icon": "./local/assets/adaptive-icon.png",
           "color": "#ffffff"
-          
         }
       ]
     ],
