@@ -71,6 +71,9 @@ dependencies:
   expo-updates:
     specifier: ~0.25.15
     version: 0.25.15(expo@51.0.9)
+  expo-web-browser:
+    specifier: ^13.0.3
+    version: 13.0.3(expo@51.0.9)
   formik:
     specifier: ^2.4.6
     version: 2.4.6(react@18.2.0)
@@ -4609,6 +4612,14 @@ packages:
     transitivePeerDependencies:
       - encoding
       - supports-color
+    dev: false
+
+  /expo-web-browser@13.0.3(expo@51.0.9):
+    resolution: {integrity: sha512-HXb7y82ApVJtqk8tManyudtTrCtx8xcUnVzmJECeHCB0SsWSQ+penVLZxJkcyATWoJOsFMnfVSVdrTcpKKGszQ==}
+    peerDependencies:
+      expo: '*'
+    dependencies:
+      expo: 51.0.9(@babel/core@7.24.5)(@babel/preset-env@7.24.5)
     dev: false
 
   /expo@51.0.9(@babel/core@7.24.5)(@babel/preset-env@7.24.5):
