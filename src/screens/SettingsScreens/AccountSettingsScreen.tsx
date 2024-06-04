@@ -11,7 +11,7 @@ import {
 import { SettingsLayout } from "./components/SettingsLayout";
 import { useMemo, useState } from "react";
 import { useUser } from "../../hooks";
-import { ActivityIndicator, View } from "react-native";
+import { ActivityIndicator, Pressable, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { useScreenInfo } from "../../hooks/useScreenInfo";
 import { useUpdateProfilePicture } from "../../hooks/useUpdateProfilePicture";
@@ -50,10 +50,12 @@ const SettingItem = ({
             (isImageLoading ? (
               <ActivityIndicator />
             ) : (
-              <Avatar size={84} userImage={imageUrl} />
+              <Pressable onPress={onButtonPress}>
+                <Avatar size={84} userImage={imageUrl} />
+              </Pressable>
             ))}
         </View>
-        <View className="text-wrap flex">
+        <View className="text-wrap shrink">
           <StyledText weight={600} xl2>
             {title}
           </StyledText>
