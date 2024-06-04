@@ -1,15 +1,13 @@
 import { View, ScrollView } from "react-native";
 import React from "react";
 import { DrawerHeader } from "../../components/headers/DrawerHeader";
-import { Card, MyReviewsCard, StyledText } from "../../components";
+import { MyReviewsCard } from "../../components";
 import { ConnectionReviewCard } from "../../components/ConnectionsReviewCard";
 import { SocialMediaCard } from "../../icons/SocialMediaCard";
 import { useUser } from "../../hooks";
-import { ReviewsList } from "../../components/ReviewsList";
+import { MyLatestReviews } from "../../components/MyLatestReviews";
 
 const HomeScreen = ({}: {}) => {
-  const user = useUser()!;
-
   return (
     <ScrollView>
       <View className="p-4 md:p-9">
@@ -17,15 +15,7 @@ const HomeScreen = ({}: {}) => {
 
         <View className="flex">
           <View className="w-full">
-            <Card
-              bodyComponent={<ReviewsList userId={user.id} />}
-              hideHeaderDivider
-              headerComponent={
-                <StyledText xl2 weight={600}>
-                  My latest reviews
-                </StyledText>
-              }
-            />
+            <MyLatestReviews />
           </View>
           <View className="md:flex-row flex-1">
             <View className="md:w-2/5 md:pr-8">
