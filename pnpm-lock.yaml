@@ -64,7 +64,7 @@ dependencies:
     version: 0.28.4(expo@51.0.9)
   expo-splash-screen:
     specifier: ^0.27.4
-    version: 0.27.4(expo-modules-autolinking@1.10.3)(expo@51.0.9)
+    version: 0.27.4(expo-modules-autolinking@1.11.1)(expo@51.0.9)
   expo-status-bar:
     specifier: ~1.12.1
     version: 1.12.1
@@ -1808,30 +1808,6 @@ packages:
       nullthrows: 1.1.1
     dev: false
 
-  /@expo/config-plugins@7.9.1:
-    resolution: {integrity: sha512-ICt6Jed1J0tPYMQrJ8K5Qusgih2I6pZ2PU4VSvxsN3T4n97L13XpYV1vyq1Uc/HMl3UhOwldipmgpEbCfeDqsQ==}
-    dependencies:
-      '@expo/config-types': 50.0.1
-      '@expo/fingerprint': 0.6.1
-      '@expo/json-file': 8.3.1
-      '@expo/plist': 0.1.1
-      '@expo/sdk-runtime-versions': 1.0.0
-      '@react-native/normalize-color': 2.1.0
-      chalk: 4.1.2
-      debug: 4.3.4
-      find-up: 5.0.0
-      getenv: 1.0.0
-      glob: 7.1.6
-      resolve-from: 5.0.0
-      semver: 7.6.0
-      slash: 3.0.0
-      slugify: 1.6.6
-      xcode: 3.0.1
-      xml2js: 0.6.0
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
   /@expo/config-plugins@8.0.4:
     resolution: {integrity: sha512-Hi+xuyNWE2LT4LVbGttHJgl9brnsdWAhEB42gWKb5+8ae86Nr/KwUBQJsJppirBYTeLjj5ZlY0glYnAkDa2jqw==}
     dependencies:
@@ -1854,30 +1830,8 @@ packages:
       - supports-color
     dev: false
 
-  /@expo/config-types@50.0.1:
-    resolution: {integrity: sha512-EZHMgzkWRB9SMHO1e9m8s+OMahf92XYTnsCFjxhSfcDrcEoSdFPyJWDJVloHZPMGhxns7Fi2+A+bEVN/hD4NKA==}
-    dev: false
-
   /@expo/config-types@51.0.0:
     resolution: {integrity: sha512-acn03/u8mQvBhdTQtA7CNhevMltUhbSrpI01FYBJwpVntufkU++ncQujWKlgY/OwIajcfygk1AY4xcNZ5ImkRA==}
-    dev: false
-
-  /@expo/config@8.5.6:
-    resolution: {integrity: sha512-wF5awSg6MNn1cb1lIgjnhOn5ov2TEUTnkAVCsOl0QqDwcP+YIerteSFwjn9V52UZvg58L+LKxpCuGbw5IHavbg==}
-    dependencies:
-      '@babel/code-frame': 7.10.4
-      '@expo/config-plugins': 7.9.1
-      '@expo/config-types': 50.0.1
-      '@expo/json-file': 8.3.1
-      getenv: 1.0.0
-      glob: 7.1.6
-      require-from-string: 2.0.2
-      resolve-from: 5.0.0
-      semver: 7.5.3
-      slugify: 1.6.6
-      sucrase: 3.34.0
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   /@expo/config@9.0.1:
@@ -1944,21 +1898,6 @@ packages:
       dotenv: 16.4.5
       dotenv-expand: 11.0.6
       getenv: 1.0.0
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
-  /@expo/fingerprint@0.6.1:
-    resolution: {integrity: sha512-ggLn6unI6qowlA1FihdQwPpLn16VJulYkvYAEL50gaqVahfNEglRQMSH2giZzjD0d6xq2/EQuUdFyHaJfyJwOQ==}
-    hasBin: true
-    dependencies:
-      '@expo/spawn-async': 1.7.2
-      chalk: 4.1.2
-      debug: 4.3.4
-      find-up: 5.0.0
-      minimatch: 3.1.2
-      p-limit: 3.1.0
-      resolve-from: 5.0.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -2068,28 +2007,6 @@ packages:
       '@xmldom/xmldom': 0.7.13
       base64-js: 1.5.1
       xmlbuilder: 14.0.0
-    dev: false
-
-  /@expo/prebuild-config@7.0.3(expo-modules-autolinking@1.10.3):
-    resolution: {integrity: sha512-Kvxy/oQzkxwXLvAmwb+ygxuRn4xUUN2+mVJj3KDe4bRVCNyDPs7wlgdokF3twnWjzRZssUzseMkhp+yHPjAEhA==}
-    peerDependencies:
-      expo-modules-autolinking: '>=0.8.1'
-    dependencies:
-      '@expo/config': 9.0.2
-      '@expo/config-plugins': 8.0.4
-      '@expo/config-types': 51.0.0
-      '@expo/image-utils': 0.5.1
-      '@expo/json-file': 8.3.1
-      '@react-native/normalize-colors': 0.74.83
-      debug: 4.3.4
-      expo-modules-autolinking: 1.10.3
-      fs-extra: 9.1.0
-      resolve-from: 5.0.0
-      semver: 7.6.0
-      xml2js: 0.6.0
-    transitivePeerDependencies:
-      - encoding
-      - supports-color
     dev: false
 
   /@expo/prebuild-config@7.0.3(expo-modules-autolinking@1.11.1):
@@ -2694,10 +2611,6 @@ packages:
     transitivePeerDependencies:
       - '@babel/preset-env'
       - supports-color
-    dev: false
-
-  /@react-native/normalize-color@2.1.0:
-    resolution: {integrity: sha512-Z1jQI2NpdFJCVgpY+8Dq/Bt3d+YUi1928Q+/CZm/oh66fzM0RUl54vvuXlPJKybH4pdCZey1eDTPaLHkMPNgWA==}
     dev: false
 
   /@react-native/normalize-colors@0.74.83:
@@ -4606,20 +4519,6 @@ packages:
       - supports-color
     dev: false
 
-  /expo-modules-autolinking@1.10.3:
-    resolution: {integrity: sha512-pn4n2Dl4iRh/zUeiChjRIe1C7EqOw1qhccr85viQV7W6l5vgRpY0osE51ij5LKg/kJmGRcJfs12+PwbdTplbKw==}
-    hasBin: true
-    dependencies:
-      '@expo/config': 8.5.6
-      chalk: 4.1.2
-      commander: 7.2.0
-      fast-glob: 3.3.2
-      find-up: 5.0.0
-      fs-extra: 9.1.0
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
   /expo-modules-autolinking@1.11.1:
     resolution: {integrity: sha512-2dy3lTz76adOl7QUvbreMCrXyzUiF8lygI7iFJLjgIQIVH+43KnFWE5zBumpPbkiaq0f0uaFpN9U0RGQbnKiMw==}
     hasBin: true
@@ -4656,12 +4555,12 @@ packages:
       - supports-color
     dev: false
 
-  /expo-splash-screen@0.27.4(expo-modules-autolinking@1.10.3)(expo@51.0.9):
+  /expo-splash-screen@0.27.4(expo-modules-autolinking@1.11.1)(expo@51.0.9):
     resolution: {integrity: sha512-JwepK1FjbwiOK2nwIFanfzj9s7UXYnpTwLX8A9v7Ec3K4V28yu8HooSc9X60cftBw9UZrs8Gwj4PgTpQabBS9A==}
     peerDependencies:
       expo: '*'
     dependencies:
-      '@expo/prebuild-config': 7.0.3(expo-modules-autolinking@1.10.3)
+      '@expo/prebuild-config': 7.0.3(expo-modules-autolinking@1.11.1)
       expo: 51.0.9(@babel/core@7.24.5)(@babel/preset-env@7.24.5)
     transitivePeerDependencies:
       - encoding
@@ -7933,14 +7832,6 @@ packages:
   /semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
     hasBin: true
-
-  /semver@7.5.3:
-    resolution: {integrity: sha512-QBlUtyVk/5EeHbi7X0fw6liDZc7BBmEaSYn01fMU1OUYbf6GPsbTtd8WmnqbI20SeycoHSeiybkE/q1Q+qlThQ==}
-    engines: {node: '>=10'}
-    hasBin: true
-    dependencies:
-      lru-cache: 6.0.0
-    dev: false
 
   /semver@7.6.0:
     resolution: {integrity: sha512-EnwXhrlwXMk9gKu5/flx5sv/an57AkRplG3hTK68W7FRDN+k+OWBj65M7719OkA82XLBxrcX0KSHj+X5COhOVg==}

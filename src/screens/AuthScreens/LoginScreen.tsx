@@ -13,6 +13,11 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useLogin } from "../../hooks/useLogin";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { GoogleAuthButton } from "./components/GoogleAuthButton";
+import { AppleAuthButton } from "./components/AppleAuthButton";
+import { LinkedinAuthButton } from "./components/LinkedinAuthButton";
+import { FacebookAuthButton } from "./components/FacebookAuthButton";
+import { GithubAuthButton } from "./components/GithubAuthButton";
 
 export const LoginScreen = () => {
   const [seeFullOptions, setFullOptions] = useState(false);
@@ -44,15 +49,7 @@ export const LoginScreen = () => {
           Embark on a Journey of Professional Growth and Collaboration!
         </StyledText>
 
-        <StyledPressable
-          fw
-          color="white"
-          className="mt-12 border h-16"
-          onPress={() => {}}
-          leftIconProps={{ name: "google" }}
-        >
-          Continue with Google
-        </StyledPressable>
+        <GoogleAuthButton />
         {!seeFullOptions && (
           <StyledPressable
             fw
@@ -65,30 +62,10 @@ export const LoginScreen = () => {
         )}
         {seeFullOptions && (
           <>
-            <StyledPressable
-              fw
-              color="white"
-              className="mt-4 border h-16"
-              onPress={() => {}}
-            >
-              Continue with Apple
-            </StyledPressable>
-            <StyledPressable
-              fw
-              color="white"
-              className="mt-4 border h-16"
-              onPress={() => {}}
-            >
-              Continue with Linkedin
-            </StyledPressable>{" "}
-            <StyledPressable
-              fw
-              color="white"
-              className="mt-4 border h-16"
-              onPress={() => {}}
-            >
-              Continue with Facebook
-            </StyledPressable>
+            <AppleAuthButton />
+            <LinkedinAuthButton />
+            <FacebookAuthButton />
+            <GithubAuthButton />
           </>
         )}
         <View className="flex-row items-center mt-6">
