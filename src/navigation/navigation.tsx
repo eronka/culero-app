@@ -3,9 +3,8 @@ import LinkingConfiguration from "./LinkingConfiguration";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { BottomNavigator } from "./BottomTabNavigator";
 import { AuthStackNavigator } from "./AuthStack";
-import { useUser } from "../hooks";
+import { useUserQuery } from "../hooks";
 import { EmailVerificationSuccess } from "../screens/AuthScreens";
 import { AuthHeader } from "../components";
 import { DrawerNavigator } from "./DrawerNavigation";
@@ -18,7 +17,7 @@ import { addPushToken } from "../utils/api";
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const RootNavigator = () => {
-  const user = useUser();
+  const user = useUserQuery();
   const [expoPushToken, setExpoPushToken] = useState("");
   const [notification, setNotification] = useState<
     Notifications.Notification | undefined
@@ -27,7 +26,7 @@ const RootNavigator = () => {
   const responseListener = useRef<Notifications.Subscription>();
 
   React.useEffect(() => {
-    if (user) {
+    if (user.data) {
       registerForPushNotificationsAsync().then((token) => {
         if (token) {
           addPushToken(token);
@@ -52,7 +51,7 @@ const RootNavigator = () => {
       responseListener.current &&
         Notifications.removeNotificationSubscription(responseListener.current);
     };
-  }, [user]);
+  }, [user.data]);
 
   return (
     <Stack.Navigator
@@ -61,7 +60,7 @@ const RootNavigator = () => {
         animation: "slide_from_right",
       }}
     >
-      {user ? (
+      {user.data && !user.isError ? (
         <>
           <Stack.Screen name="HomeScreen" component={DrawerNavigator} />
         </>

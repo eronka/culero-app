@@ -7,7 +7,7 @@ import {
 import { BottomNavigator } from "./BottomTabNavigator";
 import { Icon } from "../icons";
 import colors from "../../colors";
-import { View, ViewProps } from "react-native";
+import { Pressable, View, ViewProps } from "react-native";
 import { Avatar, HorizontalDivider, StyledText } from "../components";
 import { IconButton } from "../components/IconButton";
 import { twMerge } from "tailwind-merge";
@@ -20,6 +20,7 @@ import { useUser } from "../hooks";
 import { NotificationsScreen } from "../screens/NotificationsScreen/NotificationsScreen";
 import { MyProfileScreen } from "../screens/MyProfileScreen";
 import { SettingsStack } from "./SettingsStack";
+import { useLogout } from "../hooks/useLogout";
 
 const Drawer = createDrawerNavigator<DrawerNavigatorParamList>();
 
@@ -29,6 +30,7 @@ const DrawerHeader = ({
   className?: ViewProps["className"];
 }) => {
   const user = useUser()!;
+  const logout = useLogout();
   return (
     <>
       <View className={twMerge("md:hidden", className)}>
@@ -38,6 +40,13 @@ const DrawerHeader = ({
             <StyledText weight={600} color="black">
               {user.name}
             </StyledText>
+            <Pressable
+              onPress={() => {
+                logout();
+              }}
+            >
+              <StyledText color="black">Logout</StyledText>
+            </Pressable>
           </View>
           <IconButton
             iconProps={{ name: "notifications", color: "gray38", size: 23 }}
@@ -63,6 +72,8 @@ const DrawerFooter = ({
 }) => {
   const user = useUser()!;
 
+  const logout = useLogout();
+
   return (
     <View className={twMerge("items-center mb-20", className)}>
       <Avatar
@@ -76,6 +87,13 @@ const DrawerFooter = ({
       <StyledText color="gray7C" weight={500}>
         {user.email}
       </StyledText>
+      <Pressable
+        onPress={() => {
+          logout();
+        }}
+      >
+        <StyledText>Logout</StyledText>
+      </Pressable>
     </View>
   );
 };
