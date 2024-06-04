@@ -62,12 +62,7 @@ export const ConnectionReviewCard = ({
               ItemSeparatorComponent={() => <HorizontalDivider />}
               renderItem={({ item }) => (
                 <View className="flex-row justify-between items-center p-2">
-                  <ConnectionDetails
-                    userAvatar={item.profilePictureUrl}
-                    userName={item.name}
-                    userPosition={item.headline}
-                    isVerified={item.isEmailVerified}
-                  />
+                  <ConnectionDetails user={item} />
                   <IconButton
                     onPress={() => {}}
                     iconProps={{ name: "review" }}
