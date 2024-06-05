@@ -1,17 +1,10 @@
-import { View, FlatList, ScrollView, ActivityIndicator } from "react-native";
+import { View, ScrollView } from "react-native";
 import React from "react";
 import { DrawerHeader } from "../../components/headers/DrawerHeader";
-import {
-  Card,
-  HorizontalDivider,
-  MyReviewsCard,
-  ProfileCard,
-  StyledText,
-} from "../../components";
+import { HorizontalDivider, ProfileCard } from "../../components";
 
-import { ReviewsList } from "../../components/ReviewsList";
 import { useUser } from "../../hooks";
-import { useUserRatings } from "../../hooks/useUserRatings";
+import { MyLatestReviews } from "../../components/MyLatestReviews";
 
 export const MyProfileScreen = ({}: {}) => {
   const me = useUser()!;
@@ -26,15 +19,7 @@ export const MyProfileScreen = ({}: {}) => {
 
           <HorizontalDivider className="bg-light-primary my-6" />
 
-          <Card
-            bodyComponent={<ReviewsList userId={me!.id} />}
-            hideHeaderDivider
-            headerComponent={
-              <StyledText xl2 weight={500}>
-                My latest reviews
-              </StyledText>
-            }
-          />
+          <MyLatestReviews allowPlatformWideReviews={false} />
         </View>
       </View>
     </ScrollView>
