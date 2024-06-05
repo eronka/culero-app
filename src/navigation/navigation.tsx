@@ -56,7 +56,7 @@ const RootNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false,
+        header: () => null,
         animation: "slide_from_right",
       }}
     >
@@ -75,7 +75,6 @@ const RootNavigator = () => {
         name="EmailVerificationSuccess"
         component={EmailVerificationSuccess}
         options={{
-          headerShown: true,
           contentStyle: {
             backgroundColor: "#ffffff",
           },

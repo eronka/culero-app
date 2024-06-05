@@ -4,6 +4,12 @@ import { StyledPressable } from "./StyledPressable";
 import { HorizontalDivider } from "./HorizontalDivider";
 import { ReactElement, ReactNode } from "react";
 import { Icon } from "../icons";
+import * as WebBrowser from "expo-web-browser";
+import * as Linking from "expo-linking";
+import storage from "../utils/storage";
+import { baseUrl } from "../utils/api";
+
+WebBrowser.maybeCompleteAuthSession();
 
 const SocialMediaConnection = ({
   description,
@@ -38,35 +44,54 @@ const SocialMediaConnection = ({
   );
 };
 
-export const SocialMediaConnections = () => (
-  <View className="w-full py-4">
-    <SocialMediaConnection
-      SocialMediaIcon={<Icon name="linkedin-square" size={40} />}
-      platformName="LinkedIn"
-      onPressConnect={() => console.log("press")}
-      description={
-        "Connect your LinkedIn account to showcase your professional background and network"
-      }
-    />
-    <HorizontalDivider className="my-2" />
+export const SocialMediaConnections = () => {
+  // const userQuery = useUserQuery(true);
 
-    <SocialMediaConnection
-      SocialMediaIcon={<Icon name="instagram-square" size={40} />}
-      onPressConnect={() => console.log("press")}
-      platformName="Instagram"
-      description={
-        "Connect your Instagram account to share a glimpse of your creative side"
-      }
-    />
-    <HorizontalDivider className="my-2" />
+  const initializePopup = async (platformName: string) => {
+    const cb = Linking.createURL("/");
 
-    <SocialMediaConnection
-      SocialMediaIcon={<Icon name="github-square" size={40} />}
-      onPressConnect={() => console.log("press")}
-      platformName="GitHub"
-      description={
-        "Connect your GitHub account to showcase your coding projects and contributions"
-      }
-    />
-  </View>
-);
+    const result = await WebBrowser.openAuthSessionAsync(
+      `${baseUrl}/auth/linkedin?app_url=${cb}`,
+      cb
+    );
+
+    if (result.type === "success") {
+      const token = result.url.split("?")[1].split("=")[1];
+      await storage.setItem(storage.TOKEN_KEY, token);
+      // userQuery.refetch();
+    }
+  };
+
+  return (
+    <View className="w-full py-4">
+      <SocialMediaConnection
+        SocialMediaIcon={<Icon name="linkedin-square" size={40} />}
+        platformName="LinkedIn"
+        onPressConnect={() => initializePopup("linkedin")}
+        description={
+          "Connect your LinkedIn account to showcase your professional background and network"
+        }
+      />
+      <HorizontalDivider className="my-2" />
+
+      <SocialMediaConnection
+        SocialMediaIcon={<Icon name="instagram-square" size={40} />}
+        onPressConnect={() => console.log("press")}
+        platformName="Instagram"
+        description={
+          "Connect your Instagram account to share a glimpse of your creative side"
+        }
+      />
+      <HorizontalDivider className="my-2" />
+
+      <SocialMediaConnection
+        SocialMediaIcon={<Icon name="github-square" size={40} />}
+        onPressConnect={() => initializePopup("github")}
+        platformName="GitHub"
+        description={
+          "Connect your GitHub account to showcase your coding projects and contributions"
+        }
+      />
+    </View>
+  );
+};

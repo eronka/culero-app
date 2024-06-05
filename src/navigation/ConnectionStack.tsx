@@ -23,7 +23,7 @@ export const ConnectionStack = () => {
   useResetScreenOnBlur();
   return (
     <Stack.Navigator
-      screenOptions={{ headerShown: false }}
+      screenOptions={{ header: () => null }}
       initialRouteName="SearchConnection"
     >
       <Stack.Screen

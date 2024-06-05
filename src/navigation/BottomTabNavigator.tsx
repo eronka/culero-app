@@ -18,7 +18,7 @@ export function BottomNavigator(props: { initialRoute?: string }) {
   return (
     <Tab.Navigator
       screenOptions={{
-        headerShown: false,
+        header: () => null,
         tabBarIconStyle: {},
         tabBarStyle: {
           height: 75,
