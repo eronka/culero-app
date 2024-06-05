@@ -11,5 +11,5 @@ export function useUserQuery(disabled?: boolean) {
 
 export function useUser() {
   const { data, error } = useUserQuery();
-  return data ? data : null;
+  return data && !error ? data : null;
 }
