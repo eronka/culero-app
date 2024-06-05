@@ -35,10 +35,7 @@ export const UserCard = ({ className, connection }: UserCardProps) => {
               <ConnectionDetails
                 usernameTextClassName="text-white"
                 positionTextClassName="text-white7"
-                userName={connection.name}
-                userPosition={connection.headline}
-                userAvatar={connection.profilePictureUrl}
-                isVerified={connection.isEmailVerified}
+                user={connection}
               />
             </View>
             <View className="hidden md:flex flex-1">

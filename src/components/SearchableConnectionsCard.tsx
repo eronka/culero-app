@@ -102,10 +102,7 @@ export const SearchableConnectionsCard = ({
                     <ConnectionDetails
                       avatarSize={isPhone ? 64 : 86}
                       badgeSize={isPhone ? 24 : 34}
-                      userAvatar={item.profilePictureUrl}
-                      userName={item.name!}
-                      userPosition={item.headline!}
-                      isVerified={item.isEmailVerified}
+                      user={item}
                     />
                   </Pressable>
                   <View className="md:flex-row-reverse items-center md:justify">
