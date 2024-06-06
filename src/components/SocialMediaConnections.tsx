@@ -111,7 +111,7 @@ export const SocialMediaConnections = () => {
           />
           <HorizontalDivider className="my-2" />
           <SocialMediaConnection
-            SocialMediaIcon={<Icon name="instagram-square" size={40} />}
+            SocialMediaIcon={<Icon name="facebook-square" size={40} />}
             onPressConnect={() => initializePopup("facebook")}
             platformName="Facebook"
             socialAccount={facebookAccount}

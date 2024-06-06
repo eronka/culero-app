@@ -17,7 +17,7 @@ export const IconButton = ({
 }: IconButtonProps) => {
   return (
     <View className={twMerge("flex items-center justify-center", className)}>
-      <Pressable {...props} className="">
+      <Pressable {...props}>
         <Icon {...iconProps} />
       </Pressable>
       {label && <StyledText>{label}</StyledText>}

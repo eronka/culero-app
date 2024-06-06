@@ -9,6 +9,7 @@ import MaterialCommunity from "@expo/vector-icons/MaterialCommunityIcons";
 import Material from "@expo/vector-icons/MaterialIcons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import Entypo from "@expo/vector-icons/Entypo";
 
 import colors from "../../colors";
 import { twMerge } from "tailwind-merge";
@@ -24,6 +25,7 @@ import { HomeIcon } from "./HomeIcon";
 import { UserIcon } from "./UserIcon";
 import { UserAvatar } from "./UserAvatar";
 import { UserNotFoundIcon } from "./UserNotFound";
+import { FacebookIcon } from "./FacebookIcon";
 
 export type IconName =
   | "edit"
@@ -31,7 +33,7 @@ export type IconName =
   | "search"
   | "arrow-down"
   | "github-square"
-  | "instagram-square"
+  | "facebook-square"
   | "linkedin-square"
   | "heart"
   | "heart-o"
@@ -43,6 +45,7 @@ export type IconName =
   | "linkedin-color"
   | "github-color"
   | "twitter-color"
+  | "facebook-color"
   | "user-star"
   | "user-group"
   | "home"
@@ -95,10 +98,10 @@ export const Icon = ({ name, color, size, className }: IconProps) => {
           color={color ? colors[color] : colors["black"]}
         />
       )}
-      {name == "instagram-square" && (
+      {name == "facebook-square" && (
         <FontAwesome5Brands
           size={size}
-          name="instagram-square"
+          name="facebook-square"
           color={color ? colors[color] : colors["black"]}
         />
       )}
@@ -138,9 +141,24 @@ export const Icon = ({ name, color, size, className }: IconProps) => {
         />
       )}
       {name == "instagram-color" && <InstaIcon />}
-      {name == "linkedin-color" && <LinkedinIcon />}
+      {name == "facebook-color" && (
+        <FontAwesome5Brands
+          size={size || 51}
+          name="facebook"
+          color={"#1c6af5"}
+        />
+      )}
+      {name == "linkedin-color" && (
+        <Entypo
+          size={size || 51}
+          name="linkedin-with-circle"
+          color={"#1566bb"}
+        />
+      )}
       {name == "twitter-color" && <TwitterIcon />}
-      {name == "github-color" && <GithubIcon />}
+      {name == "github-color" && (
+        <FontAwesome5Brands size={size || 51} name="github" />
+      )}
       {name == "user-star" && (
         <UserStarIcon size={size} color={color ? colors[color] : undefined} />
       )}

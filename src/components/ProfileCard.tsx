@@ -10,7 +10,7 @@ import {
 import { StyledText } from "./StyledText";
 import { Icon } from "../icons";
 import { StyledPressable } from "./StyledPressable";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { StyledModal } from "./StyledModal";
 import { useFormik } from "formik";
 import { User } from "../types";
@@ -22,6 +22,10 @@ import { useUpdateProfilePicture } from "../hooks/useUpdateProfilePicture";
 import * as ImagePicker from "expo-image-picker";
 import { useScreenInfo } from "../hooks/useScreenInfo";
 import { useConnection } from "../hooks/useConnection";
+import { useSocialAccounts } from "../hooks/useSocialAccounts";
+import { IconButton } from "./IconButton";
+import * as Linking from "expo-linking";
+import { SocialAccount } from "../types/SocialAccount";
 
 export type ProfileCardProps = {
   user: User;
@@ -158,6 +162,22 @@ export const ProfileCard = ({ user, className }: ProfileCardProps) => {
   const avgs = useUserRatings(user.id);
   const connectionData = useConnection(user.id);
   const { isPhone } = useScreenInfo();
+  const socialAccounts = useSocialAccounts();
+
+  const githubAccount: SocialAccount | undefined = useMemo(
+    () => socialAccounts.data?.find((s) => s.platform === "GITHUB"),
+    [socialAccounts.data]
+  );
+  const facebookAccount = useMemo(
+    () => socialAccounts.data?.find((s) => s.platform === "FACEBOOK"),
+    [socialAccounts.data]
+  );
+  const linkedinAccount: SocialAccount | undefined = useMemo(
+    () => socialAccounts.data?.find((s) => s.platform === "LINKEDIN"),
+    [socialAccounts.data]
+  );
+  const hasSocialAccount =
+    !!githubAccount || !!facebookAccount || !!linkedinAccount;
 
   return (
     <>
@@ -227,6 +247,37 @@ export const ProfileCard = ({ user, className }: ProfileCardProps) => {
                       Contact info
                     </StyledText>
                   </StyledText>
+                )}
+                {hasSocialAccount && (
+                  <View className="flex-row">
+                    {linkedinAccount && (
+                      <IconButton
+                        iconProps={{ name: "linkedin-color", size: 32 }}
+                        onPress={() =>
+                          linkedinAccount.profileUrl &&
+                          Linking.openURL(linkedinAccount.profileUrl)
+                        }
+                      />
+                    )}
+                    {facebookAccount && (
+                      <IconButton
+                        iconProps={{ name: "facebook-color", size: 32 }}
+                        onPress={() =>
+                          facebookAccount.profileUrl &&
+                          Linking.openURL(facebookAccount.profileUrl)
+                        }
+                      />
+                    )}
+                    {githubAccount && (
+                      <IconButton
+                        iconProps={{ name: "github-color", size: 32 }}
+                        onPress={() =>
+                          githubAccount.profileUrl &&
+                          Linking.openURL(githubAccount.profileUrl)
+                        }
+                      />
+                    )}
+                  </View>
                 )}
                 {connectionData.isFetched && connectionData.data && (
                   <StyledText color="gray38">

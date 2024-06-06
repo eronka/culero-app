@@ -8,11 +8,14 @@ import Svg, {
   SvgProps,
 } from "react-native-svg";
 
-export const LinkedinIcon = (props: SvgProps) => {
+export const LinkedinIcon = ({
+  size = 51,
+  ...props
+}: SvgProps & { size?: number }) => {
   return (
     <Svg
-      width={51}
-      height={51}
+      width={size}
+      height={size}
       viewBox="0 0 51 51"
       fill="none"
       // @ts-ignore
