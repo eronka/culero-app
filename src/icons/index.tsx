@@ -16,16 +16,13 @@ import { twMerge } from "tailwind-merge";
 import { MessageIcon } from "./MessageIcon";
 import { ReviewIcon } from "./ReviewIcon";
 import { InstaIcon } from "./InstagramIcon";
-import { LinkedinIcon } from "./LinkedinIcon";
 import { TwitterIcon } from "./TwitterIcon";
-import { GithubIcon } from "./GithubIcon";
 import { UserStarIcon } from "./UserStarIcon";
 import { UserGroupIcon } from "./UserGroupIcon";
 import { HomeIcon } from "./HomeIcon";
 import { UserIcon } from "./UserIcon";
 import { UserAvatar } from "./UserAvatar";
 import { UserNotFoundIcon } from "./UserNotFound";
-import { FacebookIcon } from "./FacebookIcon";
 
 export type IconName =
   | "edit"
