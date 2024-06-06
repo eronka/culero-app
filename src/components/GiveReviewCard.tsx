@@ -121,7 +121,7 @@ export const GiveReviewCard = ({
 
   const form = useFormik({
     initialValues: {
-      anonymous: true,
+      anonymous: false,
       comment: "",
       professionalism: 0,
       reliability: 0,
@@ -165,7 +165,7 @@ export const GiveReviewCard = ({
       setEditingEnabled(false);
     } else {
       setFieldValue("comment", "");
-      setFieldValue("anonymous", true);
+      setFieldValue("anonymous", false);
       setFieldValue("professionalism", 0);
       setFieldValue("reliability", 0);
       setFieldValue("communication", 0);
