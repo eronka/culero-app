@@ -21,7 +21,7 @@ const UserSearchResult = ({ user }: { user: ConnectionPreview }) => {
   const connectionNav = useNavToConnection();
   return (
     <Pressable
-      className="flex-row hover:bg-whiteFA items-center p-2"
+      className="flex-row hover:bg-grayF2 items-center p-2"
       onPress={() => {
         connectionNav.navigate(user.id);
       }}
@@ -125,7 +125,7 @@ export const DrawerHeader = ({
                 });
               }}
               iconProps={{ name: "notifications", size: 16 }}
-              className="bg-white shadow-md rounded-full h-9 w-9 hover:bg-whiteFA ml-2"
+              className="bg-white shadow-md rounded-full h-9 w-9 hover:bg-grayF2 ml-2"
             />
           </View>
         </View>

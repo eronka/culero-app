@@ -25,7 +25,10 @@ export const ConnectionDetails = ({
   const nav = useNavToConnection();
   return (
     <Pressable
-      className={twMerge("flex-row items-center", className)}
+      className={twMerge(
+        "flex-row items-center bg hover:opacity-50",
+        className
+      )}
       onPress={() => nav.navigate(user.id)}
     >
       <Avatar

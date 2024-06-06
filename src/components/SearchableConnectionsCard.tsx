@@ -95,7 +95,6 @@ export const SearchableConnectionsCard = ({
                   <Pressable
                     className="flex-grow"
                     onPress={() => {
-                      console.log("item.id", item.id);
                       navigation.navigate("Connection", { userId: item.id });
                     }}
                   >

@@ -7,6 +7,8 @@ import { ConnectionDetails } from "./ConnectionDetails";
 import { useState } from "react";
 import { IconButton } from "./IconButton";
 import { useSuggestedForReviewConnections } from "../hooks/useSuggestedForReviewConenctions";
+import { StyledPressable } from "./StyledPressable";
+import { useNavToConnection } from "../hooks/useNavToConnection";
 
 export type ConnectionsReviewCardProps = {
   className?: ViewProps["className"];
@@ -23,6 +25,8 @@ export const ConnectionReviewCard = ({
 }: ConnectionsReviewCardProps) => {
   const [expanded, setExpand] = useState(false);
   const connections = useSuggestedForReviewConnections();
+  const nav = useNavToConnection();
+
   return (
     <Card
       className={className}
@@ -34,11 +38,14 @@ export const ConnectionReviewCard = ({
                 {title}
               </StyledText>
               {expandable && (
-                <Pressable onPress={() => setExpand(!expanded)}>
+                <StyledPressable
+                  color="transparent"
+                  onPress={() => setExpand(!expanded)}
+                >
                   <StyledText className="text-sm">
                     {expanded ? "See Less" : "See All"}
                   </StyledText>
-                </Pressable>
+                </StyledPressable>
               )}
             </View>
             {subtitle && (
@@ -61,10 +68,10 @@ export const ConnectionReviewCard = ({
               )}
               ItemSeparatorComponent={() => <HorizontalDivider />}
               renderItem={({ item }) => (
-                <View className="flex-row justify-between items-center p-2">
+                <View className="flex-row justify-between items-center p-2 rounded-md">
                   <ConnectionDetails user={item} />
                   <IconButton
-                    onPress={() => {}}
+                    onPress={() => nav.navigate(item.id)}
                     iconProps={{ name: "review" }}
                   />
                 </View>

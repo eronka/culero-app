@@ -15,9 +15,14 @@ export const IconButton = ({
   className,
   ...props
 }: IconButtonProps) => {
+  const btnSize = (iconProps.size || 22) + 14;
   return (
     <View className={twMerge("flex items-center justify-center", className)}>
-      <Pressable {...props} className="">
+      <Pressable
+        style={{ height: btnSize, width: btnSize }}
+        {...props}
+        className="rounded-full hover:bg-grayF2 items-center justify-center"
+      >
         <Icon {...iconProps} />
       </Pressable>
       {label && <StyledText>{label}</StyledText>}

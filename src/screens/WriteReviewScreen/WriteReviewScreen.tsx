@@ -50,7 +50,7 @@ export const WriteReviewScreen = () => {
                   </StyledText>
                   <SearchBar
                     placeholder="Enter social link"
-                    containerClassName="mt-2  bg-grayF7"
+                    containerClassName="mt-2  bg-grayF2"
                     onSubmit={async (value) => {
                       if (!value) {
                         return;

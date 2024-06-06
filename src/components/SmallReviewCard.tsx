@@ -42,7 +42,7 @@ export const SmallReviewCard = ({
               }}
             />
             <Pressable
-              className="flex justify-center items-center"
+              className="flex justify-center items-center hover:opacity-50"
               disabled={review.isAnonymous}
               onPress={() => {
                 if (review.postedBy?.id) {
