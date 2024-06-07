@@ -75,7 +75,7 @@ const normalizeResult = async (response: Response) => {
   return responseData;
 };
 
-const authorizedFetch = async (
+export const authorizedFetch = async (
   input: FetchInput,
   init: FetchInit | object
 ): Promise<any> => {

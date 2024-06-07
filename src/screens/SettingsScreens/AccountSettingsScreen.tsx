@@ -18,6 +18,7 @@ import { useUpdateProfilePicture } from "../../hooks/useUpdateProfilePicture";
 import { useUpdateProfile } from "../../hooks/useUpdateProfile";
 import { StyledModal } from "../../components/StyledModal";
 import { useDeleteAccount } from "../../hooks/useDeleteAccount";
+import { SocialMediaModal } from "../../components/SocialMediaModal";
 
 export type SettingItemProps = {
   title: string;
@@ -92,35 +93,6 @@ const SettingItem = ({
         {editing ? "Save" : buttonText}
       </StyledPressable>
     </View>
-  );
-};
-
-type SocialMediaProps = {
-  visible: boolean;
-  setVisibility: (v: boolean) => void;
-};
-const SocialMediaModal = ({ visible, setVisibility }: SocialMediaProps) => {
-  return (
-    <StyledModal isVisible={visible} setVisibility={setVisibility}>
-      <View
-        className="items-center self-center p-10 mx-20"
-        style={{ maxWidth: 600 }}
-      >
-        <StyledText weight={600}>Social Media</StyledText>
-        <StyledText weight={600} xl2 className="mb-4">
-          Manage your social media
-        </StyledText>
-        <SocialMediaConnections />
-        <StyledPressable
-          onPress={() => setVisibility(false)}
-          color="primary"
-          className="w-64 mt-4"
-          textVariant={{ color: "white" }}
-        >
-          Back to Home
-        </StyledPressable>
-      </View>
-    </StyledModal>
   );
 };
 
