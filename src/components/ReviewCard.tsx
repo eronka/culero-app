@@ -11,6 +11,7 @@ import { useLikeReview } from "../hooks/useLikeReview";
 import { useUnlikeReview } from "../hooks/useUnlikeReview";
 import { Review } from "../types/Review";
 import { useNavToConnection } from "../hooks/useNavToConnection";
+import { formatDistance } from "date-fns/formatDistance";
 
 export type RatingCardProps = {
   review: Review;
@@ -112,9 +113,9 @@ export const ReviewCard = ({ className, review }: RatingCardProps) => {
             <StyledText
               color="gray83"
               className="text-xs text-right mt-4"
-            >{`Posted on: ${new Date(
-              review.createdAt
-            ).toLocaleDateString()}`}</StyledText>
+            >{`Posted ${formatDistance(new Date(review.createdAt), new Date(), {
+              addSuffix: true,
+            })}`}</StyledText>
           </View>
         </View>
       }
