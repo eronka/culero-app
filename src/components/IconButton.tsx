@@ -18,6 +18,7 @@ export const IconButton = ({
   const btnSize = (iconProps.size || 22) + 14;
   return (
     <View className={twMerge("flex items-center justify-center", className)}>
+
       <Pressable
         style={{ height: btnSize, width: btnSize }}
         {...props}
