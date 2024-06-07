@@ -25,7 +25,7 @@ export const RadioButtons = ({
       {options.map((option) => (
         <Pressable
           onPress={() => onSelect(option)}
-          className="flex-row items-center md:py-0 py-1"
+          className="flex-row items-center md:py-0 py-1 shrink hover:opacity-50"
         >
           <CheckBox
             value={option.selected}

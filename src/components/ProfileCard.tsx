@@ -112,7 +112,7 @@ const EditModal = ({ visible, setVisibility, user }: EditModalProps) => {
         <StyledText weight={600} xl2>
           Edit profile
         </StyledText>
-        <Pressable onPress={pickImage}>
+        <Pressable onPress={pickImage} className="hover:opacity-50">
           <Avatar
             userImage={formik.values.profilePictureUrl}
             size={151}

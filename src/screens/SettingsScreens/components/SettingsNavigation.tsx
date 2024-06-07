@@ -1,5 +1,10 @@
 import { FlatList, Pressable, View } from "react-native";
-import { Card, HorizontalDivider, StyledText } from "../../../components";
+import {
+  Card,
+  HorizontalDivider,
+  StyledPressable,
+  StyledText,
+} from "../../../components";
 import { Icon } from "../../../icons";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { SettingsStackParamList } from "../../../types";
@@ -27,15 +32,16 @@ export const SettingsNavigation = ({ items }: SettingsNavigationProps) => {
           )}
           renderItem={({ item }) => {
             return (
-              <Pressable
-                className="flex-row justify-between hover:bg-white7 py-8 px-4 rounded-lg"
+              <StyledPressable
+                color="transparent"
+                className="flex-row justify-between hover:bg-white7 py-8 px-4 rounded-lg hover:no-underline"
                 onPress={() => navigation.navigate(item.navTo)}
               >
                 <StyledText weight={600} xl2>
                   {item.title}
                 </StyledText>
                 <Icon name="right-arrow" color="black" size={20} />
-              </Pressable>
+              </StyledPressable>
             );
           }}
         />

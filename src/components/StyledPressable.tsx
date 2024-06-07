@@ -11,13 +11,13 @@ import { Icon, IconProps } from "../icons";
 import { twMerge } from "tailwind-merge";
 
 const button = tv({
-  base: "rounded-md p-2 px-6 flex items-center justify-center flex-row disabled:bg-opacity-50",
+  base: "rounded-md p-2 px-6 flex items-center justify-center flex-row disabled:bg-opacity-50 disabled:pointer-events-none",
   variants: {
     color: {
-      light: "bg-light-primary",
-      white: "bg-white",
-      primary: "bg-primary weight-900",
-      transparent: "bg-transparent",
+      light: "bg-light-primary hover:bg-[#b4c8ff]",
+      white: "bg-white hover:bg-grayF2",
+      primary: "bg-primary weight-900 hover:bg-[#3278ff]",
+      transparent: "bg-transparent hover:underline p-0",
     },
     // full width button
     fw: {
@@ -57,7 +57,7 @@ export const StyledPressable = ({
 }: StyledPressableProps) => (
   <Pressable
     className={button({ color, fw, rounded, className })}
-    style={disabled ? { opacity: 0.5 } : { opacity: 1 }}
+    style={disabled ? { opacity: 0.5, pointerEvents: "none" } : { opacity: 1 }}
     disabled={isLoading || disabled}
     {...props}
   >

@@ -37,6 +37,9 @@ const text = tv({
       "deep-red": "text-deep-red",
       "light-primary": "text-light-primary",
     },
+    pressable: {
+      true: "hover:underline cursor-pointer",
+    },
     sm: {
       true: "text-sm",
     },
@@ -105,6 +108,7 @@ export const StyledText = ({
   xl8,
   xl9,
   center,
+  onPress,
   className,
   ...props
 }: StyledTextProps) => {
@@ -127,10 +131,12 @@ export const StyledText = ({
           xl7,
           xl8,
           xl9,
+          pressable: onPress ? true : undefined,
           center,
         }),
         className
       )}
+      onPress={onPress}
       {...props}
     />
   );

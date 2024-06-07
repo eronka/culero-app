@@ -41,9 +41,9 @@ export const ReviewCard = ({ className, review }: RatingCardProps) => {
     <Card
       className={twMerge("px-9 py-4", className)}
       headerComponent={
-        <View className="flex-row justify-between p-2 items-center pb-4">
+        <View className="flex-row justify-between p-2 items-center pb-4 ">
           <Pressable
-            className="flex-row"
+            className="flex-row hover:opacity-50 "
             disabled={review.isAnonymous}
             onPress={() => {
               if (review.postedBy?.id) {
@@ -51,10 +51,12 @@ export const ReviewCard = ({ className, review }: RatingCardProps) => {
               }
             }}
           >
-            <Avatar
-              userImage={review.postedBy?.profilePictureUrl}
-              isAnonymous={review.isAnonymous}
-            />
+            <View className="hover:opacity-50">
+              <Avatar
+                userImage={review.postedBy?.profilePictureUrl}
+                isAnonymous={review.isAnonymous}
+              />
+            </View>
             <View className="ml-2">
               <StyledText weight={700} className="text-3xl">
                 {overallRating.toLocaleString("en", {
