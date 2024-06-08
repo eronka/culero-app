@@ -1,11 +1,18 @@
 # Culero
 
-[Live Demo](https://youtu.be/pdTLFS2vTNQ)
+## Share anonymous, honest feedback about your professional network on Culero
+
+<img width="1796" alt="image" src="https://github.com/eronka/culero-app/assets/4149765/0b18e1b0-a0ab-470a-b95c-8675235a4adc">
+
 
 Why we care about culero?
 We passionatly beleive that as world citizens, we are all public figures & need to be help hold each other accountable for our words, thoughts & deeds. Culero is the public forum for people to express their opinions & share their experiences. Together we can create a better world.
 
 Thanks to the open source community for your contribution. I am absolutely loving witnessing the project grows by the community and looking forward to seeing the evolution we can make to the project
+
+## Live Demo
+
+[Live Demo](https://youtu.be/pdTLFS2vTNQ)
 
 ## Repositories
 
