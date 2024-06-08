@@ -1,6 +1,9 @@
-# Culero
+# Culero - Share anonymous, honest feedback about your professional network on Culero
 
-## Share anonymous, honest feedback about your professional network on Culero
+[Live Demo](https://youtu.be/pdTLFS2vTNQ)
+
+[Join Culero Community](https://discord.gg/tyaRVrJsDW)
+
 
 <img width="1796" alt="image" src="https://github.com/eronka/culero-app/assets/4149765/0b18e1b0-a0ab-470a-b95c-8675235a4adc">
 
@@ -14,15 +17,23 @@ Thanks to the open source community for your contribution. I am absolutely lovin
 
 [Live Demo](https://youtu.be/pdTLFS2vTNQ)
 
+## Join our community
+
+On our Discord Channel : https://discord.gg/tyaRVrJsDW.
+
 ## Repositories
 
 - React Native client - https://github.com/eronka/culero-app
 - API - https://github.com/eronka/culero-api
 
+## Stack
 
-## Join our community
-
-On our Discord Channel : https://discord.gg/tyaRVrJsDW.
+- App Build - Nest JS
+- Database - Postgre
+- Cache - Redis
+- App Platform - React Native
+- Deployment - Fly
+- API - https://github.com/eronka/culero-api
 
 # Culero Expo Application
 
