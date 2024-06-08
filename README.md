@@ -4,6 +4,8 @@
 
 [Join Culero Community](https://discord.gg/tyaRVrJsDW)
 
+[Github Project with Roadmap](https://github.com/orgs/eronka/projects/5)
+
 
 <img width="1796" alt="image" src="https://github.com/eronka/culero-app/assets/4149765/0b18e1b0-a0ab-470a-b95c-8675235a4adc">
 
@@ -19,7 +21,8 @@ Thanks to the open source community for your contribution. I am absolutely lovin
 
 ## Join our community
 
-On our Discord Channel : https://discord.gg/tyaRVrJsDW.
+[On our Discord Channel](https://discord.gg/tyaRVrJsDW)
+[Github Project with Roadmap](https://github.com/orgs/eronka/projects/5)
 
 ## API Documentation
 
