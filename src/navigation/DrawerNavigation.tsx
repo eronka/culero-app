@@ -236,6 +236,21 @@ export const DrawerNavigator = () => {
         headerTitle: "",
         drawerType: isPhone ? "front" : "permanent",
 
+        header: (props) => {
+          return (
+            <View
+              style={{ height: 60, backgroundColor: "white" }}
+              className="shadow-md items-center flex-row px-4"
+            >
+              <IconButton
+                iconProps={{ name: "hamburger", size: 36 }}
+                onPress={() => props.navigation.openDrawer()}
+              />
+            </View>
+          );
+        },
+        drawerActiveTintColor: "black",
+
         drawerLabelStyle: {
           fontFamily: "Inter_500Medium",
           fontSize: 18,
