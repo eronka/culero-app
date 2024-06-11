@@ -59,7 +59,8 @@ export type IconName =
   | "back"
   | "right-arrow"
   | "user-not-found"
-  | "grid";
+  | "grid"
+  | "hamburger";
 
 export type IconProps = {
   name: IconName;
@@ -242,6 +243,13 @@ export const Icon = ({ name, color, size, className }: IconProps) => {
       {name === "grid" && (
         <Ionicons
           name="grid"
+          size={size}
+          color={color ? colors[color] : colors["black"]}
+        />
+      )}
+      {name === "hamburger" && (
+        <Ionicons
+          name="menu"
           size={size}
           color={color ? colors[color] : colors["black"]}
         />

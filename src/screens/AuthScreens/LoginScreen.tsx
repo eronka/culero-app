@@ -64,7 +64,7 @@ export const LoginScreen = () => {
           <>
             <AppleAuthButton />
             <LinkedinAuthButton />
-            <FacebookAuthButton />
+            {/* <FacebookAuthButton /> */}
             <GithubAuthButton />
           </>
         )}
