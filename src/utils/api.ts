@@ -66,6 +66,13 @@ const stringifyBody = () => {
   });
 };
 
+// used in development.
+const simulateSlowNetwork = async (response: Response): Promise<Response> => {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(response), 5000);
+  });
+};
+
 const normalizeResult = async (response: Response) => {
   const responseData = await response.json();
   if (responseData.message != null) {
@@ -93,7 +100,13 @@ export const authorizedFetch = async (
       }),
       stringifyBody(),
     ],
-    [normalizeResult]
+    [
+      /** Uncomment next line in dev mode to check how the app behaves
+       * when the api connection is sLoW
+       */
+      simulateSlowNetwork,
+      normalizeResult,
+    ]
   );
 };
 

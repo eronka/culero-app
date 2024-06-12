@@ -81,7 +81,7 @@ export const DeleteReviewModal = ({
             color="transparent"
             textVariant={{ color: "deep-red" }}
             onPress={async () => {
-              await onDeleteConfirmation();
+              onDeleteConfirmation();
               setVisibility(false);
             }}
           >
@@ -126,6 +126,7 @@ export const GiveReviewCard = ({
       professionalism: 0,
       reliability: 0,
       communication: 0,
+      id: "",
     },
     onSubmit: async (values, { resetForm }) => {
       if (!myReviewForUser.data) {
@@ -139,7 +140,7 @@ export const GiveReviewCard = ({
         await updateReview.mutate({
           ratedUserId: ratedUser.id,
           data: values,
-          reviewId: myReviewForUser.data.id,
+          reviewId: values.id,
         });
       }
     },
@@ -162,6 +163,8 @@ export const GiveReviewCard = ({
       setFieldValue("professionalism", myReviewForUser.data.professionalism);
       setFieldValue("reliability", myReviewForUser.data.reliability);
       setFieldValue("communication", myReviewForUser.data.communication);
+      setFieldValue("id", myReviewForUser.data.id);
+
       setEditingEnabled(false);
     } else {
       setFieldValue("comment", "");
@@ -171,7 +174,11 @@ export const GiveReviewCard = ({
       setFieldValue("communication", 0);
       setEditingEnabled(true);
     }
-  }, [myReviewForUser.data, myReviewForUser.isFetched]);
+  }, [
+    myReviewForUser.data,
+    myReviewForUser.isFetched,
+    myReviewForUser.data?.id,
+  ]);
 
   const buttons = useMemo(
     () =>
@@ -384,7 +391,10 @@ export const GiveReviewCard = ({
                     }}
                     className="self-end mt-8 md:mt-2 md:min-w-52"
                     color="primary"
-                    disabled={!!myReviewForUser.data && !isEditingEnabled}
+                    disabled={
+                      (!!myReviewForUser.data && !isEditingEnabled) ||
+                      (myReviewForUser.data && !myReviewForUser.data.id)
+                    }
                     textVariant={{ color: "white" }}
                   >
                     {myReviewForUser.data
