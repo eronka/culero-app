@@ -104,7 +104,7 @@ export const authorizedFetch = async (
       /** Uncomment next line in dev mode to check how the app behaves
        * when the api connection is sLoW
        */
-      simulateSlowNetwork,
+      // simulateSlowNetwork,
       normalizeResult,
     ]
   );
