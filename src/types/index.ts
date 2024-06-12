@@ -9,6 +9,7 @@ import {
 } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { User } from "./User";
+import { Connection } from "./Connection";
 
 export interface APP_CONSTANTS {
   ENV: string;
@@ -49,7 +50,7 @@ export type DrawerNavigatorParamList = {
 
 export type ConnectionStackParamList = {
   SearchConnection: undefined;
-  Connection: { userId: User["id"] };
+  Connection: { userId: User["id"]; user: Connection };
 };
 
 export type SettingsStackParamList = {

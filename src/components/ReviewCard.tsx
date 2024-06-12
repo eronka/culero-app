@@ -12,6 +12,7 @@ import { useUnlikeReview } from "../hooks/useUnlikeReview";
 import { Review } from "../types/Review";
 import { useNavToConnection } from "../hooks/useNavToConnection";
 import { formatDistance } from "date-fns/formatDistance";
+import { Connection } from "../types";
 
 export type RatingCardProps = {
   review: Review;
@@ -47,7 +48,10 @@ export const ReviewCard = ({ className, review }: RatingCardProps) => {
             disabled={review.isAnonymous}
             onPress={() => {
               if (review.postedBy?.id) {
-                connectionNav.navigate(review.postedBy.id);
+                connectionNav.navigate(
+                  review.postedBy.id,
+                  review.postedBy as Connection
+                );
               }
             }}
           >

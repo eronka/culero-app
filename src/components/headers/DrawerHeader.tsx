@@ -6,7 +6,7 @@ import { HorizontalDivider } from "../HorizontalDivider";
 import { ReactElement, useEffect, useState } from "react";
 import { SearchBar } from "../SearchBar";
 import { Avatar } from "../Avatar";
-import { ConnectionPreview } from "../../types";
+import { Connection, ConnectionPreview } from "../../types";
 import { getSearchUserResult } from "../../utils/api";
 import { FlatList } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
@@ -23,7 +23,7 @@ const UserSearchResult = ({ user }: { user: ConnectionPreview }) => {
     <Pressable
       className="flex-row hover:bg-grayF2 items-center p-2"
       onPress={() => {
-        connectionNav.navigate(user.id);
+        connectionNav.navigate(user.id, user as Connection);
       }}
     >
       <View>
