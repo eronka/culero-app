@@ -63,7 +63,7 @@ export const SignupScreen = () => {
           <>
             <AppleAuthButton />
             <LinkedinAuthButton />
-            <FacebookAuthButton />
+            {/* <FacebookAuthButton /> */}
             <GithubAuthButton />
           </>
         )}

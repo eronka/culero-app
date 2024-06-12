@@ -140,26 +140,29 @@ const DrawerHeader = ({
   return (
     <>
       <View className={twMerge("md:hidden", className)}>
-        <View className="flex-row justify-between items-center px-6 py-4">
+        <View className="flex-row justify-between items-center px-6">
           <View className="flex-row items-center">
             <Avatar userImage={user.profilePictureUrl} />
             <StyledText weight={600} color="black">
               {user.name}
             </StyledText>
-            <StyledPressable
-              color="transparent"
-              onPress={() => {
-                logout();
-              }}
-            >
-              <StyledText color="black">Logout</StyledText>
-            </StyledPressable>
           </View>
           <IconButton
             iconProps={{ name: "notifications", color: "gray38", size: 23 }}
             onPress={() => {}}
           />
         </View>
+        <Pressable
+          className=" p-0 shrink mb-4 mx-4 h-8 border-primary"
+          style={{ marginLeft: 68 }}
+          onPress={() => {
+            logout();
+          }}
+        >
+          <StyledText weight={600} className="" color="red">
+            Logout
+          </StyledText>
+        </Pressable>
         <HorizontalDivider />
       </View>
 
@@ -232,6 +235,21 @@ export const DrawerNavigator = () => {
         headerShown: isPhone,
         headerTitle: "",
         drawerType: isPhone ? "front" : "permanent",
+
+        header: (props) => {
+          return (
+            <View
+              style={{ height: 60, backgroundColor: "white" }}
+              className="shadow-md items-center flex-row px-4"
+            >
+              <IconButton
+                iconProps={{ name: "hamburger", size: 36 }}
+                onPress={() => props.navigation.openDrawer()}
+              />
+            </View>
+          );
+        },
+        drawerActiveTintColor: "black",
 
         drawerLabelStyle: {
           fontFamily: "Inter_500Medium",

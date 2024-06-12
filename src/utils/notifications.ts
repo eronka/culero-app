@@ -27,9 +27,9 @@ export async function registerForPushNotificationsAsync() {
       finalStatus = status;
     }
     if (finalStatus !== "granted") {
-      handleRegistrationError(
-        "Permission not granted to get push token for push notification!"
-      );
+      // handleRegistrationError(
+      //   "Permission not granted to get push token for push notification!"
+      // );
       return;
     }
     const projectId =

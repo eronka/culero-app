@@ -42,11 +42,18 @@ const SettingItem = ({
 }: SettingItemProps) => {
   const [editing, setEdit] = useState(false);
   const [value, setValue] = useState(subtitle);
+  const { isPhone } = useScreenInfo();
 
   return (
-    <View className="flex-row items-center py-8 justify-between">
-      <View className="w-2/3 flex-row items-center text-wrap">
-        <View style={{ width: 84 }} className="mx-5">
+    <View className="md:flex-row items-center py-8 md:justify-between px-4">
+      <View className="w-full md:w-2/3 flex-row items-center text-wrap">
+        <View
+          style={{
+            width: isPhone && !showImage ? 0 : 84,
+            display: isPhone && !showImage ? "none" : "flex",
+          }}
+          className="mx-5"
+        >
           {showImage &&
             (isImageLoading ? (
               <ActivityIndicator />
@@ -73,7 +80,8 @@ const SettingItem = ({
       </View>
       <StyledPressable
         color="white"
-        className="border border-primary self-end h-8"
+        fw={isPhone}
+        className="mt-4 h-10  md:mt-0 border border-primary self-end md:h-8"
         textVariant={{ color: "primary", sm: true }}
         onPress={
           onButtonPress
