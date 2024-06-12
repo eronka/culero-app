@@ -1,4 +1,4 @@
-import { Pressable, View } from "react-native";
+import { ActivityIndicator, Pressable, View } from "react-native";
 import { useScreenInfo } from "../../hooks/useScreenInfo";
 import { StyledText } from "../StyledText";
 import { Icon, IconProps } from "../../icons";
@@ -42,25 +42,35 @@ const SearchUsersBar = () => {
   const [dropdownShown, setDropdownShown] = useState(false);
   const [isFocused, setFocused] = useState(false);
   const { height } = useScreenInfo();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (searchQuery && searchQuery !== "") {
-      getSearchUserResult(searchQuery).then((r) => setResults(r));
+      setLoading(true);
+      getSearchUserResult(searchQuery)
+        .then((r) => {
+          setResults(r);
+          setLoading(false);
+        })
+        .catch((e) => {
+          setLoading(false);
+        });
     } else {
+      setLoading(false);
       setResults([]);
     }
   }, [searchQuery]);
 
   useEffect(() => {
     if (isFocused) {
-      return setDropdownShown(true);
+      setDropdownShown(true);
     } else {
       setTimeout(() => {
         setDropdownShown(false);
+        setResults([]);
       }, 1000);
     }
   }, [isFocused]);
-  console.log("height", height);
 
   return (
     <View className="flex-row w-10/12 z-[90]" style={{ minWidth: 300 }}>
@@ -81,15 +91,25 @@ const SearchUsersBar = () => {
       />
       <View
         className="absolute z-[90] w-full top-12 rounded-lg mt-2"
-        style={{ display: dropdownShown ? "flex" : "none" }}
+        style={{
+          display: dropdownShown ? "flex" : "none",
+          minHeight: 50,
+        }}
       >
         <View className="bg-white shadow-md  rounded-b-lg  mx-5">
-          <FlatList
-            style={{ maxHeight: height / 3 }}
-            data={results}
-            ItemSeparatorComponent={() => <HorizontalDivider />}
-            renderItem={({ item }) => <UserSearchResult user={item} />}
-          />
+          {(!loading || results) && (
+            <FlatList
+              style={{ maxHeight: height / 3 }}
+              data={results}
+              ItemSeparatorComponent={() => <HorizontalDivider />}
+              renderItem={({ item }) => <UserSearchResult user={item} />}
+            />
+          )}
+          {!results.length && !!loading && (
+            <View className="h-9 mt-3">
+              <ActivityIndicator size="small" className="self-center" />
+            </View>
+          )}
         </View>
       </View>
     </View>
