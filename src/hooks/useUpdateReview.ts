@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { SendReviewData, sendReview, updateReview } from "../utils/api";
 import { useUser } from "./useUser";
-import { ReviewState } from "../types/Review";
+import { Review, ReviewState } from "../types/Review";
 
 export function useUpdateReview() {
   const queryClient = useQueryClient();
@@ -27,7 +27,7 @@ export function useUpdateReview() {
       });
     },
 
-    onMutate: async ({ ratedUserId, data }) => {
+    onMutate: async ({ ratedUserId, data, reviewId }) => {
       await queryClient.cancelQueries({ queryKey: ["my-review", ratedUserId] });
 
       // Snapshot the previous value
@@ -35,18 +35,18 @@ export function useUpdateReview() {
         queryKey: ["my-review", ratedUserId],
       });
 
-      queryClient.setQueryData(["my-review", ratedUserId], {
+      const review = {
         isAnonymous: data.anonymous,
         professionalism: data.professionalism,
         communication: data.communication,
         reliability: data.reliability,
         comment: data.comment,
-
+        id: reviewId,
         createdAt: new Date().toDateString(),
         postedToId: ratedUserId,
         isOwnReview: true,
         isFavorite: true,
-        state: ReviewState.PENDING,
+        state: ReviewState.APPROVED,
         postedBy: data.anonymous
           ? undefined
           : {
@@ -55,8 +55,16 @@ export function useUpdateReview() {
               isEmailVerified: user.isEmailVerified,
               id: user.id,
             },
-      });
+      };
 
+      queryClient.setQueryData(["my-review", ratedUserId], review);
+      queryClient.setQueryData(
+        ["reviews", { postedToId: ratedUserId }],
+        (old: Review[]) => old.map((o) => (o.id === reviewId ? review : old))
+      );
+      queryClient.setQueryData(["given-reviews"], (old: Review[]) =>
+        old.map((o) => (o.id === reviewId ? review : old))
+      );
       return { previousReview };
     },
     onSettled: (data, error, variables) => {

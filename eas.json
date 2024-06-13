@@ -7,8 +7,9 @@
       "developmentClient": true,
       "distribution": "internal",
       "channel": "development",
+      "autoIncrement": true,
       "env": { 
-        "EXPO_PUBLIC_API_BASE_URL": "http://staging.culero.com"
+        "EXPO_PUBLIC_API_BASE_URL": "http://stage.api.culero.com"
       }
     },
     "preview": {
@@ -17,7 +18,11 @@
       
     },
     "production": {
-      "channel": "production"
+      "channel": "production",
+      "autoIncrement": true,
+      "env": {
+        "EXPO_PUBLIC_API_BASE_URL": "http://api.culero.com"
+      }
     }
   },
   "submit": {

@@ -2,7 +2,7 @@
   "expo": {
     "name": "Culero",
     "slug": "culero",
-    "scheme":"culero",
+    "scheme": "culero",
     "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -17,7 +17,8 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.culero.eronka"
+      "bundleIdentifier": "com.culero.eronka",
+      "buildNumber": "9"
     },
     "android": {
       "adaptiveIcon": {

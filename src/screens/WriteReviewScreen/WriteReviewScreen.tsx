@@ -35,12 +35,12 @@ export const WriteReviewScreen = () => {
       <View className="p-4 md:p-9">
         <DrawerHeader title="Write a Review" iconProps={{ name: "review" }} />
 
-        <View className="md:flex-row gap-4">
+        <View className="lg:flex-row gap-4">
           <View className="basis-3/4">
             <Card
               className="py-6 px-3 md:px-9"
               headerComponent={
-                <View className="md:w-2/3 mb-4">
+                <View className="xl:w-2/3 mb-4">
                   <StyledText weight={500} xl2>
                     Search by Social Link
                   </StyledText>

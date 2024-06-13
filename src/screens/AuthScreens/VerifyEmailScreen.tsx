@@ -63,6 +63,7 @@ export const VerifyEmailScreen = ({ route }: Props) => {
           color="light"
           className=" mb-4"
           textClassName="p-1"
+          isLoading={verifyEmail.isPending}
           disabled={
             form.values.code.length !== 6 ||
             form.isSubmitting ||

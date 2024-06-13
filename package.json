@@ -6,7 +6,9 @@
     "start": "expo start --dev-client",
     "android": "expo run:android",
     "ios": "expo run:ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "build:ios": "EXPO_NO_CAPABILITY_SYNC=1 eas build --profile production --platform ios",
+    "submit:ios": "eas submit --platform ios"
   },
   "dependencies": {
     "@babel/plugin-transform-export-namespace-from": "^7.24.1",

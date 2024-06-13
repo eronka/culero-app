@@ -59,25 +59,31 @@ export const UserCard = ({ className, connection }: UserCardProps) => {
             <View className="md:flex-row md:self-end mt-2">
               <View className="flex-row">
                 <Icon name="user-star" color="grayC5" size={15} />
-                <StyledText color="whiteFA" sm>
-                  {`${connection.reviewsCount} reviews`}
-                </StyledText>
+                {typeof connection.reviewsCount === "number" && (
+                  <StyledText color="whiteFA" sm>
+                    {`${connection.reviewsCount} reviews`}
+                  </StyledText>
+                )}
               </View>
 
               <View className="flex-row md:mx-4">
                 <Icon name="user-group" color="grayC5" size={15} />
-                <StyledText color="whiteFA" sm>
-                  {`${connection.connectionsCount} connections`}
-                </StyledText>
+                {typeof connection.connectionsCount === "number" && (
+                  <StyledText color="whiteFA" sm>
+                    {`${connection.connectionsCount} connections`}
+                  </StyledText>
+                )}
               </View>
 
               <View className="flex-row">
                 <Icon name="verified" color="grayC5" size={15} />
-                <StyledText color="whiteFA" sm>
-                  {`Member since ${new Date(
-                    connection.joinedAt
-                  ).getFullYear()}`}
-                </StyledText>
+                {connection.joinedAt && (
+                  <StyledText color="whiteFA" sm>
+                    {`Member since ${new Date(
+                      connection.joinedAt
+                    ).getFullYear()}`}
+                  </StyledText>
+                )}
               </View>
             </View>
             <View className="md:hidden self-end">
