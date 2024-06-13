@@ -119,6 +119,7 @@ export const SocialMediaConnections = () => {
               "Connect your Facebook  ---- NEEDS NEW DESCRIPTION AND ICON ---- account to share a glimpse of your creative side"
             }
           /> */}
+
           {/* <HorizontalDivider className="my-2" /> */}
           <SocialMediaConnection
             SocialMediaIcon={<Icon name="github-square" size={40} />}
