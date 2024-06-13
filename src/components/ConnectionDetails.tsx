@@ -29,7 +29,7 @@ export const ConnectionDetails = ({
         "flex-row items-center bg hover:opacity-50",
         className
       )}
-      onPress={() => nav.navigate(user.id)}
+      onPress={() => nav.navigate(user.id, user)}
     >
       <Avatar
         userImage={user.profilePictureUrl}

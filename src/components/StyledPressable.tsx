@@ -62,16 +62,19 @@ export const StyledPressable = ({
     {...props}
   >
     {leftIconProps && <Icon {...leftIconProps} />}
-    {!isLoading && (
-      <StyledText
-        weight={500}
-        {...textVariant}
-        className={twMerge("text-center", textClassName)}
-      >
-        {children}
-      </StyledText>
-    )}
-    {isLoading && <ActivityIndicator className="self-center" color="#000" />}
+
+    <StyledText
+      weight={500}
+      {...textVariant}
+      className={twMerge("text-center", textClassName)}
+    >
+      {!isLoading ? (
+        children
+      ) : (
+        <ActivityIndicator className="self-center" color="#000" />
+      )}
+    </StyledText>
+
     {rightIconProps && <Icon {...rightIconProps} />}
   </Pressable>
 );

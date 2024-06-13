@@ -10,11 +10,15 @@ export function useSignup() {
   return useMutation<User, Error, SignupInput, unknown>({
     mutationFn: ({ email }) => signUp(email),
     mutationKey: ["user"],
-    onSuccess: async (result) => {
+    onMutate: async ({ email }) => {
       navigation.navigate("AuthNav", {
         screen: "VerifyEmail",
-        params: { email: result.email },
+        params: { email: email },
       });
+    },
+
+    onError: () => {
+      navigation.navigate("AuthNav", { screen: "Signup" });
     },
   });
 }

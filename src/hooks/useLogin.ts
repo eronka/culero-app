@@ -9,12 +9,24 @@ export function useLogin() {
   return useMutation<User, Error, SigninInput, unknown>({
     mutationFn: ({ email }) => signIn(email),
     mutationKey: ["user"],
-    onSuccess: async (result) => {
-      console.log("result is", result);
+    onMutate: async ({ email }) => {
       navigation.navigate("AuthNav", {
-        screen: result.isEmailVerified ? "VerifyLogin" : "VerifyEmail",
-        params: { email: result.email },
+        screen: "VerifyLogin",
+        params: { email },
       });
+    },
+    onError: () => {
+      navigation.navigate("AuthNav", {
+        screen: "Login",
+      });
+    },
+    onSuccess: async (result) => {
+      if (!result.isEmailVerified) {
+        navigation.navigate("AuthNav", {
+          screen: "VerifyEmail",
+          params: { email: result.email },
+        });
+      }
     },
   });
 }

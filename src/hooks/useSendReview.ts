@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { SendReviewData, sendReview } from "../utils/api";
 import { useUser } from "./useUser";
-import { ReviewState } from "../types/Review";
+import { Review, ReviewState } from "../types/Review";
 
 export function useSendReview() {
   const queryClient = useQueryClient();
@@ -23,7 +23,7 @@ export function useSendReview() {
         queryKey: ["my-review", ratedUserId],
       });
 
-      queryClient.setQueryData(["review", ratedUserId], {
+      const review = {
         isAnonymous: data.anonymous,
         professionalism: data.professionalism,
         communication: data.communication,
@@ -34,7 +34,7 @@ export function useSendReview() {
         postedToId: ratedUserId,
         isOwnReview: true,
         isFavorite: true,
-        state: ReviewState.PENDING,
+        state: ReviewState.APPROVED,
         postedBy: data.anonymous
           ? undefined
           : {
@@ -43,7 +43,17 @@ export function useSendReview() {
               isEmailVerified: user.isEmailVerified,
               id: user.id,
             },
-      });
+      };
+
+      queryClient.setQueryData(["my-review", ratedUserId], review);
+      queryClient.setQueryData(
+        ["reviews", { postedToId: ratedUserId }],
+        (old: Review[]) => [review, ...old]
+      );
+      queryClient.setQueryData(["given-reviews"], (old: Review[]) => [
+        review,
+        ...old,
+      ]);
 
       return { previousReview };
     },

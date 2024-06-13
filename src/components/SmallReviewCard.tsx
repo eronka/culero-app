@@ -13,6 +13,7 @@ import { useAvgRating } from "../hooks/useAvgRating";
 import { useLikeReview } from "../hooks/useLikeReview";
 import { useUnlikeReview } from "../hooks/useUnlikeReview";
 import { useNavToConnection } from "../hooks/useNavToConnection";
+import { Connection } from "../types";
 
 export type SmallReviewCardProps = {
   className?: ViewProps["className"];
@@ -46,7 +47,10 @@ export const SmallReviewCard = ({
               disabled={review.isAnonymous}
               onPress={() => {
                 if (review.postedBy?.id) {
-                  connectionNav.navigate(review.postedBy.id);
+                  connectionNav.navigate(
+                    review.postedBy.id,
+                    review.postedBy as Connection
+                  );
                 }
               }}
             >

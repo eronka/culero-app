@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteReview } from "../utils/api";
+import { Review } from "../types/Review";
 
 export function useDeleteReview() {
   const queryClient = useQueryClient();
@@ -21,6 +22,13 @@ export function useDeleteReview() {
       });
 
       queryClient.setQueryData(["my-review", ratedUserId], null);
+      queryClient.setQueryData(
+        ["reviews", { postedToId: ratedUserId }],
+        (old: Review[]) => old.filter((old) => old.id !== reviewId)
+      );
+      queryClient.setQueryData(["given-reviews"], (old: Review[]) =>
+        old.filter((old) => old.id !== reviewId)
+      );
 
       return { previousReview };
     },

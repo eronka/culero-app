@@ -71,7 +71,7 @@ export const ConnectionReviewCard = ({
                 <View className="flex-row justify-between items-center p-2 rounded-md">
                   <ConnectionDetails user={item} />
                   <IconButton
-                    onPress={() => nav.navigate(item.id)}
+                    onPress={() => nav.navigate(item.id, item)}
                     iconProps={{ name: "review" }}
                   />
                 </View>
