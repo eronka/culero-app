@@ -9,7 +9,7 @@
       "channel": "development",
       "autoIncrement": true,
       "env": { 
-        "EXPO_PUBLIC_API_BASE_URL": "http://stage.api.culero.com"
+        "EXPO_PUBLIC_API_BASE_URL": "https://stage.api.culero.com"
       }
     },
     "preview": {
@@ -21,7 +21,7 @@
       "channel": "production",
       "autoIncrement": true,
       "env": {
-        "EXPO_PUBLIC_API_BASE_URL": "http://api.culero.com"
+        "EXPO_PUBLIC_API_BASE_URL": "https://api.culero.com"
       }
     }
   },
