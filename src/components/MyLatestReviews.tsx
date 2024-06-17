@@ -55,10 +55,10 @@ export const MyLatestReviews = ({
       return <ActivityIndicator size="large" className="self-center" />;
     }
 
-    let reviews = userReviews.data!;
+    let reviews = userReviews.data! || [];
 
     if (!reviews.length && allowPlatformWideReviews) {
-      reviews = platformWideReviews.data!;
+      reviews = platformWideReviews.data! || [];
     }
 
     if (!reviews.length) {
