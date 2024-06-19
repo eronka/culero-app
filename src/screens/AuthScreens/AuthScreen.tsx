@@ -1,28 +1,27 @@
 import { View, ScrollView } from "react-native";
 import {
   HorizontalDivider,
-  PasswordStrength,
   StyledPressable,
   StyledText,
   StyledTextInput,
 } from "../../components";
 import colors from "../../../colors";
 import { useNavigation } from "@react-navigation/native";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useLogin } from "../../hooks/useLogin";
+import { useSignup } from "../../hooks/useSignup";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { GoogleAuthButton } from "./components/GoogleAuthButton";
-import { AppleAuthButton } from "./components/AppleAuthButton";
 import { LinkedinAuthButton } from "./components/LinkedinAuthButton";
+import { GoogleAuthButton } from "./components/GoogleAuthButton";
 import { FacebookAuthButton } from "./components/FacebookAuthButton";
+import { AppleAuthButton } from "./components/AppleAuthButton";
 import { GithubAuthButton } from "./components/GithubAuthButton";
 
-export const LoginScreen = () => {
-  const [seeFullOptions, setFullOptions] = useState(false);
-  const loginMutation = useLogin();
+export const AuthScreen = () => {
   const navigation = useNavigation();
+  const [seeFullOptions, setFullOptions] = useState(false);
+  const signUpMutation = useSignup();
 
   const formik = useFormik({
     initialValues: {
@@ -35,7 +34,7 @@ export const LoginScreen = () => {
         .required("Email is required!"),
     }),
     onSubmit: async (values) => {
-      loginMutation.mutate({ ...values });
+      signUpMutation.mutate({ ...values });
     },
   });
 
@@ -43,13 +42,13 @@ export const LoginScreen = () => {
     <SafeAreaView>
       <ScrollView className="px-4 max-w-xl md:self-center">
         <StyledText weight={600} xl3 center>
-          Welcome back
+          Get started
         </StyledText>
         <StyledText color="gray35" className="mt-6" center>
           Embark on a Journey of Professional Growth and Collaboration!
         </StyledText>
-
         <GoogleAuthButton />
+
         {!seeFullOptions && (
           <StyledPressable
             fw
@@ -84,9 +83,9 @@ export const LoginScreen = () => {
           onChangeText={(value) => formik.setFieldValue("email", value)}
           placeholderTextColor={colors.gray35}
         />
-        {loginMutation.error && (
+        {signUpMutation.error && (
           <StyledText color="deep-red">
-            {loginMutation.error.message}
+            {signUpMutation.error.message}
           </StyledText>
         )}
         <StyledPressable
@@ -96,7 +95,7 @@ export const LoginScreen = () => {
           textClassName="p-1"
           onPress={() => formik.handleSubmit()}
         >
-          Sign In
+          Submit
         </StyledPressable>
 
         <StyledText sm color="gray35" center>
@@ -119,19 +118,6 @@ export const LoginScreen = () => {
             Privacy Policy
           </StyledText>
           .
-        </StyledText>
-        <StyledText className="mt-6" center>
-          Don't have an account?{" "}
-          <StyledText
-            weight={500}
-            color="primary"
-            className="italic"
-            onPress={() => {
-              navigation.navigate("AuthNav", { screen: "Signup" });
-            }}
-          >
-            Sign up
-          </StyledText>
         </StyledText>
       </ScrollView>
     </SafeAreaView>

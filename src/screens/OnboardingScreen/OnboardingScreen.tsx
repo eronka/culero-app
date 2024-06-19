@@ -17,6 +17,7 @@ import * as Yup from "yup";
 import { useUpdateProfilePicture } from "../../hooks/useUpdateProfilePicture";
 import { OnboardingFlow } from "./components/OnboardingFlow";
 import { useScreenInfo } from "../../hooks/useScreenInfo";
+import { useUser } from "../../hooks";
 
 const SocialAccountsStep = () => {
   return (
@@ -37,11 +38,12 @@ export const OnboardingScreen = () => {
   const updateUserMutation = useUpdateProfile();
   const updateProfilePicMutation = useUpdateProfilePicture();
   const { platform } = useScreenInfo();
+  const user = useUser()!;
 
   const form = useFormik({
     initialValues: {
-      name: "",
-      headline: "",
+      name: user.name,
+      headline: user.headline,
     },
     onSubmit: async (values) => {
       return updateUserMutation.mutateAsync(values);
@@ -49,12 +51,14 @@ export const OnboardingScreen = () => {
   });
 
   const imageForm = useFormik({
-    initialValues: { image: "" },
+    initialValues: { image: user.profilePictureUrl || "" },
     validationSchema: Yup.object().shape({
       image: Yup.string().required("No image uploaded."),
     }),
     onSubmit: async (values) => {
-      return updateProfilePicMutation.mutateAsync(values.image);
+      if (values.image) {
+        return updateProfilePicMutation.mutateAsync(values.image);
+      }
     },
   });
 
