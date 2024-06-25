@@ -53,6 +53,8 @@ const RootNavigator = () => {
     };
   }, [user.data]);
 
+  console.log("user is ", user.data);
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -62,27 +64,31 @@ const RootNavigator = () => {
     >
       {user.data && !user.isError ? (
         <>
-          <Stack.Screen name="HomeScreen" component={DrawerNavigator} />
+          {user.data.onboarded ? (
+            <Stack.Screen name="HomeScreen" component={DrawerNavigator} />
+          ) : (
+            <>
+              <Stack.Screen
+                name="EmailVerificationSuccess"
+                component={EmailVerificationSuccess}
+                options={{
+                  headerShown: true,
+                  contentStyle: {
+                    backgroundColor: "#ffffff",
+                  },
+
+                  header: () => <AuthHeader />,
+                }}
+              />
+              <Stack.Screen name="Onboarding" component={OnboardingScreen} />
+            </>
+          )}
         </>
       ) : (
         <>
           <Stack.Screen name="AuthNav" component={AuthStackNavigator} />
         </>
       )}
-      <Stack.Screen name="Onboarding" component={OnboardingScreen} />
-
-      <Stack.Screen
-        name="EmailVerificationSuccess"
-        component={EmailVerificationSuccess}
-        options={{
-          headerShown: true,
-          contentStyle: {
-            backgroundColor: "#ffffff",
-          },
-
-          header: () => <AuthHeader />,
-        }}
-      />
     </Stack.Navigator>
   );
 };

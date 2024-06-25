@@ -7,6 +7,7 @@ export type User = {
   headline?: string;
   name?: string;
   location?: string;
+  onboarded?: boolean;
 };
 
 export type UserWithToken = User & { token: string };

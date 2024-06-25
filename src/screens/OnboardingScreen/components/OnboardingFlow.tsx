@@ -15,6 +15,7 @@ import Animated, {
   useSharedValue,
 } from "react-native-reanimated";
 import { RootStackParamList } from "../../../types";
+import { useFinishOnboarding } from "../../../hooks/useFinishOnboarding";
 
 export type StepProps = {
   component: ReactElement;
@@ -33,6 +34,7 @@ export const OnboardingFlow = ({ data }: OnboardingLayoutProps) => {
   const flatListRef = useAnimatedRef<Animated.FlatList<StepProps>>();
   const { width, isPhone } = useScreenInfo();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const finishOnboarding = useFinishOnboarding();
 
   const scrollHandle = useAnimatedScrollHandler({
     onScroll: (event) => {
@@ -42,13 +44,14 @@ export const OnboardingFlow = ({ data }: OnboardingLayoutProps) => {
 
   const renderItem = useCallback(
     ({ item, index }: { item: StepProps; index: number }) => {
-      const handleNextItem = () => {
+      const handleNextItem = async () => {
         if (index + 1 < data.length) {
           flatListRef.current?.scrollToIndex({
             index: index + 1,
             animated: true,
           });
         } else {
+          await finishOnboarding.mutateAsync();
           //@ts-ignore
           navigation.navigate("HomeScreen");
         }

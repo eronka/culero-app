@@ -14,8 +14,6 @@ import Base64 from "Base64";
 // @ts-ignore TODO: Fix this
 export const baseUrl = process.env.EXPO_PUBLIC_API_BASE_URL;
 
-const signInUrl = `${baseUrl}/auth/sign-in`;
-const signUpUrl = `${baseUrl}/auth/sign-up`;
 const verifyEmailUrl = `${baseUrl}/auth/verify-email`;
 
 type FetchInput = string | URL | Request;
@@ -88,8 +86,6 @@ export const authorizedFetch = async (
 ): Promise<any> => {
   const token = await storage.getItem(storage.TOKEN_KEY);
 
-  console.log("token is ", token);
-
   return enhancedFetch(
     input,
     init,
@@ -110,12 +106,12 @@ export const authorizedFetch = async (
   );
 };
 
-export type SignupInput = {
+export type AuthInput = {
   email: string;
 };
 
-export async function signUp(email: SignupInput["email"]): Promise<User> {
-  const response = await fetch(signUpUrl, {
+export async function authenticate(email: AuthInput["email"]): Promise<User> {
+  const response = await fetch(`${baseUrl}/auth/send-verification-email`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email }),
@@ -124,29 +120,9 @@ export async function signUp(email: SignupInput["email"]): Promise<User> {
 
   if (response.ok) {
     return responseData;
-  } else if (response.status === 409) {
-    throw new Error("There is already an account with this email.");
   } else {
     throw new Error(responseData.message);
   }
-}
-
-export type SigninInput = {
-  email: string;
-};
-
-export async function signIn(email: SigninInput["email"]): Promise<User> {
-  const response = await fetch(signInUrl, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email }),
-  });
-  const responseData = await response.json();
-
-  if (response.ok) {
-    return responseData;
-  }
-  throw new Error(responseData.message);
 }
 
 export type VerifyEmailInput = {

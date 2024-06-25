@@ -12,12 +12,10 @@ export function useVerifyEmail(shouldNavigate?: boolean) {
     mutationFn: ({ email, code }) => verifyEmail(email, code),
     mutationKey: ["user"],
     onSuccess: async (result) => {
-      if (shouldNavigate) {
-        await navigation.navigate("EmailVerificationSuccess");
-      }
       queryClient.setQueryData(["user"], result);
 
       await storage.setItem(storage.TOKEN_KEY, result.token);
+
       queryClient.refetchQueries();
     },
   });
