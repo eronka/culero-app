@@ -14,7 +14,7 @@ import Base64 from "Base64";
 // @ts-ignore TODO: Fix this
 export const baseUrl = process.env.EXPO_PUBLIC_API_BASE_URL;
 
-const verifyEmailUrl = `${baseUrl}/auth/verify-email`;
+const verifyEmailUrl = `${baseUrl}/auth/email`;
 
 type FetchInput = string | URL | Request;
 type FetchInit = RequestInit;
