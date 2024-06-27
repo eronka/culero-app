@@ -111,7 +111,7 @@ export type AuthInput = {
 };
 
 export async function authenticate(email: AuthInput["email"]): Promise<User> {
-  const response = await fetch(`${baseUrl}/auth/send-verification-email`, {
+  const response = await fetch(`${baseUrl}/auth/email`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email }),
