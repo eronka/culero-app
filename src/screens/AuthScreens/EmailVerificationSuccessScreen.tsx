@@ -16,7 +16,7 @@ export const EmailVerificationSuccess = () => {
             Congratiulations
           </StyledText>
           <StyledText weight={600} xl3 center className="mt-8">
-            Your Email is Verified!
+            Your account is Verified!
           </StyledText>
 
           <StyledText color="gray35" className="mt-6" center lg>

@@ -32,10 +32,8 @@ export type RootStackParamList = {
 };
 
 export type AuthStackParamList = {
-  Signup: undefined;
+  Auth: undefined;
   VerifyEmail: { email: string };
-  Login: undefined;
-  VerifyLogin: { email: string };
 };
 
 export type DrawerNavigatorParamList = {
