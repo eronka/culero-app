@@ -45,8 +45,7 @@ export const WriteReviewScreen = () => {
                     Search by Social Link
                   </StyledText>
                   <StyledText weight={400} className="mt-8 mb-2" color="gray33">
-                    Enter the social link (LinkedIn, Twitter, GitHub, or
-                    Instagram) of the person you want to review.
+                    Enter the social link (LinkedIn or Github) of the person you want to review.
                   </StyledText>
                   <SearchBar
                     placeholder="Enter social link"
