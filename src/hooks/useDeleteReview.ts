@@ -27,7 +27,7 @@ export function useDeleteReview() {
         (old: Review[]) => old.filter((old) => old.id !== reviewId)
       );
       queryClient.setQueryData(["given-reviews"], (old: Review[]) =>
-        old.filter((old) => old.id !== reviewId)
+        old ? old.filter((old) => old.id !== reviewId) : []
       );
 
       return { previousReview };

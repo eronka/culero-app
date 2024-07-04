@@ -48,12 +48,11 @@ export function useSendReview() {
       queryClient.setQueryData(["my-review", ratedUserId], review);
       queryClient.setQueryData(
         ["reviews", { postedToId: ratedUserId }],
-        (old: Review[]) => [review, ...old]
+        (old: Review[]) => (old ? [review, ...old] : [])
       );
-      queryClient.setQueryData(["given-reviews"], (old: Review[]) => [
-        review,
-        ...old,
-      ]);
+      queryClient.setQueryData(["given-reviews"], (old: Review[]) =>
+        old ? [review, ...old] : [review]
+      );
 
       return { previousReview };
     },
@@ -73,6 +72,9 @@ export function useSendReview() {
       queryClient.invalidateQueries({
         queryKey: ["reviews-posted"],
       });
+    },
+    onError: (err) => {
+      console.log(err);
     },
   });
 }

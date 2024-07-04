@@ -60,10 +60,11 @@ export function useUpdateReview() {
       queryClient.setQueryData(["my-review", ratedUserId], review);
       queryClient.setQueryData(
         ["reviews", { postedToId: ratedUserId }],
-        (old: Review[]) => old.map((o) => (o.id === reviewId ? review : old))
+        (old: Review[]) =>
+          old ? old.map((o) => (o.id === reviewId ? review : o)) : [review]
       );
       queryClient.setQueryData(["given-reviews"], (old: Review[]) =>
-        old.map((o) => (o.id === reviewId ? review : old))
+        old ? old.map((o) => (o.id === reviewId ? review : o)) : [review]
       );
       return { previousReview };
     },
